@@ -9,7 +9,10 @@
     hcloud_token: "{{ vault_hcloud_token }}"
   roles:
   # - role: hetzner-firewalls
-    # Create ci.woodpecker-ci.org server
+
+  # Create ci.woodpecker-ci.org server
+  - role: ssh-key
+    server_name: ci.woodpecker-ci.org
   - role: hetzner-server
     server_name: ci.woodpecker-ci.org
     hcloud_server_image: "ubuntu-20.04"
@@ -26,9 +29,10 @@
 
 - hosts: ci.woodpecker-ci.org
   vars:
+    server_name: ci.woodpecker-ci.org
     ansible_connection: ssh
     ansible_user: root
-    ansible_ssh_private_key_file: ./keys/ci.woodpecker-ci.org-id_ed25519
+    ansible_ssh_private_key_file: ./keys/{{ server_name | replace('.','_') }}.id_ed25519
   vars_files:
     - group_vars/all/vault.yml
   roles:
@@ -39,7 +43,7 @@
       caddy_version: 2.4.6-alpine
     - role: woodpecker
       woodpecker_version: next
-      woodpecker_host: https://ci.woodpecker-ci.org
+      woodpecker_host: https://{{ server_name }}
       woodpecker_github_client: "{{ vault_woodpecker_github_client }}"
       woodpecker_github_secret: "{{ vault_woodpecker_github_secret }}"
       woodpecker_agent_secret: "{{ vault_woodpecker_agent_secret }}"

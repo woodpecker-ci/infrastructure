@@ -1,0 +1,4 @@
+*
+!.gitignore
+!*.id_ed25519.enc
+!*.id_ed25519.pub

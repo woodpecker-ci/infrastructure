@@ -1,21 +1,13 @@
-- name: Generate SSH key for {{ server_name }}
-  openssh_keypair:
-    path: ./keys/{{server_name}}-id_ed25519
-    type: ed25519
-    state: present
-    force: no
-  delegate_to: localhost
-  tags:
-    - hetzner
-    - hetzner-server
-
 - name: Create a ssh key for {{ server_name }}
   hcloud_ssh_key:
     api_token: "{{ hcloud_token }}"
     name: "{{ server_name }}-ssh"
-    public_key: "{{ lookup('file', './keys/{{ server_name }}-id_ed25519.pub') }}"
+    public_key: "{{ lookup('file', './keys/{{ server_name | replace('.','_') }}.id_ed25519.pub') }}"
     state: present
   delegate_to: localhost
+  tags:
+    - hetzner
+    - hetzner-server
 
 - name: Create a server {{ server_name }}
   hcloud_server:

@@ -5,6 +5,9 @@
     state: present
     force: no
   delegate_to: localhost
+  tags:
+    - hetzner
+    - hetzner-server
 
 - name: Create a ssh key for {{ server_name }}
   hcloud_ssh_key:
@@ -28,6 +31,9 @@
       - "{{ server_name }}-ssh"
   delegate_to: localhost
   register: server
+  tags:
+    - hetzner
+    - hetzner-server
 
 - name: Waits until server is ready
   wait_for:
@@ -36,3 +42,6 @@
     delay: 2
     timeout: 60
   delegate_to: localhost
+  tags:
+    - hetzner
+    - hetzner-server

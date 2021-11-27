@@ -9,18 +9,19 @@
     hcloud_token: "{{ vault_hcloud_token }}"
   roles:
   # - role: hetzner-firewalls
+    # Create ci.woodpecker-ci.org server
   - role: hetzner-server
     server_name: ci.woodpecker-ci.org
     hcloud_server_image: "ubuntu-20.04"
     hcloud_server_type: "cpx31"
     hcloud_server_location: "fsn1"
 
+# https://stackoverflow.com/questions/29003420/reload-ansibles-dynamic-inventory#34012534
 - name: Refresh inventory
   hosts: localhost
   become: no
   gather_facts: false
   tasks:
-    # https://stackoverflow.com/questions/29003420/reload-ansibles-dynamic-inventory#34012534
     - meta: refresh_inventory
 
 - hosts: ci.woodpecker-ci.org
@@ -30,12 +31,15 @@
     ansible_ssh_private_key_file: ./keys/ci.woodpecker-ci.org-id_ed25519
   vars_files:
     - group_vars/all/vault.yml
-  #  roles:
-  # - role: common
-  # - role: docker
-  tasks:
-    - name: ip a
-      command: ip a
-      register: hello
-
-    - debug: msg="{{ hello.stdout }}"
+  roles:
+    - role: common
+    - role: docker
+    - role: docker_compose
+    - role: caddy
+      caddy_version: 2.4.6-alpine
+    - role: woodpecker
+      woodpecker_version: next
+      woodpecker_host: https://ci.woodpecker-ci.org
+      woodpecker_github_client: "{{ vault_woodpecker_github_client }}"
+      woodpecker_github_secret: "{{ vault_woodpecker_github_secret }}"
+      woodpecker_agent_secret: "{{ vault_woodpecker_agent_secret }}"

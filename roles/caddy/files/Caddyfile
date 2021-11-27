@@ -1,0 +1,11 @@
+{
+  email owners@woodpecker-ci.org
+}
+
+# wp.laszlo.cloud {
+#   redir https://ci.woodpecker-ci.org{uri}
+# }
+
+ci.woodpecker-ci.org {
+  reverse_proxy woodpecker-server:8000
+}

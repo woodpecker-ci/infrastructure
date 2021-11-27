@@ -46,6 +46,8 @@
     - docker
 
 - name: install Python docker module for ansible
-  pip: name=docker executable=pip3
+  pip:
+    name: docker
+    executable: pip3
   tags:
     - docker

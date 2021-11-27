@@ -16,6 +16,9 @@
           - ::/0
         description: allow icmp in
     state: present
+  tags:
+    - hetzner
+    - hetzner-firewalls
 
 - name: Create a firewall for web access
   hcloud_firewall:
@@ -42,9 +45,15 @@
           - ::/0
         description: allow https in
     state: present
+  tags:
+    - hetzner
+    - hetzner-firewalls
 
 - name: Create a firewall for no incoming access
   hcloud_firewall:
     name: closed
     rules: []
     state: present
+  tags:
+    - hetzner
+    - hetzner-firewalls

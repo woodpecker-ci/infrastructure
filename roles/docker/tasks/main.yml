@@ -5,6 +5,9 @@
     - docker
 
 - name: start Docker
-  service: name=docker enabled=yes state=started
+  service:
+    name: docker
+    enabled: yes
+    state: started
   tags:
     - docker

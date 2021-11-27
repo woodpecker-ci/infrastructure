@@ -3,7 +3,3 @@
 all:
   hosts:
     localhost:
-    ci.woodpecker-ci.org:
-
-  vars:
-    environment: prod

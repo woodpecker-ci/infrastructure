@@ -1,4 +1,0 @@
-ansible_connection: ssh
-ansible_user: root
-ansible_ssh_private_key_file: ./host_vars/ci.woodpecker-ci.org/id_ed25519
-# ansible_python_interpreter: /usr/bin/python3

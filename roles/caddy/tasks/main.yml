@@ -31,12 +31,14 @@
           image: caddy:{{ caddy_version }}
           restart: always
           ports:
-            - "80:80"
-            - "443:443"
+            - 80:80
+            - 443:443
           volumes:
             - /opt/caddy/Caddyfile:/etc/caddy/Caddyfile
             - caddy_data:/data
             - caddy_config:/config
+          networks:
+            - web
       volumes:
         caddy_data:
         caddy_config:

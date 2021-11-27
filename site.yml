@@ -1,0 +1,41 @@
+- name: Prepare Hetzner Cloud
+  hosts: localhost
+  become: no
+  gather_facts: false
+  vars_files:
+    - group_vars/all/vault.yml
+  vars:
+    hcloud_token: "{{ vault_hcloud_token }}"
+  roles:
+  # - role: hetzner-firewalls
+  - role: hetzner-server
+    server_name: ci.woodpecker-ci.org
+    hcloud_server_image: "ubuntu-20.04"
+    hcloud_server_type: "cpx31"
+    hcloud_server_location: "fsn1"
+
+- name: Refresh inventory
+  hosts: localhost
+  become: no
+  gather_facts: false
+  tasks:
+    # https://stackoverflow.com/questions/29003420/reload-ansibles-dynamic-inventory#34012534
+    - meta: refresh_inventory
+
+- hosts: ci.woodpecker-ci.org
+  vars:
+    ansible_host: "{{ server.hcloud_server.ipv4_address }}"
+    ansible_connection: ssh
+    ansible_user: root
+    ansible_ssh_private_key_file: ./keys/woodpecker-server
+  vars_files:
+    - group_vars/all/vault.yml
+  #  roles:
+  # - role: common
+  # - role: docker
+  tasks:
+    - name: ip a
+      command: ip a
+      register: hello
+
+    - debug: msg="{{ hello.stdout }}"

@@ -1,0 +1,5 @@
+- name: update packages with apt
+  apt: upgrade=dist update_cache=yes cache_valid_time=3600
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+  tags:
+    - common

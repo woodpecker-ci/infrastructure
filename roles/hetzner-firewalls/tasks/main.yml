@@ -1,0 +1,50 @@
+- name: Create a firewall for ssh access
+  hcloud_firewall:
+    name: ssh-only
+    rules:
+      - direction: in
+        protocol: icmp
+        source_ips:
+          - 0.0.0.0/0
+          - ::/0
+        description: allow icmp in
+      - direction: in
+        protocol: tcp
+        port: 22
+        source_ips:
+          - 0.0.0.0/0
+          - ::/0
+        description: allow icmp in
+    state: present
+
+- name: Create a firewall for web access
+  hcloud_firewall:
+    name: web
+    rules:
+      - direction: in
+        protocol: icmp
+        source_ips:
+          - 0.0.0.0/0
+          - ::/0
+        description: allow icmp in
+      - direction: in
+        protocol: tcp
+        port: 443
+        source_ips:
+          - 0.0.0.0/0
+          - ::/0
+        description: allow https in
+      - direction: in
+        protocol: tcp
+        port: 443
+        source_ips:
+          - 0.0.0.0/0
+          - ::/0
+        description: allow https in
+    state: present
+
+- name: Create a firewall for no incoming access
+  hcloud_firewall:
+    name: closed
+    rules: []
+    state: present

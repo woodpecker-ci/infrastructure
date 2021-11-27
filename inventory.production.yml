@@ -1,0 +1,9 @@
+# This is inventory file for production stage
+
+all:
+  hosts:
+    localhost:
+    ci.woodpecker-ci.org:
+
+  vars:
+    environment: prod

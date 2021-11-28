@@ -1,6 +1,7 @@
-- name: Create a firewall for ssh access
-  hcloud_firewall:
-    name: ssh-only
+- name: create a firewall for ssh access
+  hetzner.hcloud.hcloud_firewall:
+    name: ssh
+    api_token: "{{ hcloud_token }}"
     rules:
       - direction: in
         protocol: icmp
@@ -10,19 +11,21 @@
         description: allow icmp in
       - direction: in
         protocol: tcp
-        port: 22
+        port: "22"
         source_ips:
           - 0.0.0.0/0
           - ::/0
         description: allow icmp in
     state: present
+  delegate_to: localhost
   tags:
     - hetzner
     - hetzner-firewalls
 
-- name: Create a firewall for web access
-  hcloud_firewall:
+- name: create a firewall for web access
+  hetzner.hcloud.hcloud_firewall:
     name: web
+    api_token: "{{ hcloud_token }}"
     rules:
       - direction: in
         protocol: icmp
@@ -32,28 +35,31 @@
         description: allow icmp in
       - direction: in
         protocol: tcp
-        port: 443
+        port: "80"
         source_ips:
           - 0.0.0.0/0
           - ::/0
         description: allow https in
       - direction: in
         protocol: tcp
-        port: 443
+        port: "443"
         source_ips:
           - 0.0.0.0/0
           - ::/0
         description: allow https in
     state: present
+  delegate_to: localhost
   tags:
     - hetzner
     - hetzner-firewalls
 
-- name: Create a firewall for no incoming access
-  hcloud_firewall:
+- name: create a firewall for no incoming access
+  hetzner.hcloud.hcloud_firewall:
     name: closed
+    api_token: "{{ hcloud_token }}"
     rules: []
     state: present
+  delegate_to: localhost
   tags:
     - hetzner
     - hetzner-firewalls

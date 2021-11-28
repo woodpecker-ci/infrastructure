@@ -1,3 +1,12 @@
+- name: disable SSH password authentication
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#PasswordAuthentication yes'
+    line: 'PasswordAuthentication no'
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+  tags:
+    - common
+
 - name: update packages with apt
   apt:
     upgrade: dist

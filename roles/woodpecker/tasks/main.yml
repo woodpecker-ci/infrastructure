@@ -24,6 +24,8 @@
           environment:
             - WOODPECKER_OPEN=true
             - WOODPECKER_HOST={{ woodpecker_host }}
+            - WOODPECKER_ORGS={{ woodpecker_orgs }}
+            - WOODPECKER_ADMIN={{ woodpecker_admins }}
             - WOODPECKER_GITHUB=true
             - WOODPECKER_GITHUB_CLIENT={{ woodpecker_github_client }}
             - WOODPECKER_GITHUB_SECRET={{ woodpecker_github_secret }}

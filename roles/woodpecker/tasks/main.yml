@@ -1,4 +1,4 @@
-- name: create Woodpecker directory
+- name: Create Woodpecker directory
   file:
     path: /opt/woodpecker
     state: directory
@@ -6,7 +6,7 @@
   tags:
     - woodpecker
 
-- name: install Woodpecker
+- name: Install Woodpecker
   docker_compose:
     project_name: woodpecker
     pull: yes

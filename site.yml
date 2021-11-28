@@ -26,7 +26,7 @@
   tasks:
     - meta: refresh_inventory
 
-- name: Open SSH
+- name: Prepare
   hosts: localhost
   connection: local
   become: no
@@ -34,12 +34,20 @@
   vars_files:
     - group_vars/all/vault.yml
   tasks:
-    - hetzner.hcloud.hcloud_server:
+    - name: Open SSH in firewall
+      hetzner.hcloud.hcloud_server:
         api_token: "{{ vault_hcloud_token }}"
         name: ci.woodpecker-ci.org
         firewalls:
           - ssh
           - web
+      delegate_to: localhost
+    - name: Waits until server is ready
+      wait_for:
+        host: "{{ server.hcloud_server.ipv4_address }}"
+        port: 22
+        delay: 2
+        timeout: 60
       delegate_to: localhost
 
 - hosts: ci.woodpecker-ci.org
@@ -65,7 +73,7 @@
       woodpecker_github_secret: "{{ vault_woodpecker_github_secret }}"
       woodpecker_agent_secret: "{{ vault_woodpecker_agent_secret }}"
 
-- name: Close SSH
+- name: Cleanup
   hosts: localhost
   connection: local
   become: no
@@ -73,7 +81,8 @@
   vars_files:
     - group_vars/all/vault.yml
   tasks:
-    - hetzner.hcloud.hcloud_server:
+    - name: Close SSH
+      hetzner.hcloud.hcloud_server:
         api_token: "{{ vault_hcloud_token }}"
         name: ci.woodpecker-ci.org
         firewalls:

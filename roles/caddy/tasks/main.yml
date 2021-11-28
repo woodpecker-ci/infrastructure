@@ -1,10 +1,10 @@
-- name: create common docker network for reverse proxying
+- name: Create common docker network for reverse proxying
   docker_network:
     name: web
   tags:
     - caddy
 
-- name: create Caddy directory
+- name: Create Caddy directory
   file:
     path: /opt/caddy
     state: directory
@@ -12,7 +12,7 @@
   tags:
     - caddy
 
-- name: copy Caddy config
+- name: Copy Caddy config
   copy:
     src: Caddyfile
     dest: /opt/caddy/Caddyfile
@@ -20,7 +20,7 @@
   tags:
     - caddy
 
-- name: install Caddy
+- name: Install Caddy
   docker_compose:
     project_name: caddy
     pull: yes

@@ -1,4 +1,4 @@
-- name: install docker-compose
+- name: Install docker-compose
   pip:
     name: docker-compose
     executable: pip3

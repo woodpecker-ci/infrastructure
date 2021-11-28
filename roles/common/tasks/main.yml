@@ -1,4 +1,4 @@
-- name: disable SSH password authentication
+- name: Disable SSH password authentication
   lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^#PasswordAuthentication yes'
@@ -7,7 +7,7 @@
   tags:
     - common
 
-- name: update packages with apt
+- name: Update packages with apt
   apt:
     upgrade: dist
     update_cache: yes

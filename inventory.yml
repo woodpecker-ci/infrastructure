@@ -1,5 +1,3 @@
-# This is inventory file for production stage
-
 all:
   hosts:
     localhost:

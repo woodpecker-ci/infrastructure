@@ -1,0 +1,29 @@
+- name: Create a ssh key
+  vars:
+    key_path: "{{ './keys/%s.id_ed25519.pub' | format(server_name | replace('.','_')) }}"
+  hetzner.hcloud.hcloud_ssh_key:
+    api_token: "{{ hcloud_token }}"
+    name: "{{ server_name }}-ssh"
+    public_key: "{{ lookup('file', key_path) }}"
+    state: present
+  delegate_to: localhost
+  tags:
+    - hetzner
+    - hetzner-server
+
+- name: Create a server
+  hetzner.hcloud.hcloud_server:
+    api_token: "{{ hcloud_token }}"
+    name: "{{ server_name }}"
+    server_type: "{{ hcloud_server_type }}"
+    location: "{{ hcloud_server_location }}"
+    image: "{{ hcloud_server_image }}"
+    state: present
+    # firewalls: {{ hcloud_firewalls.split(',') }}
+    ssh_keys:
+      - "{{ server_name }}-ssh"
+  delegate_to: localhost
+  register: server
+  tags:
+    - hetzner
+    - hetzner-server

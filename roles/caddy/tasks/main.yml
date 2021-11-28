@@ -1,0 +1,50 @@
+- name: Create common docker network for reverse proxying
+  docker_network:
+    name: web
+  tags:
+    - caddy
+
+- name: Create Caddy directory
+  file:
+    path: /opt/caddy
+    state: directory
+    mode: 0700
+  tags:
+    - caddy
+
+- name: Copy Caddy config
+  copy:
+    src: Caddyfile
+    dest: /opt/caddy/Caddyfile
+    mode: 644
+  tags:
+    - caddy
+
+- name: Install Caddy
+  docker_compose:
+    project_name: caddy
+    pull: yes
+    definition:
+      version: "3.7"
+      services:
+        caddy:
+          image: caddy:{{ caddy_version }}
+          restart: always
+          ports:
+            - 80:80
+            - 443:443
+          volumes:
+            - /opt/caddy/Caddyfile:/etc/caddy/Caddyfile
+            - caddy_data:/data
+            - caddy_config:/config
+          networks:
+            - web
+      volumes:
+        caddy_data:
+        caddy_config:
+      networks:
+        web:
+          external:
+            name: web
+  tags:
+    - caddy

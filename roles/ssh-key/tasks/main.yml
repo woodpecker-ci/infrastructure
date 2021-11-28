@@ -1,0 +1,31 @@
+- name: Decrypt existing SSH key
+  vars:
+    key_path: "{{ './keys/%s.id_ed25519' | format(server_name | replace('.','_')) }}"
+  command:
+    creates: "{{ key_path }}"
+    cmd: ansible-vault decrypt {{ key_path }}.enc --output {{ key_path }}
+  delegate_to: localhost
+  tags:
+    - ssh-key
+
+- name: Generate SSH key for {{ server_name }}
+  vars:
+    key_path: "{{ './keys/%s.id_ed25519' | format(server_name | replace('.','_')) }}"
+  openssh_keypair:
+    path: "{{ key_path }}"
+    type: ed25519
+    state: present
+    force: no
+  delegate_to: localhost
+  tags:
+    - ssh-key
+
+- name: Encrypt created SSH key
+  vars:
+    key_path: "{{ './keys/%s.id_ed25519' | format(server_name | replace('.','_')) }}"
+  command:
+    creates: "{{ key_path }}.enc"
+    cmd: ansible-vault encrypt {{ key_path }} --output {{ key_path }}.enc
+  delegate_to: localhost
+  tags:
+    - ssh-key

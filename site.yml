@@ -1,0 +1,90 @@
+- name: Prepare Hetzner Cloud
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: false
+  vars_files:
+    - group_vars/all/vault.yml
+  vars:
+    hcloud_token: "{{ vault_hcloud_token }}"
+  roles:
+    - role: hetzner-firewalls
+    # Create ci.woodpecker-ci.org server
+    - role: ssh-key
+      server_name: ci.woodpecker-ci.org
+    - role: hetzner-server
+      server_name: ci.woodpecker-ci.org
+      hcloud_server_image: "ubuntu-20.04"
+      hcloud_server_type: "cpx31"
+      hcloud_server_location: "fsn1"
+
+# https://stackoverflow.com/questions/29003420/reload-ansibles-dynamic-inventory#34012534
+- name: Refresh inventory
+  hosts: localhost
+  become: no
+  gather_facts: false
+  tasks:
+    - meta: refresh_inventory
+
+- name: Prepare
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: false
+  vars_files:
+    - group_vars/all/vault.yml
+  tasks:
+    - name: Open SSH in firewall
+      hetzner.hcloud.hcloud_server:
+        api_token: "{{ vault_hcloud_token }}"
+        name: ci.woodpecker-ci.org
+        firewalls:
+          - ssh
+          - web
+      delegate_to: localhost
+    - name: Waits until server is ready
+      wait_for:
+        host: "{{ server.hcloud_server.ipv4_address }}"
+        port: 22
+        delay: 2
+        timeout: 60
+      delegate_to: localhost
+
+- hosts: ci.woodpecker-ci.org
+  vars:
+    server_name: ci.woodpecker-ci.org
+    ansible_connection: ssh
+    ansible_user: root
+    ansible_ssh_private_key_file: ./keys/{{ server_name | replace('.','_') }}.id_ed25519
+  vars_files:
+    - group_vars/all/vault.yml
+  roles:
+    - role: common
+    - role: docker
+    - role: docker_compose
+    - role: caddy
+      caddy_version: 2.4.6-alpine
+    - role: woodpecker
+      woodpecker_version: next
+      woodpecker_host: https://{{ server_name }}
+      woodpecker_orgs: woodpecker-ci
+      woodpecker_admins: 6543,anbraten
+      woodpecker_github_client: "{{ vault_woodpecker_github_client }}"
+      woodpecker_github_secret: "{{ vault_woodpecker_github_secret }}"
+      woodpecker_agent_secret: "{{ vault_woodpecker_agent_secret }}"
+
+- name: Cleanup
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: false
+  vars_files:
+    - group_vars/all/vault.yml
+  tasks:
+    - name: Close SSH
+      hetzner.hcloud.hcloud_server:
+        api_token: "{{ vault_hcloud_token }}"
+        name: ci.woodpecker-ci.org
+        firewalls:
+          - web
+      delegate_to: localhost

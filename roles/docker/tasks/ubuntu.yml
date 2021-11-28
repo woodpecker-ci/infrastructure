@@ -1,0 +1,53 @@
+- name: Install Docker dependencies
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg2
+      - python-setuptools
+  tags:
+    - docker
+
+- name: Add apt key for Docker repository
+  apt_key:
+    id: 0EBFCD88
+    url: https://download.docker.com/linux/ubuntu/gpg
+  tags:
+    - docker
+
+- name: Add Docker repository (amd64)
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+    state: present
+  when: ansible_architecture == "x86_64"
+  tags:
+    - docker
+
+- name: Add Docker repository (armhf)
+  apt_repository:
+    repo: "deb [arch=armhf] https://download.docker.com/linux/ubuntu bionic stable"
+    state: present
+  when: ansible_architecture == "armv7l"
+  tags:
+    - docker
+
+- name: Install Docker
+  apt:
+    name: "docker-ce"
+    update_cache: yes
+    force: yes
+  tags:
+    - docker
+
+- name: Install pip
+  apt:
+    name: python3-pip
+  tags:
+    - docker
+
+- name: Install Python docker module for ansible
+  pip:
+    name: docker
+    executable: pip3
+  tags:
+    - docker

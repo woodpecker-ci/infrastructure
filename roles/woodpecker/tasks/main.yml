@@ -1,0 +1,50 @@
+- name: Create Woodpecker directory
+  file:
+    path: /opt/woodpecker
+    state: directory
+    mode: 0700
+  tags:
+    - woodpecker
+
+- name: Install Woodpecker
+  docker_compose:
+    project_name: woodpecker
+    pull: yes
+    definition:
+      version: '3'
+      services:
+        woodpecker-server:
+          image: woodpeckerci/woodpecker-server:{{ woodpecker_version }}
+          restart: always
+          volumes:
+            - /opt/woodpecker:/var/lib/woodpecker/
+          networks:
+            - web
+            - default
+          environment:
+            - WOODPECKER_OPEN=true
+            - WOODPECKER_HOST={{ woodpecker_host }}
+            - WOODPECKER_ORGS={{ woodpecker_orgs }}
+            - WOODPECKER_ADMIN={{ woodpecker_admins }}
+            - WOODPECKER_GITHUB=true
+            - WOODPECKER_GITHUB_CLIENT={{ woodpecker_github_client }}
+            - WOODPECKER_GITHUB_SECRET={{ woodpecker_github_secret }}
+            - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
+
+        woodpecker-agent:
+          image: woodpeckerci/woodpecker-agent:{{ woodpecker_version }}
+          restart: always
+          depends_on:
+            - woodpecker-server
+          volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+          environment:
+            - WOODPECKER_SERVER=woodpecker-server:9000
+            - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
+
+      networks:
+        web:
+          external:
+            name: web
+  tags:
+    - woodpecker

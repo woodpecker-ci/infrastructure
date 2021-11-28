@@ -1,0 +1,13 @@
+- name: Include tasks on Ubuntu
+  include_tasks: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - docker
+
+- name: Start Docker
+  service:
+    name: docker
+    enabled: yes
+    state: started
+  tags:
+    - docker

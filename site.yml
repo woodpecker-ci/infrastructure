@@ -25,30 +25,38 @@
   gather_facts: false
   tasks:
     - meta: refresh_inventory
+      tags:
+        - always
 
 - name: Prepare
   hosts: localhost
   connection: local
   become: no
   gather_facts: false
+  vars:
+    server_name: ci.woodpecker-ci.org
   vars_files:
     - group_vars/all/vault.yml
   tasks:
     - name: Open SSH in firewall
       hetzner.hcloud.hcloud_server:
         api_token: "{{ vault_hcloud_token }}"
-        name: ci.woodpecker-ci.org
+        name: "{{ server_name }}"
         firewalls:
           - ssh
           - web
       delegate_to: localhost
+      tags:
+        - always
     - name: Waits until server is ready
       wait_for:
-        host: "{{ server.hcloud_server.ipv4_address }}"
+        host: "{{ server_name }}"
         port: 22
         delay: 2
         timeout: 60
       delegate_to: localhost
+      tags:
+        - always
 
 - hosts: ci.woodpecker-ci.org
   vars:
@@ -87,4 +95,6 @@
         name: ci.woodpecker-ci.org
         firewalls:
           - web
+      tags:
+        - always
       delegate_to: localhost

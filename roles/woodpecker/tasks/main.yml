@@ -41,6 +41,7 @@
           environment:
             - WOODPECKER_SERVER=woodpecker-server:9000
             - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
+            - WOODPECKER_MAX_PROCS={{ woodpecker_max_processes }}
 
       networks:
         web:

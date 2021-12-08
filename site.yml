@@ -80,6 +80,7 @@
       woodpecker_github_client: "{{ vault_woodpecker_github_client }}"
       woodpecker_github_secret: "{{ vault_woodpecker_github_secret }}"
       woodpecker_agent_secret: "{{ vault_woodpecker_agent_secret }}"
+      woodpecker_max_processes: 2
 
 - name: Cleanup
   hosts: localhost

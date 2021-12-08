@@ -4,3 +4,5 @@
 collections:
   - name: community.docker
     version: 1.10.0
+  - name: hetzner.hcloud
+    version: 1.6.0

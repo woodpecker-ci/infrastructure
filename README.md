@@ -1,9 +1,13 @@
 # Woodpecker-CI infrastructure
 
-## Provisioning
+## Preparation
 
 - save the ansible vault password under `vault-pass.secret`
 - run `docker build -t ansible`
-- run `./provision.sh`
+- install dependencies: `./ansible.sh ansible-galaxy install -r requirements.yml`
 
-> Hint: You can provision / update specific parts of the deployment by using a filter. For example to only update `woodpecker` you cloud use: `./provision.sh ansible-playbook site.yml --tags woodpecker`
+## Provisioning
+
+- run `./ansible.sh`
+
+> Hint: You can provision / update specific parts of the deployment by using a filter. For example to only update `woodpecker` you cloud use: `./ansible.sh ansible-playbook site.yml --tags woodpecker`

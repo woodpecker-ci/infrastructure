@@ -48,6 +48,7 @@
       delegate_to: localhost
       tags:
         - always
+        - ssh-open
     - name: Waits until server is ready
       wait_for:
         host: "{{ server_name }}"
@@ -57,6 +58,7 @@
       delegate_to: localhost
       tags:
         - always
+        - ssh-open
 
 - hosts: ci.woodpecker-ci.org
   vars:
@@ -98,4 +100,5 @@
           - web
       tags:
         - always
+        - ssh-close
       delegate_to: localhost

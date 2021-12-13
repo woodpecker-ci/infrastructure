@@ -9,3 +9,14 @@ wp.laszlo.cloud {
 ci.woodpecker-ci.org {
   reverse_proxy woodpecker-server:8000
 }
+
+go.woodpecker-ci.org {
+  respond "go vanity url"
+
+  route /woodpecker {
+    @goget query go-get=1
+    respond @goget `<meta name="go-import" content="go.woodpecker-ci.org/woodpecker git https://github.com/woodpecker-ci/woodpecker">`
+
+    redir https://pkg.go.dev/github.com/woodpecker-ci/woodpecker
+  }
+}

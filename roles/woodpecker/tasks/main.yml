@@ -30,6 +30,7 @@
             - WOODPECKER_GITHUB_CLIENT={{ woodpecker_github_client }}
             - WOODPECKER_GITHUB_SECRET={{ woodpecker_github_secret }}
             - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
+            - WOODPECKER_GITHUB_MERGE_REF=false
 
         woodpecker-agent:
           image: woodpeckerci/woodpecker-agent:{{ woodpecker_version }}

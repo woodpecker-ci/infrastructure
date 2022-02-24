@@ -3,7 +3,7 @@
 ## Preparation
 
 - save the ansible vault password under `vault-pass.secret`
-- run `docker build -t ansible`
+- run `docker build -t ansible .`
 - install dependencies: `./ansible.sh ansible-galaxy install -r requirements.yml`
 
 ## Provisioning

@@ -17,7 +17,7 @@
 
 - name: Add Docker repository (amd64)
   apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
   when: ansible_architecture == "x86_64"
   tags:
@@ -25,7 +25,7 @@
 
 - name: Add Docker repository (armhf)
   apt_repository:
-    repo: "deb [arch=armhf] https://download.docker.com/linux/ubuntu bionic stable"
+    repo: "deb [arch=armhf] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
   when: ansible_architecture == "armv7l"
   tags:

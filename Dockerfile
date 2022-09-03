@@ -8,5 +8,5 @@ RUN mkdir ~/.ssh
 
 WORKDIR /ansible
 
-RUN pip3 install ansible-lint hcloud docker docker-compose
-
+# RUN pip3 install ansible-lint
+RUN pip3 install hcloud docker docker-compose

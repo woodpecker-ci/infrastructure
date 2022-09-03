@@ -83,6 +83,18 @@
       woodpecker_github_secret: "{{ vault_woodpecker_github_secret }}"
       woodpecker_agent_secret: "{{ vault_woodpecker_agent_secret }}"
       woodpecker_max_processes: 2
+    - role: weblate
+      weblate_version: 4.13.1-2
+      weblate_email_host: "{{ vault_weblate_email_host }}"
+      weblate_email_use_ssl: 0
+      weblate_email_use_tls: 1
+      weblate_email_port: 587
+      weblate_email_username: "{{ vault_weblate_email_username }}"
+      weblate_email_password: "{{ vault_weblate_email_password }}"
+      weblate_postgres_password: "{{ vault_weblate_postgres_password }}"
+      weblate_domain: "translate.woodpecker-ci.org"
+      weblate_admin_email: "{{ vault_weblate_admin_email }}"
+      weblate_site_title: Woodpecker translate
 
 - name: Cleanup
   hosts: localhost

@@ -12,7 +12,8 @@
 
 > Hint: You can provision / update specific parts of the deployment by using a filter. For example to only update `woodpecker` you cloud use: `./ansible.sh ansible-playbook site.yml --tags woodpecker`
 
-## Open / Close SSH
+## SSH
 
 - Open SSH with: `./ssh open`
+- Connect SSH with: `./ssh connect`
 - Close SSH with: `./ssh close`

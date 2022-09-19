@@ -16,14 +16,14 @@
   copy:
     src: Caddyfile
     dest: /opt/caddy/Caddyfile
-    mode: 644
+    mode: 0644
   tags:
     - caddy
 
 - name: Install Caddy
   docker_compose:
     project_name: caddy
-    pull: yes
+    pull: true
     definition:
       version: "3.7"
       services:

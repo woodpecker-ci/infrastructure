@@ -10,7 +10,7 @@
 - name: Update packages with apt
   apt:
     upgrade: dist
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
   when: ansible_distribution in ["Debian", "Ubuntu"]
   tags:

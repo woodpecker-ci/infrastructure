@@ -34,8 +34,8 @@
 - name: Install Docker
   apt:
     name: "docker-ce"
-    update_cache: yes
-    force: yes
+    update_cache: true
+    force: true
   tags:
     - docker
 

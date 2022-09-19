@@ -9,7 +9,7 @@
 - name: Install Woodpecker
   docker_compose:
     project_name: woodpecker
-    pull: yes
+    pull: true
     definition:
       version: '3'
       services:

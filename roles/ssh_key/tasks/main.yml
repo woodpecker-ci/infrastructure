@@ -15,7 +15,7 @@
     path: "{{ key_path }}"
     type: ed25519
     state: present
-    force: no
+    force: false
   delegate_to: localhost
   tags:
     - ssh-key

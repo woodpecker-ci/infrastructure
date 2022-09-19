@@ -1,5 +1,5 @@
 - name: Disable SSH password authentication
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^#PasswordAuthentication yes'
     line: 'PasswordAuthentication no'
@@ -8,7 +8,7 @@
     - common
 
 - name: Update packages with apt
-  apt:
+  ansible.builtin.apt:
     upgrade: dist
     update_cache: true
     cache_valid_time: 3600

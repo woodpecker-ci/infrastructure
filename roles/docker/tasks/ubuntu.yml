@@ -1,5 +1,5 @@
 - name: Install Docker dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - ca-certificates
@@ -9,14 +9,14 @@
     - docker
 
 - name: Add apt key for Docker repository
-  apt_key:
+  ansible.builtin.apt_key:
     id: 0EBFCD88
     url: https://download.docker.com/linux/ubuntu/gpg
   tags:
     - docker
 
 - name: Add Docker repository (amd64)
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
   when: ansible_architecture == "x86_64"
@@ -24,7 +24,7 @@
     - docker
 
 - name: Add Docker repository (armhf)
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch=armhf] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
   when: ansible_architecture == "armv7l"
@@ -32,7 +32,7 @@
     - docker
 
 - name: Install Docker
-  apt:
+  ansible.builtin.apt:
     name: "docker-ce"
     update_cache: true
     force: true
@@ -40,13 +40,13 @@
     - docker
 
 - name: Install pip
-  apt:
+  ansible.builtin.apt:
     name: python3-pip
   tags:
     - docker
 
 - name: Install Python docker module for ansible
-  pip:
+  ansible.builtin.pip:
     name: docker
     executable: pip3
   tags:

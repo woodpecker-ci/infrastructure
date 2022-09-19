@@ -1,5 +1,5 @@
 - name: Create Woodpecker directory
-  file:
+  ansible.builtin.file:
     path: /opt/woodpecker
     state: directory
     mode: 0700

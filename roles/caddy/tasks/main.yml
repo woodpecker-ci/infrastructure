@@ -5,7 +5,7 @@
     - caddy
 
 - name: Create Caddy directory
-  file:
+  ansible.builtin.file:
     path: /opt/caddy
     state: directory
     mode: 0700
@@ -13,7 +13,7 @@
     - caddy
 
 - name: Copy Caddy config
-  copy:
+  ansible.builtin.copy:
     src: Caddyfile
     dest: /opt/caddy/Caddyfile
     mode: 0644

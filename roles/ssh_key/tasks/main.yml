@@ -1,7 +1,7 @@
 - name: Decrypt existing SSH key
   vars:
     key_path: "{{ './keys/%s.id_ed25519' | format(server_name | replace('.','_')) }}"
-  command:
+  ansible.builtin.command:
     creates: "{{ key_path }}"
     cmd: ansible-vault decrypt {{ key_path }}.enc --output {{ key_path }}
   delegate_to: localhost
@@ -23,7 +23,7 @@
 - name: Encrypt created SSH key
   vars:
     key_path: "{{ './keys/%s.id_ed25519' | format(server_name | replace('.','_')) }}"
-  command:
+  ansible.builtin.command:
     creates: "{{ key_path }}.enc"
     cmd: ansible-vault encrypt {{ key_path }} --output {{ key_path }}.enc
   delegate_to: localhost

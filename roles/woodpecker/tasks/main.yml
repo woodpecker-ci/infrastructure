@@ -1,5 +1,5 @@
 - name: Create Woodpecker directory
-  file:
+  ansible.builtin.file:
     path: /opt/woodpecker
     state: directory
     mode: 0700
@@ -9,7 +9,7 @@
 - name: Install Woodpecker
   docker_compose:
     project_name: woodpecker
-    pull: yes
+    pull: true
     definition:
       version: '3'
       services:

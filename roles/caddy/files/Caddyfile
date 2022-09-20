@@ -11,7 +11,7 @@ ci.woodpecker-ci.org {
 }
 
 https://ci.woodpecker-ci.org:9000 {
-  reverse_proxy woodpecker-server:9000
+  reverse_proxy h2c://woodpecker-server:9000
 }
 
 go.woodpecker-ci.org {

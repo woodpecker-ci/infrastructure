@@ -33,7 +33,7 @@
         source_ips:
           - 0.0.0.0/0
           - ::/0
-      - description: allow https in
+      - description: allow http in
         direction: in
         protocol: tcp
         port: "80"

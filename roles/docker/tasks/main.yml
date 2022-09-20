@@ -5,9 +5,9 @@
     - docker
 
 - name: Start Docker
-  service:
+  ansible.builtin.service:
     name: docker
-    enabled: yes
+    enabled: true
     state: started
   tags:
     - docker

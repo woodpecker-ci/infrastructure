@@ -1,7 +1,7 @@
 - name: Install Weblate
   docker_compose:
     project_name: weblate
-    pull: yes
+    pull: true
     definition:
       version: "3"
       services:

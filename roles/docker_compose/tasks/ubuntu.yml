@@ -1,5 +1,5 @@
 - name: Install docker-compose
-  pip:
+  ansible.builtin.pip:
     name: docker-compose
     executable: pip3
   tags:

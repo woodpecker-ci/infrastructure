@@ -1,18 +1,18 @@
 - name: Prepare Hetzner Cloud
   hosts: localhost
   connection: local
-  become: no
+  become: false
   gather_facts: false
   vars_files:
     - group_vars/all/vault.yml
   vars:
     hcloud_token: "{{ vault_hcloud_token }}"
   roles:
-    - role: hetzner-firewalls
+    - role: hetzner_firewalls
     # Create ci.woodpecker-ci.org server
-    - role: ssh-key
+    - role: ssh_key
       server_name: ci.woodpecker-ci.org
-    - role: hetzner-server
+    - role: hetzner_server
       server_name: ci.woodpecker-ci.org
       hcloud_server_image: "ubuntu-20.04"
       hcloud_server_type: "cpx31"
@@ -21,7 +21,7 @@
 # https://stackoverflow.com/questions/29003420/reload-ansibles-dynamic-inventory#34012534
 - name: Refresh inventory
   hosts: localhost
-  become: no
+  become: false
   gather_facts: false
   tasks:
     - meta: refresh_inventory
@@ -31,7 +31,7 @@
 - name: Prepare
   hosts: localhost
   connection: local
-  become: no
+  become: false
   gather_facts: false
   vars:
     server_name: ci.woodpecker-ci.org
@@ -99,7 +99,7 @@
 - name: Cleanup
   hosts: localhost
   connection: local
-  become: no
+  become: false
   gather_facts: false
   vars_files:
     - group_vars/all/vault.yml

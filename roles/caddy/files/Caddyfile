@@ -10,7 +10,7 @@ ci.woodpecker-ci.org {
   reverse_proxy woodpecker-server:8000
 }
 
-https://ci.woodpecker-ci.org:9000 {
+https://grpc-ci.woodpecker-ci.org {
   reverse_proxy h2c://woodpecker-server:9000
 }
 

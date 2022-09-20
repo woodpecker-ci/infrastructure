@@ -10,6 +10,10 @@ ci.woodpecker-ci.org {
   reverse_proxy woodpecker-server:8000
 }
 
+grpc-ci.woodpecker-ci.org {
+  reverse_proxy h2c://woodpecker-server:9000
+}
+
 go.woodpecker-ci.org {
   respond "go vanity url"
 

@@ -27,26 +27,26 @@
     name: web
     api_token: "{{ hcloud_token }}"
     rules:
-      - direction: in
+      - description: allow icmp in
+        direction: in
         protocol: icmp
         source_ips:
           - 0.0.0.0/0
           - ::/0
-        description: allow icmp in
-      - direction: in
+      - description: allow http in
+        direction: in
         protocol: tcp
         port: "80"
         source_ips:
           - 0.0.0.0/0
           - ::/0
-        description: allow https in
-      - direction: in
+      - description: allow https in
+        direction: in
         protocol: tcp
         port: "443"
         source_ips:
           - 0.0.0.0/0
           - ::/0
-        description: allow https in
     state: present
   delegate_to: localhost
   tags:

@@ -4,7 +4,6 @@ pipeline:
   ansible-lint:
     image: codeberg.org/6543/docker-images/ansible-lint
     group: lint
-    pull: true
     commands:
       - ansible-galaxy install -r requirements.yml
       - ansible-lint

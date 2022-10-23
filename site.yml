@@ -95,6 +95,7 @@
       weblate_domain: "translate.woodpecker-ci.org"
       weblate_admin_email: "{{ vault_weblate_admin_email }}"
       weblate_site_title: Woodpecker translate
+      weblate_addons: "weblate.cleanup.blank"
 
 - name: Cleanup
   hosts: localhost

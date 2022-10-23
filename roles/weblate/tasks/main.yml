@@ -23,6 +23,7 @@
             WEBLATE_SITE_DOMAIN: "{{ weblate_domain }}"
             WEBLATE_ADMIN_EMAIL: "{{ weblate_admin_email }}"
             WEBLATE_SITE_TITLE: "{{ weblate_site_title }}"
+            WEBLATE_ADD_ADDONS: "{{ weblate_addons }}"
             POSTGRES_USER: weblate
             POSTGRES_PASSWORD: "{{ weblate_postgres_password }}"
             POSTGRES_DATABASE: weblate

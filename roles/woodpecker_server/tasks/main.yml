@@ -6,12 +6,12 @@
   tags:
     - woodpecker
 
-- name: Install Woodpecker
+- name: Install Woodpecker server
   docker_compose:
-    project_name: woodpecker
+    project_name: woodpecker_server
     pull: true
     definition:
-      version: '3'
+      version: "3"
       services:
         woodpecker-server:
           image: woodpeckerci/woodpecker-server:{{ woodpecker_version }}
@@ -31,22 +31,10 @@
             - WOODPECKER_GITHUB_SECRET={{ woodpecker_github_secret }}
             - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
             - WOODPECKER_GITHUB_MERGE_REF=false
-
-        woodpecker-agent:
-          image: woodpeckerci/woodpecker-agent:{{ woodpecker_version }}
-          restart: always
-          depends_on:
-            - woodpecker-server
-          volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-          environment:
-            - WOODPECKER_SERVER=woodpecker-server:9000
-            - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
-            - WOODPECKER_MAX_PROCS={{ woodpecker_max_processes }}
-
       networks:
         web:
           external:
             name: web
   tags:
     - woodpecker
+    - woodpecker-server

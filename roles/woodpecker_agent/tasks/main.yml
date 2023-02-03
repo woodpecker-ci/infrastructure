@@ -1,0 +1,26 @@
+- name: Install Woodpecker agent
+  docker_compose:
+    project_name: woodpecker_agent
+    pull: true
+    definition:
+      version: "3"
+      services:
+        woodpecker-agent:
+          image: woodpeckerci/woodpecker-agent:{{ woodpecker_version }}
+          restart: always
+          volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+          environment:
+            - WOODPECKER_SERVER={{ woodpecker_server }}
+            - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
+            - WOODPECKER_MAX_PROCS={{ woodpecker_max_processes }}
+          networks:
+            - web
+            - default
+      networks:
+        web:
+          external:
+            name: web
+  tags:
+    - woodpecker
+    - woodpecker-agent

@@ -55,6 +55,18 @@
       woodpecker_server: woodpecker-server:9000
       woodpecker_agent_secret: "{{ vault_woodpecker_agent1_secret }}"
       woodpecker_max_processes: 2
+    - role: woodpecker_autoscaler
+      woodpecker_version: next
+      woodpecker_server: http://woodpecker-server:8000
+      woodpecker_token: "{{ vault_woodpecker_api_token }}"
+      woodpecker_min_agents: 0
+      woodpecker_max_agents: 1
+      woodpecker_workflows_per_agent: 2
+      woodpecker_grpc_addr: grpc-ci.woodpecker-ci.org:443
+      woodpecker_grpc_secure: true
+      woodpecker_provider: hetzner
+      woodpecker_hetzner_api_token: "{{ vault_hcloud_token }}"
+      woodpecker_hetzner_server_type: cpx31
     - role: weblate
       weblate_version: 4.13.1-2
       weblate_email_host: "{{ vault_weblate_email_host }}"

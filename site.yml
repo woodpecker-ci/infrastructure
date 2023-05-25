@@ -67,6 +67,7 @@
       woodpecker_provider: hetzner
       woodpecker_hetzner_api_token: "{{ vault_hcloud_token }}"
       woodpecker_hetzner_server_type: cpx31
+      woodpecker_hetzner_ssh_key_id: 4973153
     - role: weblate
       weblate_version: 4.13.1-2
       weblate_email_host: "{{ vault_weblate_email_host }}"

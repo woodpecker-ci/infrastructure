@@ -14,11 +14,12 @@
             - WOODPECKER_MIN_AGENTS={{ woodpecker_min_agents }}
             - WOODPECKER_MAX_AGENTS={{ woodpecker_max_agents }}
             - WOODPECKER_WORKFLOWS_PER_AGENT={{ woodpecker_workflows_per_agent }}
-            - WOODEPCKER_GRPC_ADDR={{ woodpecker_grpc_addr }}
-            - WOODEPCKER_GRPC_SECURE={{ woodpecker_grpc_secure }}
+            - WOODPECKER_GRPC_ADDR={{ woodpecker_grpc_addr }}
+            - WOODPECKER_GRPC_SECURE={{ woodpecker_grpc_secure }}
             - WOODPECKER_PROVIDER={{ woodpecker_provider }}
             - WOODPECKER_HETZNER_API_TOKEN={{ woodpecker_hetzner_api_token }}
             - WOODPECKER_HETZNER_SERVER_TYPE={{ woodpecker_hetzner_server_type }}
+            - WOODPECKER_HETZNER_SSH_KEY_ID={{ woodpecker_hetzner_ssh_key_id }}
           networks:
             - web
             - default

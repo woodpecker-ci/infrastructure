@@ -43,7 +43,7 @@
     - role: caddy
       caddy_version: 2.4.6-alpine
     - role: woodpecker_server
-      woodpecker_version: next-b57b6f27f6
+      woodpecker_version: next-cd982fcbd1
       woodpecker_host: https://{{ server_name }}
       woodpecker_orgs: woodpecker-ci
       woodpecker_admins: 6543,anbraten

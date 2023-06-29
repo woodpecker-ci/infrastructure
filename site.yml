@@ -43,7 +43,7 @@
     - role: caddy
       caddy_version: 2.4.6-alpine
     - role: woodpecker_server
-      woodpecker_version: next-cd982fcbd1
+      woodpecker_version: next-e6d646bc7b
       woodpecker_host: https://{{ server_name }}
       woodpecker_orgs: woodpecker-ci
       woodpecker_admins: 6543,anbraten
@@ -51,7 +51,7 @@
       woodpecker_github_client: "{{ vault_woodpecker_github_client }}"
       woodpecker_github_secret: "{{ vault_woodpecker_github_secret }}"
     - role: woodpecker_agent
-      woodpecker_version: next-b57b6f27f6
+      woodpecker_version: next-e6d646bc7b
       woodpecker_server: woodpecker-server:9000
       woodpecker_agent_secret: "{{ vault_woodpecker_agent1_secret }}"
       woodpecker_max_processes: 2

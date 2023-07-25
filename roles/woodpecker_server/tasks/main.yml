@@ -31,6 +31,7 @@
             - WOODPECKER_GITHUB_SECRET={{ woodpecker_github_secret }}
             - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
             - WOODPECKER_GITHUB_MERGE_REF=false
+            - WOODPECKER_MIGRATIONS_ALLOW_LONG=true
       networks:
         web:
           external:

@@ -43,7 +43,7 @@
     - role: caddy
       caddy_version: 2.4.6-alpine
     - role: woodpecker_server
-      woodpecker_version: &woodpecker_version next-1c116daf08
+      woodpecker_version: &woodpecker_version next
       woodpecker_host: https://{{ server_name }}
       woodpecker_orgs: woodpecker-ci
       woodpecker_admins: 6543,anbraten
@@ -55,20 +55,19 @@
       woodpecker_server: woodpecker-server:9000
       woodpecker_agent_secret: "{{ vault_woodpecker_agent1_secret }}"
       woodpecker_max_processes: 2
-# TODO: fix autoscaler killing agents to soon
-#   - role: woodpecker_autoscaler
-#     woodpecker_version: next
-#     woodpecker_server: http://woodpecker-server:8000
-#     woodpecker_token: "{{ vault_woodpecker_api_token }}"
-#     woodpecker_min_agents: 0
-#     woodpecker_max_agents: 1
-#     woodpecker_workflows_per_agent: 2
-#     woodpecker_grpc_addr: grpc-ci.woodpecker-ci.org:443
-#     woodpecker_grpc_secure: true
-#     woodpecker_provider: hetzner
-#     woodpecker_hetzner_api_token: "{{ vault_hcloud_token }}"
-#     woodpecker_hetzner_server_type: cpx31
-#     woodpecker_hetzner_ssh_key_id: 4973153
+    - role: woodpecker_autoscaler
+      woodpecker_version: next
+      woodpecker_server_url: http://woodpecker-server:8000
+      woodpecker_server_token: "{{ vault_woodpecker_api_token }}"
+      woodpecker_min_agents: 0
+      woodpecker_max_agents: 1
+      woodpecker_workflows_per_agent: 2
+      woodpecker_grpc_addr: grpc-ci.woodpecker-ci.org:443
+      woodpecker_grpc_secure: true
+      woodpecker_provider: hetznercloud
+      woodpecker_hetzner_api_token: "{{ vault_hcloud_token }}"
+      woodpecker_hetzner_server_type: cpx31
+      woodpecker_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
     - role: weblate
       weblate_version: 4.13.1-2
       weblate_email_host: "{{ vault_weblate_email_host }}"

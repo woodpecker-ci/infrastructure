@@ -54,7 +54,7 @@
       woodpecker_hetzner_server_type: cpx31
       woodpecker_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
     - role: weblate
-      weblate_version: 4.13.1-2
+      weblate_version: 4.18.2.2
       weblate_email_host: "{{ vault_weblate_email_host }}"
       weblate_email_use_ssl: 0
       weblate_email_use_tls: 1

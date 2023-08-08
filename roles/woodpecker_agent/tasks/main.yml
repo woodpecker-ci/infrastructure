@@ -10,6 +10,7 @@
           restart: always
           volumes:
             - /var/run/docker.sock:/var/run/docker.sock
+            - /opt/woodpecker:/etc/woodpecker/
           environment:
             - WOODPECKER_SERVER={{ woodpecker_server }}
             - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}

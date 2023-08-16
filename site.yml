@@ -39,7 +39,7 @@
       woodpecker_version: *woodpecker_version
       woodpecker_server: woodpecker-server:9000
       woodpecker_agent_secret: "{{ vault_woodpecker_agent1_secret }}"
-      woodpecker_max_processes: 2
+      woodpecker_max_processes: 1
     - role: woodpecker_autoscaler
       woodpecker_version: next
       woodpecker_server_url: http://woodpecker-server:8000

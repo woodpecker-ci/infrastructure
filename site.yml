@@ -28,7 +28,7 @@
     - role: caddy
       caddy_version: 2.4.6-alpine
     - role: woodpecker_server
-      woodpecker_version: &woodpecker_version next-c2448b1745
+      woodpecker_version: &woodpecker_version next-c1731524bc
       woodpecker_host: https://{{ inventory_hostname }}
       woodpecker_orgs: woodpecker-ci
       woodpecker_admins: 6543,anbraten

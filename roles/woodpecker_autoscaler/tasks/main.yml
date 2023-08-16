@@ -20,6 +20,7 @@
             - WOODPECKER_HETZNERCLOUD_API_TOKEN={{ woodpecker_hetzner_api_token }}
             - WOODPECKER_HETZNERCLOUD_SERVER_TYPE={{ woodpecker_hetzner_server_type }}
             - WOODPECKER_HETZNERCLOUD_SSH_KEYS={{ woodpecker_hetzner_ssh_keys }}
+            - WOODPECKER_HETZNERCLOUD_LOCATION={{ woodpecker_hetzner_server_location }}
           networks:
             - web
             - default

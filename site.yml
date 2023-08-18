@@ -51,7 +51,7 @@
       woodpecker_grpc_secure: true
       woodpecker_provider: hetznercloud
       woodpecker_hetzner_api_token: "{{ vault_hcloud_token }}"
-      woodpecker_hetzner_server_type: cpx31
+      woodpecker_hetzner_server_type: cpx41
       woodpecker_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
     - role: weblate
       weblate_version: 4.18.2.2

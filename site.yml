@@ -18,7 +18,8 @@
 #       hcloud_server_type: "cpx31"
 #       hcloud_server_location: "fsn1"
 
-- hosts: ci.woodpecker-ci.org
+- name: Setup man server at hetzner
+  hosts: ci.woodpecker-ci.org
   vars_files:
     - group_vars/all/vault.yml
   roles:

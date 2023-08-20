@@ -7,7 +7,7 @@
     - woodpecker
 
 - name: Install Woodpecker server
-  docker_compose:
+  community.docker.docker_compose:
     project_name: woodpecker_server
     pull: true
     definition:
@@ -31,7 +31,6 @@
             - WOODPECKER_GITHUB_SECRET={{ woodpecker_github_secret }}
             - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
             - WOODPECKER_GITHUB_MERGE_REF=false
-            - WOODPECKER_MIGRATIONS_ALLOW_LONG=true
       networks:
         web:
           external:

@@ -1,5 +1,5 @@
 - name: Include tasks on Ubuntu
-  include_tasks: ubuntu.yml
+  ansible.builtin.include_tasks: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
   tags:
     - docker_compose

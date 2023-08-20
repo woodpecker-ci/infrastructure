@@ -2,6 +2,12 @@ when:
   branch: ${CI_REPO_DEFAULT_BRANCH}
 
 steps:
+  no-vault:
+    image: bash
+    commands:
+      - sed -i '/vault_password_file/d' ansible.cfg
+      - sed -i  's/vault\.yml/vault\.example\.yml/g' site.yml
+
   ansible-lint:
     image: codeberg.org/6543/docker-images/ansible-lint
     group: lint

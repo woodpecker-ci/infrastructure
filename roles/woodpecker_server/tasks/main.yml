@@ -2,7 +2,7 @@
   ansible.builtin.file:
     path: /opt/woodpecker
     state: directory
-    mode: 0700
+    mode: "0o700"
   tags:
     - woodpecker
 

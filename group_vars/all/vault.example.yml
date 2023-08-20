@@ -9,4 +9,3 @@ vault_weblate_email_password: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 vault_weblate_postgres_password: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 vault_weblate_admin_email: mail@example.com
 vault_woodpecker_api_token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-

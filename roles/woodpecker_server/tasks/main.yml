@@ -31,13 +31,6 @@
             - WOODPECKER_GITHUB_SECRET={{ woodpecker_github_secret }}
             - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
             - WOODPECKER_GITHUB_MERGE_REF=false
-        logs-migrator:
-          image: codeberg.org/6543/woodpecker_logs_migrator
-          volumes:
-            - /opt/woodpecker:/var/lib/woodpecker/
-          environment:
-            - WOODPECKER_DATABASE_DRIVER=sqlite3
-            - WOODPECKER_DATABASE_DATASOURCE=/var/lib/woodpecker/woodpecker.sqlite
       networks:
         web:
           external:

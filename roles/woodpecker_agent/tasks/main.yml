@@ -1,5 +1,5 @@
 - name: Install Woodpecker agent
-  docker_compose:
+  community.docker.docker_compose:
     project_name: woodpecker_agent
     pull: true
     definition:

@@ -1,5 +1,5 @@
 - name: Install Weblate
-  docker_compose:
+  community.docker.docker_compose:
     project_name: weblate
     pull: true
     definition:

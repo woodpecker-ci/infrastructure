@@ -1,5 +1,5 @@
 - name: Install Woodpecker autoscaler
-  docker_compose:
+  community.docker.docker_compose:
     project_name: woodpecker_autoscaler
     pull: true
     definition:

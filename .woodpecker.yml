@@ -1,7 +1,7 @@
 when:
   branch: ${CI_REPO_DEFAULT_BRANCH}
 
-pipeline:
+steps:
   ansible-lint:
     image: codeberg.org/6543/docker-images/ansible-lint
     group: lint

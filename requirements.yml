@@ -7,3 +7,6 @@ collections:
   - name: hetzner.hcloud
     version: 2.0.0
   - name: community.crypto
+    version: 2.15.1
+
+

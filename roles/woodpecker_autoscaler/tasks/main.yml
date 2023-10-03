@@ -9,17 +9,17 @@
           image: woodpeckerci/autoscaler:{{ woodpecker_version }}
           restart: always
           environment:
-            - WOODPECKER_SERVER={{ woodpecker_server_url }}
-            - WOODPECKER_TOKEN={{ woodpecker_server_token }}
-            - WOODPECKER_MIN_AGENTS={{ woodpecker_min_agents }}
-            - WOODPECKER_MAX_AGENTS={{ woodpecker_max_agents }}
-            - WOODPECKER_WORKFLOWS_PER_AGENT={{ woodpecker_workflows_per_agent }}
-            - WOODPECKER_GRPC_ADDR={{ woodpecker_grpc_addr }}
-            - WOODPECKER_GRPC_SECURE={{ woodpecker_grpc_secure }}
-            - WOODPECKER_PROVIDER={{ woodpecker_provider }}
-            - WOODPECKER_HETZNERCLOUD_API_TOKEN={{ woodpecker_hetzner_api_token }}
-            - WOODPECKER_HETZNERCLOUD_SERVER_TYPE={{ woodpecker_hetzner_server_type }}
-            - WOODPECKER_HETZNERCLOUD_SSH_KEYS={{ woodpecker_hetzner_ssh_keys }}
+            - WOODPECKER_SERVER={{ woodpecker_autoscaler_woodpecker_server_url }}
+            - WOODPECKER_TOKEN={{ woodpecker_autoscaler_woodpecker_server_token }}
+            - WOODPECKER_MIN_AGENTS={{ woodpecker_autoscaler_woodpecker_min_agents }}
+            - WOODPECKER_MAX_AGENTS={{ woodpecker_autoscaler_woodpecker_max_agents }}
+            - WOODPECKER_WORKFLOWS_PER_AGENT={{ woodpecker_autoscaler_woodpecker_workflows_per_agent }}
+            - WOODPECKER_GRPC_ADDR={{ woodpecker_autoscaler_woodpecker_grpc_addr }}
+            - WOODPECKER_GRPC_SECURE={{ woodpecker_autoscaler_woodpecker_grpc_secure }}
+            - WOODPECKER_PROVIDER={{ woodpecker_autoscaler_woodpecker_provider }}
+            - WOODPECKER_HETZNERCLOUD_API_TOKEN={{ woodpecker_autoscaler_woodpecker_hetzner_api_token }}
+            - WOODPECKER_HETZNERCLOUD_SERVER_TYPE={{ woodpecker_autoscaler_woodpecker_hetzner_server_type }}
+            - WOODPECKER_HETZNERCLOUD_SSH_KEYS={{ woodpecker_autoscaler_woodpecker_hetzner_ssh_keys }}
           networks:
             - web
             - default

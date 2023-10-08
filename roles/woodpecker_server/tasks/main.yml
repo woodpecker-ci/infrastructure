@@ -14,7 +14,7 @@
       version: "3"
       services:
         woodpecker-server:
-          image: woodpeckerci/woodpecker-server:{{ woodpecker_server_woodpecker_version }}
+          image: woodpeckerci/woodpecker-server:{{ woodpecker_server_version }}
           restart: always
           volumes:
             - /opt/woodpecker:/var/lib/woodpecker/
@@ -23,13 +23,13 @@
             - default
           environment:
             - WOODPECKER_OPEN=true
-            - WOODPECKER_HOST={{ woodpecker_server_woodpecker_host }}
-            - WOODPECKER_ORGS={{ woodpecker_server_woodpecker_orgs }}
-            - WOODPECKER_ADMIN={{ woodpecker_server_woodpecker_admins }}
+            - WOODPECKER_HOST={{ woodpecker_server_host }}
+            - WOODPECKER_ORGS={{ woodpecker_server_orgs }}
+            - WOODPECKER_ADMIN={{ woodpecker_server_admins }}
             - WOODPECKER_GITHUB=true
-            - WOODPECKER_GITHUB_CLIENT={{ woodpecker_server_woodpecker_github_client }}
-            - WOODPECKER_GITHUB_SECRET={{ woodpecker_server_woodpecker_github_secret }}
-            - WOODPECKER_AGENT_SECRET={{ woodpecker_server_woodpecker_agent_secret }}
+            - WOODPECKER_GITHUB_CLIENT={{ woodpecker_server_github_client }}
+            - WOODPECKER_GITHUB_SECRET={{ woodpecker_server_github_secret }}
+            - WOODPECKER_AGENT_SECRET={{ woodpecker_server_agent_secret }}
             - WOODPECKER_GITHUB_MERGE_REF=false
       networks:
         web:

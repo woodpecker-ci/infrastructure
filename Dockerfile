@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.18@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
 
 RUN apk add --update --no-cache python3 py3-pip ansible openssh nano py3-ruamel.yaml
 

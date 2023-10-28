@@ -3,13 +3,13 @@ when:
 
 steps:
   no-vault:
-    image: bash
+    image: bash@sha256:acbac47fb9ea642a211c35013f50481bec20bd23db852c9c2634a4d153e631f1
     commands:
       - sed -i '/vault_password_file/d' ansible.cfg
       - sed -i  's/vault\.yml/vault\.example\.yml/g' site.yml
 
   ansible-lint:
-    image: codeberg.org/6543/docker-images/ansible-lint
+    image: codeberg.org/6543/docker-images/ansible-lint@sha256:0c23b8105a243e3eb09aa85b62ceb86751b71866d17456479b2bd56b3b603074
     group: lint
     commands:
       - ansible-galaxy install -r requirements.yml

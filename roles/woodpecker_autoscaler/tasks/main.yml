@@ -6,7 +6,7 @@
       version: "3"
       services:
         woodpecker-autoscaler:
-          image: woodpeckerci/autoscaler:{{ woodpecker_version }}
+          image: woodpeckerci/autoscaler:{{ woodpecker_autoscaler_version }}
           restart: always
           environment:
             - WOODPECKER_SERVER={{ woodpecker_autoscaler_server_url }}

@@ -6,15 +6,15 @@
       version: "3"
       services:
         woodpecker-agent:
-          image: woodpeckerci/woodpecker-agent:{{ woodpecker_version }}
+          image: woodpeckerci/woodpecker-agent:{{ woodpecker_agent_version }}
           restart: always
           volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - /opt/woodpecker:/etc/woodpecker/
           environment:
-            - WOODPECKER_SERVER={{ woodpecker_server }}
-            - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_secret }}
-            - WOODPECKER_MAX_PROCS={{ woodpecker_max_processes }}
+            - WOODPECKER_SERVER={{ woodpecker_agent_server }}
+            - WOODPECKER_AGENT_SECRET={{ woodpecker_agent_agent_secret }}
+            - WOODPECKER_MAX_PROCS={{ woodpecker_agent_max_processes }}
           networks:
             - web
             - default

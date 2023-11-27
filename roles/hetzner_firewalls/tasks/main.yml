@@ -1,5 +1,5 @@
 - name: Create a firewall for ssh access
-  hetzner.hcloud.hcloud_firewall:
+  hetzner.hcloud.firewall:
     name: ssh
     api_token: "{{ hcloud_token }}"
     rules:
@@ -23,7 +23,7 @@
     - hetzner-firewalls
 
 - name: Create a firewall for web access
-  hetzner.hcloud.hcloud_firewall:
+  hetzner.hcloud.firewall:
     name: web
     api_token: "{{ hcloud_token }}"
     rules:
@@ -54,7 +54,7 @@
     - hetzner-firewalls
 
 - name: Create a firewall for no incoming access
-  hetzner.hcloud.hcloud_firewall:
+  hetzner.hcloud.firewall:
     name: closed
     api_token: "{{ hcloud_token }}"
     rules: []

@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.19
 
 RUN apk add --update --no-cache python3 py3-pip ansible openssh nano py3-ruamel.yaml
 

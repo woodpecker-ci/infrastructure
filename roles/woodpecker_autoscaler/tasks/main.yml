@@ -20,6 +20,7 @@
             - WOODPECKER_HETZNERCLOUD_API_TOKEN={{ woodpecker_autoscaler_hetzner_api_token }}
             - WOODPECKER_HETZNERCLOUD_SERVER_TYPE={{ woodpecker_autoscaler_hetzner_server_type }}
             - WOODPECKER_HETZNERCLOUD_SSH_KEYS={{ woodpecker_autoscaler_hetzner_ssh_keys }}
+            - WOODPECKER_RECONCILIATION_INTERVAL=5s
           networks:
             - web
             - default

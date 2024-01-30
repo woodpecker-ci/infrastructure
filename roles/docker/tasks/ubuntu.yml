@@ -30,6 +30,14 @@
   tags:
     - docker
 
+- name: Add Docker repository (arm64)
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=arm64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+  when: ansible_architecture == "aarch64"
+  tags:
+    - docker
+
 - name: Install Docker
   ansible.builtin.apt:
     name:

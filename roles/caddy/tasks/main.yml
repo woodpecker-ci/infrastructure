@@ -17,6 +17,7 @@
     src: Caddyfile
     dest: /opt/caddy/Caddyfile
     mode: "0o644"
+  register: output
   tags:
     - caddy
 
@@ -24,6 +25,7 @@
   community.docker.docker_compose:
     project_name: caddy
     pull: true
+    restarted: "{{ 'true' if output.changed else 'false' }}"
     definition:
       version: "3.7"
       services:

@@ -36,11 +36,11 @@
       woodpecker_server_agent_secret: "{{ vault_woodpecker_agent_secret }}"
       woodpecker_server_github_client: "{{ vault_woodpecker_github_client }}"
       woodpecker_server_github_secret: "{{ vault_woodpecker_github_secret }}"
-    - role: woodpecker_agent
-      woodpecker_agent_version: *woodpecker_version
-      woodpecker_agent_server: woodpecker-server:9000
-      woodpecker_agent_agent_secret: "{{ vault_woodpecker_agent1_secret }}"
-      woodpecker_agent_max_processes: 1
+    # - role: woodpecker_agent
+    #   woodpecker_agent_version: *woodpecker_version
+    #   woodpecker_agent_server: woodpecker-server:9000
+    #   woodpecker_agent_agent_secret: "{{ vault_woodpecker_agent1_secret }}"
+    #   woodpecker_agent_max_processes: 2
     - role: woodpecker_autoscaler
       woodpecker_autoscaler_version: next
       woodpecker_autoscaler_server_url: http://woodpecker-server:8000

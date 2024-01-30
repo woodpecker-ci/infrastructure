@@ -4,7 +4,6 @@
       - apt-transport-https
       - ca-certificates
       - gnupg2
-      - python-setuptools
   tags:
     - docker
 
@@ -31,23 +30,20 @@
   tags:
     - docker
 
+- name: Add Docker repository (arm64)
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=arm64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+  when: ansible_architecture == "aarch64"
+  tags:
+    - docker
+
 - name: Install Docker
   ansible.builtin.apt:
-    name: "docker-ce"
+    name:
+      - docker-ce
+      - python3-docker
     update_cache: true
     force: true
-  tags:
-    - docker
-
-- name: Install pip
-  ansible.builtin.apt:
-    name: python3-pip
-  tags:
-    - docker
-
-- name: Install Python docker module for ansible
-  ansible.builtin.pip:
-    name: docker
-    executable: pip3
   tags:
     - docker

@@ -12,7 +12,7 @@ steps:
     image: pipelinecomponents/ansible-lint:0.63.0
     depends_on: []
     commands:
-      - ansible-galaxy install -r requirements.yml
+      - ansible-galaxy install -r requirements.yaml
       - ansible-lint
 
   editor-config:

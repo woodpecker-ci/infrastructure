@@ -6,11 +6,15 @@ steps:
     image: bash
     commands:
       - sed -i '/vault_password_file/d' ansible.cfg
-      - sed -i  's/vault\.yml/vault\.example\.yml/g' site.yml
+      - sed -i  's/vault\.yaml/vault\.example\.yaml/g' site.yaml
 
   ansible-lint:
-    image: codeberg.org/6543/docker-images/ansible-lint
-    group: lint
+    image: pipelinecomponents/ansible-lint:0.63.0
+    depends_on: []
     commands:
       - ansible-galaxy install -r requirements.yml
       - ansible-lint
+
+  editor-config:
+    image: mstruebing/editorconfig-checker:2.7.2
+    depends_on: []

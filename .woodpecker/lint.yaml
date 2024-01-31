@@ -10,7 +10,7 @@ steps:
 
   ansible-lint:
     image: pipelinecomponents/ansible-lint:0.63.0
-    depends_on: []
+    depends_on: no-vault
     commands:
       - ansible-galaxy install -r requirements.yaml
       - ansible-lint

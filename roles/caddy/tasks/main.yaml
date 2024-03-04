@@ -8,7 +8,7 @@
   ansible.builtin.file:
     path: /opt/caddy
     state: directory
-    mode: "0o700"
+    mode: '0o700'
   tags:
     - caddy
 
@@ -16,7 +16,7 @@
   ansible.builtin.copy:
     src: Caddyfile
     dest: /opt/caddy/Caddyfile
-    mode: "0o644"
+    mode: '0o644'
   register: output
   tags:
     - caddy
@@ -27,7 +27,7 @@
     pull: true
     restarted: "{{ 'true' if output.changed else 'false' }}"
     definition:
-      version: "3.7"
+      version: '3.7'
       services:
         caddy:
           image: caddy:{{ caddy_version }}

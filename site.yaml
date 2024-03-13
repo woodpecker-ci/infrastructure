@@ -1,27 +1,7 @@
-# - name: Prepare Hetzner Cloud
-#   hosts: localhost
-#   connection: local
-#   become: false
-#   gather_facts: false
-#   vars_files:
-#     - group_vars/all/vault.yml
-#   vars:
-#     hcloud_token: "{{ vault_hcloud_token }}"
-#   roles:
-#     - role: hetzner_firewalls
-#     # Create ci.woodpecker-ci.org server
-#     - role: ssh_key
-#       server_name: ci.woodpecker-ci.org
-#     - role: hetzner_server
-#       server_name: ci.woodpecker-ci.org
-#       hcloud_server_image: "ubuntu-20.04"
-#       hcloud_server_type: "cpx31"
-#       hcloud_server_location: "fsn1"
-
 - name: Setup main server at hetzner
   hosts: ci.woodpecker-ci.org
   vars_files:
-    - group_vars/all/vault.yml
+    - group_vars/all/vault.yaml
   roles:
     - role: common
     - role: docker

@@ -3,7 +3,7 @@
     project_name: weblate
     pull: true
     definition:
-      version: "3"
+      version: '3'
       services:
         weblate:
           image: weblate/weblate:{{ weblate_version }}
@@ -12,19 +12,19 @@
           volumes:
             - weblate-data:/app/data
           environment:
-            WEBLATE_EMAIL_HOST: "{{ weblate_email_host }}"
-            WEBLATE_EMAIL_PORT: "{{ weblate_email_port }}"
-            WEBLATE_EMAIL_USE_TLS: "{{ weblate_email_use_tls }}"
-            WEBLATE_EMAIL_USE_SSL: "{{ weblate_email_use_ssl }}"
-            WEBLATE_EMAIL_HOST_USER: "{{ weblate_email_username }}"
-            WEBLATE_EMAIL_HOST_PASSWORD: "{{ weblate_email_password }}"
-            WEBLATE_SERVER_EMAIL: "{{ weblate_email_username }}"
-            WEBLATE_DEFAULT_FROM_EMAIL: "{{ weblate_email_username }}"
-            WEBLATE_SITE_DOMAIN: "{{ weblate_domain }}"
-            WEBLATE_ADMIN_EMAIL: "{{ weblate_admin_email }}"
-            WEBLATE_SITE_TITLE: "{{ weblate_site_title }}"
+            WEBLATE_EMAIL_HOST: '{{ weblate_email_host }}'
+            WEBLATE_EMAIL_PORT: '{{ weblate_email_port }}'
+            WEBLATE_EMAIL_USE_TLS: '{{ weblate_email_use_tls }}'
+            WEBLATE_EMAIL_USE_SSL: '{{ weblate_email_use_ssl }}'
+            WEBLATE_EMAIL_HOST_USER: '{{ weblate_email_username }}'
+            WEBLATE_EMAIL_HOST_PASSWORD: '{{ weblate_email_password }}'
+            WEBLATE_SERVER_EMAIL: '{{ weblate_email_username }}'
+            WEBLATE_DEFAULT_FROM_EMAIL: '{{ weblate_email_username }}'
+            WEBLATE_SITE_DOMAIN: '{{ weblate_domain }}'
+            WEBLATE_ADMIN_EMAIL: '{{ weblate_admin_email }}'
+            WEBLATE_SITE_TITLE: '{{ weblate_site_title }}'
             POSTGRES_USER: weblate
-            POSTGRES_PASSWORD: "{{ weblate_postgres_password }}"
+            POSTGRES_PASSWORD: '{{ weblate_postgres_password }}'
             POSTGRES_DATABASE: weblate
             POSTGRES_HOST: database
             POSTGRES_PORT: 5432
@@ -41,7 +41,7 @@
           image: postgres:16-alpine
           environment:
             POSTGRES_USER: weblate
-            POSTGRES_PASSWORD: "{{ weblate_postgres_password }}"
+            POSTGRES_PASSWORD: '{{ weblate_postgres_password }}'
             POSTGRES_DATABASE: weblate
             POSTGRES_HOST: database
             POSTGRES_PORT: 5432
@@ -51,7 +51,7 @@
         cache:
           image: redis:7-alpine
           restart: always
-          command: [redis-server, --save, "60", "1"]
+          command: [redis-server, --save, '60', '1']
           volumes:
             - redis-data:/data
       networks:

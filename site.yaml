@@ -19,6 +19,7 @@
 #       hcloud_server_location: "fsn1"
 
 - name: Setup main server at hetzner
+  hosts: ci_server
   roles:
     - role: common
     - role: docker

@@ -23,8 +23,8 @@ steps:
       check: true
       user: root
       galaxy_force: false
-      # private_key:
-      #   from_secret: id_ed25519_ci
+      vault-password:
+        from_secret: ansible_vault_password
 
   'ansible (apply)':
     when:

@@ -13,9 +13,9 @@ steps:
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
-      playbook: site.yml
+      playbook: site.yaml
       diff: true
-      galaxy: requirements.yml
+      galaxy: requirements.yaml
       inventory: inventory
       syntax_check: false
       limit: ci_server
@@ -35,9 +35,9 @@ steps:
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
-      playbook: site.yml
+      playbook: site.yaml
       diff: true
-      galaxy: requirements.yml
+      galaxy: requirements.yaml
       inventory: inventory
       syntax_check: false
       limit: ci_server

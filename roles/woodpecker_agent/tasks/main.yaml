@@ -3,7 +3,7 @@
     project_name: woodpecker_agent
     pull: true
     definition:
-      version: "3"
+      version: '3'
       services:
         woodpecker-agent:
           image: woodpeckerci/woodpecker-agent:{{ woodpecker_agent_version }}

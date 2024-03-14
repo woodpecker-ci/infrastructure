@@ -28,7 +28,7 @@ steps:
 
   'ansible (apply)':
     when:
-      - event: [push]
+      - event: [manual]
         branch: ${CI_REPO_DEFAULT_BRANCH}
     image: woodpeckerci/plugin-ansible:0.2.0
     pull: true

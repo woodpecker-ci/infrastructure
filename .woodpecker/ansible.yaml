@@ -23,6 +23,7 @@ steps:
       check: true
       user: root
       galaxy_force: false
+      verbose: 5
       vault-password:
         from_secret: ansible_vault_password
 

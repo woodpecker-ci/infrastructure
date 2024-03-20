@@ -21,8 +21,10 @@ steps:
       check: true
       user: root
       galaxy_force: false
-      vault-password:
+      vault_password:
         from_secret: ansible_vault_password
+      private_key:
+        from_secret: ansible_ssh_private_key
     when:
       - event: pull_request
 
@@ -42,8 +44,10 @@ steps:
       check: false
       user: root
       galaxy_force: false
-      # private_key:
-      #   from_secret: id_ed25519_ci
+      vault_password:
+        from_secret: ansible_vault_password
+      private_key:
+        from_secret: ansible_ssh_private_key
     when:
       - event: manual
         branch: ${CI_REPO_DEFAULT_BRANCH}

@@ -1,3 +1,6 @@
+### Caddy
+caddy_version: 2.4.6-alpine
+
 ### Server
 woodpecker_server_version: &woodpecker_version next
 woodpecker_server_host: https://{{ inventory_hostname }}

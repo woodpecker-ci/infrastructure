@@ -1,4 +1,5 @@
 - name: Setup main server at hetzner
+  hosts: ci_server
   roles:
     - role: common
     - role: docker

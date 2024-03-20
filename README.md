@@ -10,7 +10,7 @@
 
 - run `./ansible.sh`
 
-> Hint: You can provision / update specific parts of the deployment by using a filter. For example to only update `woodpecker` you cloud use: `./ansible.sh ansible-playbook site.yaml --tags woodpecker`
+> Hint: You can provision / update specific parts of the deployment by using a filter. For example to only update `woodpecker` you cloud use: `./ansible.sh ansible-playbook playbooks/run.yaml --tags woodpecker`
 
 ## SSH
 

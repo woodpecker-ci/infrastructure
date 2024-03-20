@@ -5,40 +5,40 @@ when:
       - ${CI_REPO_DEFAULT_BRANCH}
 
 steps:
-  - name: ansible (check)
-    image: woodpeckerci/plugin-ansible:pull_10
-    pull: true
+  'ansible (check)':
+    when:
+      event: [pull_request]
+    image: woodpeckerci/plugin-ansible:0.2.1
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
-      playbook: site.yaml
+      playbook: playbooks/run.yaml
       diff: true
       galaxy: requirements.yaml
       inventory: inventory
       syntax_check: false
-      limit: ci_server
       become: true
       check: true
       user: root
       galaxy_force: false
-      vault_password:
+      vault-password:
         from_secret: ansible_vault_password
       private_key:
         from_secret: ansible_ssh_private_key
-    when:
-      - event: pull_request
 
-  - name: ansible (apply)
-    image: woodpeckerci/plugin-ansible:0.2.0
+  'ansible (apply)':
+    when:
+      - event: [manual]
+        branch: ${CI_REPO_DEFAULT_BRANCH}
+    image: woodpeckerci/plugin-ansible:0.2.1
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
-      playbook: site.yaml
+      playbook: playbooks/run.yaml
       diff: true
       galaxy: requirements.yaml
       inventory: inventory
       syntax_check: false
-      limit: ci_server
       become: true
       check: false
       user: root
@@ -47,6 +47,3 @@ steps:
         from_secret: ansible_vault_password
       private_key:
         from_secret: ansible_ssh_private_key
-    when:
-      - event: manual
-        branch: ${CI_REPO_DEFAULT_BRANCH}

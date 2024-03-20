@@ -8,7 +8,7 @@ steps:
   'ansible (check)':
     when:
       event: [pull_request]
-    image: woodpeckerci/plugin-ansible:0.2.0
+    image: woodpeckerci/plugin-ansible:pull_10
     pull: true
     environment:
       ANSIBLE_ROLES_PATH: ./roles

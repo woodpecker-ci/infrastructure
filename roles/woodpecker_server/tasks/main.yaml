@@ -7,7 +7,7 @@
     - woodpecker
 
 - name: Install Woodpecker server
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_name: woodpecker_server
     pull: true
     definition:

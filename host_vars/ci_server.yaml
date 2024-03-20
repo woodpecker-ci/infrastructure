@@ -1,6 +1,10 @@
 ### Caddy
 # renovate: datasource=docker depName=library/caddy
 caddy_version: 2.4.6-alpine
+# renovate: datasource=docker depName=library/postgres
+postgres_version: 16.1-alpine
+# renovate: datasource=docker depName=library/redis
+redis_version: 7.2-alpine
 
 ### Server
 woodpecker_server_version: &woodpecker_version next

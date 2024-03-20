@@ -9,7 +9,7 @@
 - name: Weblate cache container
   community.docker.docker_container:
     name: weblate_cache
-    image: redis:7-alpine
+    image: redis:{{ redis_version | string }}
     restart: true
     restart_policy: 'always'
     command: [redis-server, --save, '60', '1']
@@ -22,7 +22,7 @@
 - name: Weblate database container
   community.docker.docker_container:
     name: weblate_database
-    image: postgres:16-alpine
+    image: postgres:{{ postgres_version | string }}
     env:
       POSTGRES_USER: 'weblate'
       POSTGRES_PASSWORD: '{{ weblate_postgres_password | string }}'

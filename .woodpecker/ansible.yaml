@@ -12,7 +12,7 @@ steps:
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
-      playbook: site.yaml
+      playbook: playbooks/run.yaml
       diff: true
       galaxy: requirements.yaml
       inventory: inventory
@@ -34,7 +34,7 @@ steps:
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
-      playbook: site.yaml
+      playbook: playbooks/run.yaml
       diff: true
       galaxy: requirements.yaml
       inventory: inventory

@@ -1,0 +1,44 @@
+### Caddy
+caddy_version: 2.4.6-alpine
+
+### Server
+woodpecker_server_version: &woodpecker_version next
+woodpecker_server_host: https://{{ inventory_hostname }}
+woodpecker_server_orgs: woodpecker-ci
+woodpecker_server_admins: 6543,anbraten
+woodpecker_server_agent_secret: '{{ vault_woodpecker_agent_secret }}'
+woodpecker_server_github_client: '{{ vault_woodpecker_github_client }}'
+woodpecker_server_github_secret: '{{ vault_woodpecker_github_secret }}'
+
+### Agent
+woodpecker_agent_version: *woodpecker_version
+woodpecker_agent_server: woodpecker-server:9000
+woodpecker_agent_agent_secret: '{{ vault_woodpecker_agent1_secret }}'
+woodpecker_agent_max_processes: 2
+
+### Autoscaler
+woodpecker_autoscaler_version: next
+woodpecker_autoscaler_server_url: http://woodpecker-server:8000
+woodpecker_autoscaler_server_token: '{{ vault_woodpecker_api_token }}'
+woodpecker_autoscaler_min_agents: 0
+woodpecker_autoscaler_max_agents: 1
+woodpecker_autoscaler_workflows_per_agent: 2
+woodpecker_autoscaler_grpc_addr: grpc-ci.woodpecker-ci.org:443
+woodpecker_autoscaler_grpc_secure: true
+woodpecker_autoscaler_provider: hetznercloud
+woodpecker_autoscaler_hetzner_api_token: '{{ vault_hcloud_token }}'
+woodpecker_autoscaler_hetzner_server_type: cpx41
+woodpecker_autoscaler_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
+
+### Weblate
+weblate_version: 4.18.2.2
+weblate_email_host: '{{ vault_weblate_email_host }}'
+weblate_email_use_ssl: 0
+weblate_email_use_tls: 1
+weblate_email_port: 587
+weblate_email_username: '{{ vault_weblate_email_username }}'
+weblate_email_password: '{{ vault_weblate_email_password }}'
+weblate_postgres_password: '{{ vault_weblate_postgres_password }}'
+weblate_domain: 'translate.woodpecker-ci.org'
+weblate_admin_email: '{{ vault_weblate_admin_email }}'
+weblate_site_title: Woodpecker translate

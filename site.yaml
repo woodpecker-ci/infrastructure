@@ -25,7 +25,6 @@
     - role: docker
     - role: docker_compose
     - role: caddy
-      caddy_version: 2.4.6-alpine
     - role: woodpecker_server
     # - role: woodpecker_agent
     - role: woodpecker_autoscaler

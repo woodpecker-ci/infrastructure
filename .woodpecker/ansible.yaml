@@ -1,5 +1,5 @@
 when:
-  - event: [pull_request]
+  - event: pull_request
   - event: push
     branch:
       - ${CI_REPO_DEFAULT_BRANCH}
@@ -23,7 +23,6 @@ steps:
       check: true
       user: root
       galaxy_force: false
-      verbose: 5
       vault-password:
         from_secret: ansible_vault_password
 
@@ -32,7 +31,6 @@ steps:
       - event: [manual]
         branch: ${CI_REPO_DEFAULT_BRANCH}
     image: woodpeckerci/plugin-ansible:0.2.0
-    pull: true
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:

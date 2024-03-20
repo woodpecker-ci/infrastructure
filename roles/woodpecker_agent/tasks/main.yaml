@@ -1,6 +1,6 @@
 - name: Woodpecker agent container
   community.docker.docker_container:
-    container_name: woodpecker_agent
+    name: woodpecker_agent
     hostname: woodpecker_agent
     pull: 'always'
     image: woodpeckerci/woodpecker-agent:{{ woodpecker_agent_version }}
@@ -13,8 +13,7 @@
       WOODPECKER_AGENT_SECRET: '{{ woodpecker_agent_agent_secret }}'
       WOODPECKER_MAX_PROCS: '{{ woodpecker_agent_max_processes }}'
     networks:
-      - web
-      - default
+      - name: web
 
   tags:
     - woodpecker

@@ -8,7 +8,7 @@ steps:
   'ansible (check)':
     when:
       event: [pull_request]
-    image: woodpeckerci/plugin-ansible:pull_10
+    image: woodpeckerci/plugin-ansible:0.2.1
     pull: true
     environment:
       ANSIBLE_ROLES_PATH: ./roles
@@ -18,7 +18,6 @@ steps:
       galaxy: requirements.yaml
       inventory: inventory
       syntax_check: false
-      limit: ci_server
       become: true
       check: true
       user: root
@@ -30,7 +29,7 @@ steps:
     when:
       - event: [manual]
         branch: ${CI_REPO_DEFAULT_BRANCH}
-    image: woodpeckerci/plugin-ansible:0.2.0
+    image: woodpeckerci/plugin-ansible:0.2.1
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
@@ -39,10 +38,7 @@ steps:
       galaxy: requirements.yaml
       inventory: inventory
       syntax_check: false
-      limit: ci_server
       become: true
       check: false
       user: root
       galaxy_force: false
-      # private_key:
-      #   from_secret: id_ed25519_ci

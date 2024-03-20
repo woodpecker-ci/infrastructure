@@ -1,3 +1,11 @@
+- name: Create volumes for containers
+  community.docker.docker_volume:
+    name: '{{ item }}'
+  loop:
+    - weblate_postgres-data
+    - weblate_redis-data
+    - weblate_weblate-data
+
 - name: Weblate cache container
   community.docker.docker_container:
     name: weblate_cache
@@ -6,7 +14,7 @@
     restart_policy: 'always'
     command: [redis-server, --save, '60', '1']
     volumes:
-      - redis-data:/data
+      - weblate_redis-data:/data
     networks:
       - name: web
   tags:
@@ -22,7 +30,7 @@
       POSTGRES_HOST: 'database'
       POSTGRES_PORT: '5432'
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - weblate_postgres-data:/var/lib/postgresql/data
     restart: true
     restart_policy: 'always'
     networks:
@@ -36,7 +44,7 @@
     pull: 'always'
     image: weblate/weblate:{{ weblate_version }}
     volumes:
-      - weblate-data:/app/data
+      - weblate_weblate-data:/app/data
     env:
       WEBLATE_EMAIL_HOST: '{{ weblate_email_host | string }}'
       WEBLATE_EMAIL_PORT: '{{ weblate_email_port | string }}'

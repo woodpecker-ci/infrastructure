@@ -1,5 +1,12 @@
 - name: Setup main server at hetzner
   hosts: ci_server
+  pre_tasks:
+    - name: Collect facts
+      ansible.builtin.setup:
+        gather_subset:
+          - 'system'
+          - 'local'
+          - 'distribution'
   roles:
     - role: common
     - role: docker

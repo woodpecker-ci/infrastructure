@@ -1,4 +1,5 @@
 ### Caddy
+# renovate: datasource=docker depName=library/caddy
 caddy_version: 2.4.6-alpine
 
 ### Server
@@ -31,6 +32,7 @@ woodpecker_autoscaler_hetzner_server_type: cpx41
 woodpecker_autoscaler_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
 
 ### Weblate
+# renovate: datasource=docker depName=weblate/weblate
 weblate_version: 4.18.2.2
 weblate_email_host: '{{ vault_weblate_email_host }}'
 weblate_email_use_ssl: 0

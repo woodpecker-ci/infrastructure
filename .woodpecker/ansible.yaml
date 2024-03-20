@@ -5,8 +5,8 @@ when:
       - ${CI_REPO_DEFAULT_BRANCH}
 
 steps:
-  'ansible (check)':
-    image: woodpeckerci/plugin-ansible:0.2.0
+  - name: ansible (check)
+    image: woodpeckerci/plugin-ansible:pull_10
     pull: true
     environment:
       ANSIBLE_ROLES_PATH: ./roles
@@ -28,9 +28,8 @@ steps:
     when:
       - event: pull_request
 
-  'ansible (apply)':
+  - name: ansible (apply)
     image: woodpeckerci/plugin-ansible:0.2.0
-    pull: true
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:

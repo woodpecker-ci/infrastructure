@@ -9,7 +9,6 @@ steps:
     when:
       event: [pull_request]
     image: woodpeckerci/plugin-ansible:0.2.1
-    pull: true
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
@@ -42,3 +41,5 @@ steps:
       check: false
       user: root
       galaxy_force: false
+      vault_password:
+        from_secret: ansible_vault_password

@@ -4,14 +4,15 @@
     hostname: woodpecker_agent
     pull: 'always'
     image: woodpeckerci/woodpecker-agent:{{ woodpecker_agent_version }}
-    restart: 'always'
+    restart: true
+    restart_policy: 'always'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/woodpecker:/etc/woodpecker/
     env:
-      WOODPECKER_SERVER: '{{ woodpecker_agent_server }}'
-      WOODPECKER_AGENT_SECRET: '{{ woodpecker_agent_agent_secret }}'
-      WOODPECKER_MAX_PROCS: '{{ woodpecker_agent_max_processes }}'
+      WOODPECKER_SERVER: '{{ woodpecker_agent_server | string }}'
+      WOODPECKER_AGENT_SECRET: '{{ woodpecker_agent_agent_secret | string }}'
+      WOODPECKER_MAX_PROCS: '{{ woodpecker_agent_max_processes | string }}'
     networks:
       - name: web
 

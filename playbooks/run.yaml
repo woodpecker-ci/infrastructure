@@ -10,7 +10,6 @@
   roles:
     - role: common
     - role: docker
-    - role: docker_compose
     - role: caddy
     - role: woodpecker_server
     - role: woodpecker_agent

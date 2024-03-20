@@ -2,7 +2,8 @@
   community.docker.docker_container:
     name: weblate_cache
     image: redis:7-alpine
-    restart: always
+    restart: true
+    restart_policy: 'always'
     command: [redis-server, --save, '60', '1']
     volumes:
       - redis-data:/data
@@ -15,14 +16,15 @@
     name: weblate_database
     image: postgres:16-alpine
     env:
-      POSTGRES_USER: weblate
+      POSTGRES_USER: 'weblate'
       POSTGRES_PASSWORD: '{{ weblate_postgres_password | string }}'
-      POSTGRES_DATABASE: weblate
-      POSTGRES_HOST: database
-      POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: 'weblate'
+      POSTGRES_HOST: 'database'
+      POSTGRES_PORT: '5432'
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    restart: always
+    restart: true
+    restart_policy: 'always'
     networks:
       - name: web
   tags:
@@ -47,17 +49,15 @@
       WEBLATE_SITE_DOMAIN: '{{ weblate_domain | string }}'
       WEBLATE_ADMIN_EMAIL: '{{ weblate_admin_email | string }}'
       WEBLATE_SITE_TITLE: '{{ weblate_site_title | string }}'
-      POSTGRES_USER: weblate
+      POSTGRES_USER: 'weblate'
       POSTGRES_PASSWORD: '{{ weblate_postgres_password | string }}'
-      POSTGRES_DATABASE: weblate
-      POSTGRES_HOST: database
-      POSTGRES_PORT: 5432
-      REDIS_HOST: cache
-      REDIS_PORT: 6379
-    restart: always
-    depends_on:
-      - database
-      - cache
+      POSTGRES_DATABASE: 'weblate'
+      POSTGRES_HOST: 'database'
+      POSTGRES_PORT: '5432'
+      REDIS_HOST: 'cache'
+      REDIS_PORT: '6379'
+    restart: true
+    restart_policy: 'always'
     networks:
       - name: web
 

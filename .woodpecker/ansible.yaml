@@ -1,0 +1,52 @@
+when:
+  - event: pull_request
+  - event: push
+    branch:
+      - ${CI_REPO_DEFAULT_BRANCH}
+
+steps:
+  - name: ansible (check)
+    image: woodpeckerci/plugin-ansible:pull_10
+    pull: true
+    environment:
+      ANSIBLE_ROLES_PATH: ./roles
+    settings:
+      playbook: site.yaml
+      diff: true
+      galaxy: requirements.yaml
+      inventory: inventory
+      syntax_check: false
+      limit: ci_server
+      become: true
+      check: true
+      user: root
+      galaxy_force: false
+      vault_password:
+        from_secret: ansible_vault_password
+      private_key:
+        from_secret: ansible_ssh_private_key
+    when:
+      - event: pull_request
+
+  - name: ansible (apply)
+    image: woodpeckerci/plugin-ansible:0.2.0
+    environment:
+      ANSIBLE_ROLES_PATH: ./roles
+    settings:
+      playbook: site.yaml
+      diff: true
+      galaxy: requirements.yaml
+      inventory: inventory
+      syntax_check: false
+      limit: ci_server
+      become: true
+      check: false
+      user: root
+      galaxy_force: false
+      vault_password:
+        from_secret: ansible_vault_password
+      private_key:
+        from_secret: ansible_ssh_private_key
+    when:
+      - event: manual
+        branch: ${CI_REPO_DEFAULT_BRANCH}

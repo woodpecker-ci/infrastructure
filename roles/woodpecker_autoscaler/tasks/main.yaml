@@ -3,7 +3,7 @@
     project_name: woodpecker_autoscaler
     pull: true
     definition:
-      version: "3"
+      version: '3'
       services:
         woodpecker-autoscaler:
           image: woodpeckerci/autoscaler:{{ woodpecker_autoscaler_version }}

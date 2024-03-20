@@ -6,7 +6,7 @@
   tags:
     - woodpecker
 
-- name: Install Woodpecker server
+- name: Woodpecker server container
   community.docker.docker_container:
     container_name: woodpecker_server
     hostname: woodpecker_server

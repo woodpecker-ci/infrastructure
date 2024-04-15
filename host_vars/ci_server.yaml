@@ -4,7 +4,7 @@ caddy_version: 2.4.6-alpine
 
 ### Server
 woodpecker_server_version: &woodpecker_version next
-woodpecker_server_host: https://{{ inventory_hostname }}
+woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: 6543,anbraten
 woodpecker_server_agent_secret: '{{ vault_woodpecker_agent_secret }}'

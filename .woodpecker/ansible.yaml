@@ -27,7 +27,7 @@ steps:
       - event: pull_request
 
   - name: ansible (apply)
-    image: woodpeckerci/plugin-ansible:0.2.1
+    image: woodpeckerci/plugin-ansible:0.2.2
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:

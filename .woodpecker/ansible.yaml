@@ -5,7 +5,7 @@ when:
       - ${CI_REPO_DEFAULT_BRANCH}
 
 steps:
-  - name: 'ansible (check)'
+  - name: ansible (check)
     image: woodpeckerci/plugin-ansible:0.2.1
     environment:
       ANSIBLE_ROLES_PATH: ./roles
@@ -26,7 +26,7 @@ steps:
     when:
       - event: pull_request
 
-  - name: 'ansible (apply)'
+  - name: ansible (apply)
     image: woodpeckerci/plugin-ansible:0.2.1
     environment:
       ANSIBLE_ROLES_PATH: ./roles

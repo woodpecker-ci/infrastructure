@@ -25,7 +25,6 @@ steps:
 
   - name: ansible (check)
     image: woodpeckerci/plugin-ansible:0.2.2
-    pull: true
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:

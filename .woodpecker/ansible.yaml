@@ -11,6 +11,7 @@ steps:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
       playbook: site.yaml
+      inventory: inventory.yaml
       skip_tags: always
       tags: ssh-key
       vault_password:

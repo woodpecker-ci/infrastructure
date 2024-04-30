@@ -60,9 +60,9 @@
       POSTGRES_USER: 'weblate'
       POSTGRES_PASSWORD: '{{ weblate_postgres_password | string }}'
       POSTGRES_DATABASE: 'weblate'
-      POSTGRES_HOST: 'database'
+      POSTGRES_HOST: 'weblate_database'
       POSTGRES_PORT: '5432'
-      REDIS_HOST: 'cache'
+      REDIS_HOST: 'weblate_cache'
       REDIS_PORT: '6379'
     restart: true
     restart_policy: 'always'

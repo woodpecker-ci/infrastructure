@@ -12,6 +12,6 @@
     - role: docker
     - role: caddy
     - role: woodpecker_server
-    - role: woodpecker_agent
+    # - role: woodpecker_agent
     - role: woodpecker_autoscaler
     - role: weblate

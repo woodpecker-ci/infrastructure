@@ -1,0 +1,4 @@
+all:
+  hosts:
+    ci_server:
+      ansible_ssh_host: ci.woodpecker-ci.org

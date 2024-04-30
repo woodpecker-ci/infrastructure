@@ -5,18 +5,21 @@ when:
       - ${CI_REPO_DEFAULT_BRANCH}
 
 steps:
+  - name: 'Install galaxy requirements'
+    image: alpine:3.19
+    commands:
+      - apk add -q --no-cache ansible git
+      - ansible-galaxy install -r requirements.yaml
+
   - name: ansible (check)
-    image: woodpeckerci/plugin-ansible:pull_10
-    pull: true
+    image: woodpeckerci/plugin-ansible:0.2.2
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
       playbook: site.yaml
       diff: true
-      galaxy: requirements.yaml
-      inventory: inventory
+      inventory: inventory.yaml
       syntax_check: false
-      limit: ci_server
       become: true
       check: true
       user: root
@@ -35,10 +38,8 @@ steps:
     settings:
       playbook: site.yaml
       diff: true
-      galaxy: requirements.yaml
-      inventory: inventory
+      inventory: inventory.yaml
       syntax_check: false
-      limit: ci_server
       become: true
       check: false
       user: root

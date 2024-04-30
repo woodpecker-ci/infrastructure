@@ -2,4 +2,3 @@ all:
   hosts:
     ci_server:
       ansible_ssh_host: ci.woodpecker-ci.org
-      # ansible_ssh_private_key_file: ./keys/ci_woodpecker-ci_org.id_ed25519

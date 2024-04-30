@@ -14,7 +14,7 @@ steps:
       playbook: site.yaml
       diff: true
       galaxy: requirements.yaml
-      inventory: inventory
+      inventory: inventory.yaml
       syntax_check: false
       limit: ci_server
       become: true
@@ -36,7 +36,7 @@ steps:
       playbook: site.yaml
       diff: true
       galaxy: requirements.yaml
-      inventory: inventory
+      inventory: inventory.yaml
       syntax_check: false
       limit: ci_server
       become: true

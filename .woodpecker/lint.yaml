@@ -1,6 +1,6 @@
 when:
-  event: [pull_request, manual]
-  branch: ${CI_REPO_DEFAULT_BRANCH}
+  - event: pull_request
+    branch: ${CI_REPO_DEFAULT_BRANCH}
 
 steps:
   no-vault:

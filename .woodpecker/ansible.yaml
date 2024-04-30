@@ -1,6 +1,6 @@
 when:
   - event: pull_request
-  - event: push
+  - event: deployment
     branch:
       - ${CI_REPO_DEFAULT_BRANCH}
 
@@ -49,5 +49,5 @@ steps:
       private_key:
         from_secret: ansible_ssh_private_key
     when:
-      - event: manual
+      - event: deployment
         branch: ${CI_REPO_DEFAULT_BRANCH}

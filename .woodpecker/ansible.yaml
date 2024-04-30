@@ -11,17 +11,17 @@ steps:
       - apk add -q --no-cache ansible git
       - ansible-galaxy install -r requirements.yaml
 
-  - name: ansible (decrypt-key)
-    image: woodpeckerci/plugin-ansible:0.2.2
-    environment:
-      ANSIBLE_ROLES_PATH: ./roles
-    settings:
-      playbook: site.yaml
-      inventory: inventory.yaml
-      skip_tags: always
-      tags: ssh-key
-      vault_password:
-        from_secret: ansible_vault_password
+  # - name: ansible (decrypt-key)
+  #   image: woodpeckerci/plugin-ansible:0.2.2
+  #   environment:
+  #     ANSIBLE_ROLES_PATH: ./roles
+  #   settings:
+  #     playbook: site.yaml
+  #     inventory: inventory.yaml
+  #     skip_tags: always
+  #     tags: ssh-key
+  #     vault_password:
+  #       from_secret: ansible_vault_password
 
   - name: ansible (check)
     image: woodpeckerci/plugin-ansible:0.2.2

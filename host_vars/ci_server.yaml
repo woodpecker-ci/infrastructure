@@ -28,7 +28,7 @@ woodpecker_autoscaler_grpc_addr: grpc-ci.woodpecker-ci.org:443
 woodpecker_autoscaler_grpc_secure: true
 woodpecker_autoscaler_provider: hetznercloud
 woodpecker_autoscaler_hetzner_api_token: '{{ vault_hcloud_token }}'
-woodpecker_autoscaler_hetzner_server_type: cpx41
+woodpecker_autoscaler_hetzner_server_type: cax31 # 16 GB RAM, 4 vCPUs, arm64
 woodpecker_autoscaler_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
 
 ### Weblate

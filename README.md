@@ -1,17 +1,29 @@
-# Woodpecker-CI infrastructure
+# Woodpecker-CI Infrastructure
 
-## Preparation
+## Remote apply
 
-- save the ansible vault password under `vault-pass.secret`
-- run `docker build -t ansible .`
-- install dependencies: `./ansible.sh ansible-galaxy install -r requirements.yaml`
+Is done through Woodpecker-CI itself using the [woodpecker ansible plugin](https://codeberg.org/woodpecker-plugins/ansible).
 
-## Provisioning
+On the `main` branch the "deployment" approach is used, which means that run on the branch don't "apply" changes but one must manually click the "deploy" button of these runs to initiate the deployment.
 
-- run `./ansible.sh`
+## Local apply
 
-> Hint: You can provision / update specific parts of the deployment by using a filter. For example to only update `woodpecker` you cloud use: `./ansible.sh ansible-playbook playbooks/run.yaml --tags woodpecker`
+### Preparation
 
-## SSH
+For reproducibility, a Dockerfile is provided to run the ansible playbook locally.
 
-- Connect to main server using SSH with: `./ssh.sh`
+1. Save the ansible vault password under `vault-pass.secret`
+2. Run `docker build -t ansible .`
+3. Install dependencies: `./ansible.sh ansible-galaxy install -r requirements.yaml`
+
+### Provisioning
+
+1. Run `./ansible.sh`
+
+> [!NOTE]
+> You can execute specific parts of the deployment by using a filter.
+> For example to only update `woodpecker` you could use: `./ansible.sh ansible-playbook playbooks/run.yaml --tags woodpecker`
+
+## Local SSH connection
+
+- Use `./ssh.sh`. This will decrypt the local SSH key and connect to the server. (Only works if you're allowed to decrypt the key.)

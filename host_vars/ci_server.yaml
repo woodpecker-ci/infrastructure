@@ -40,7 +40,11 @@ weblate_email_use_tls: 1
 weblate_email_port: 587
 weblate_email_username: '{{ vault_weblate_email_username }}'
 weblate_email_password: '{{ vault_weblate_email_password }}'
+# renovate: datasource=docker depName=library/postgres
+weblate_postgres_version: 16-alpine
 weblate_postgres_password: '{{ vault_weblate_postgres_password }}'
 weblate_domain: 'translate.woodpecker-ci.org'
 weblate_admin_email: '{{ vault_weblate_admin_email }}'
 weblate_site_title: Woodpecker translate
+# renovate: datasource=docker depName=library/redis
+weblate_redis_version: 7-alpine

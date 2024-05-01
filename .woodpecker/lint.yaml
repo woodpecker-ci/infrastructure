@@ -1,6 +1,6 @@
 when:
-  event: [pull_request, manual]
-  branch: ${CI_REPO_DEFAULT_BRANCH}
+  - event: pull_request
+    branch: ${CI_REPO_DEFAULT_BRANCH}
 
 steps:
   no-vault:
@@ -10,7 +10,7 @@ steps:
       - sed -i  's/vault\.yaml/vault\.example\.yaml/g' site.yaml
 
   ansible-lint:
-    image: pipelinecomponents/ansible-lint:0.65.0
+    image: pipelinecomponents/ansible-lint:0.67.0
     depends_on: no-vault
     commands:
       - ansible-galaxy install -r requirements.yaml

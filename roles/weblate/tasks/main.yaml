@@ -5,46 +5,61 @@
     - weblate_postgres-data
     - weblate_redis-data
     - weblate_weblate-data
+  tags:
+    - weblate
 
-- name: Weblate cache container
+- name: Create Weblate network
+  community.docker.docker_network:
+    name: weblate
+  tags:
+    - weblate
+
+- name: Create Weblate cache container
   community.docker.docker_container:
     name: weblate_cache
-    image: redis:{{ redis_version | string }}
-    restart: true
+    hostname: weblate-cache
+    image: redis:{{ weblate_redis_version | string }}
     restart_policy: 'always'
     command: [redis-server, --save, '60', '1']
     volumes:
       - weblate_redis-data:/data
     networks:
-      - name: web
+      - name: weblate
   tags:
     - weblate
-- name: Weblate database container
+
+- name: Create Weblate database container
   community.docker.docker_container:
     name: weblate_database
-    image: postgres:{{ postgres_version | string }}
+    hostname: weblate-database
+    image: postgres:{{ weblate_postgres_version | string }}
+    volumes:
+      - weblate_postgres-data:/var/lib/postgresql/data
+    restart_policy: 'always'
+    networks:
+      - name: weblate
     env:
-      POSTGRES_USER: 'weblate'
+      POSTGRES_USER: weblate
       POSTGRES_PASSWORD: '{{ weblate_postgres_password | string }}'
       POSTGRES_DATABASE: 'weblate'
       POSTGRES_HOST: 'database'
       POSTGRES_PORT: '5432'
-    volumes:
-      - weblate_postgres-data:/var/lib/postgresql/data
-    restart: true
-    restart_policy: 'always'
-    networks:
-      - name: web
   tags:
     - weblate
 
-- name: Weblate container
+- name: Create Weblate container
   community.docker.docker_container:
     name: weblate
-    pull: 'always'
+    hostname: weblate
     image: weblate/weblate:{{ weblate_version }}
+    restart_policy: 'always'
     volumes:
       - weblate_weblate-data:/app/data
+    tmpfs:
+      - /app/cache
+    networks:
+      - name: weblate
+      - name: web
     env:
       WEBLATE_EMAIL_HOST: '{{ weblate_email_host | string }}'
       WEBLATE_EMAIL_PORT: '{{ weblate_email_port | string }}'
@@ -60,14 +75,9 @@
       POSTGRES_USER: 'weblate'
       POSTGRES_PASSWORD: '{{ weblate_postgres_password | string }}'
       POSTGRES_DATABASE: 'weblate'
-      POSTGRES_HOST: 'weblate_database'
+      POSTGRES_HOST: 'weblate-database'
       POSTGRES_PORT: '5432'
-      REDIS_HOST: 'weblate_cache'
+      REDIS_HOST: 'weblate-cache'
       REDIS_PORT: '6379'
-    restart: true
-    restart_policy: 'always'
-    networks:
-      - name: web
-
   tags:
     - weblate

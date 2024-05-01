@@ -1,21 +1,28 @@
-- name: Woodpecker agent container
+- name: Create Woodpecker agent directory
+  ansible.builtin.file:
+    path: /opt/woodpecker-agent
+    state: directory
+    mode: '0o700'
+  tags:
+    - woodpecker
+    - woodpecker-agent
+
+- name: Create Woodpecker agent container
   community.docker.docker_container:
     name: woodpecker_agent
     hostname: woodpecker_agent
     pull: 'always'
     image: woodpeckerci/woodpecker-agent:{{ woodpecker_agent_version }}
-    restart: true
     restart_policy: 'always'
+    networks:
+      - name: web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /opt/woodpecker:/etc/woodpecker/
+      - /opt/woodpecker-agent:/etc/woodpecker/
     env:
       WOODPECKER_SERVER: '{{ woodpecker_agent_server | string }}'
       WOODPECKER_AGENT_SECRET: '{{ woodpecker_agent_agent_secret | string }}'
-      WOODPECKER_MAX_PROCS: '{{ woodpecker_agent_max_processes | string }}'
-    networks:
-      - name: web
-
+      WOODPECKER_MAX_WORKFLOWS: '{{ woodpecker_agent_max_workflows | string }}'
   tags:
     - woodpecker
     - woodpecker-agent

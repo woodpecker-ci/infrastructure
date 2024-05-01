@@ -5,14 +5,14 @@
     mode: '0o700'
   tags:
     - woodpecker
+    - woodpecker-server
 
-- name: Woodpecker server container
+- name: Create Woodpecker server container
   community.docker.docker_container:
     name: woodpecker_server
     hostname: woodpecker-server
     pull: 'always'
     image: woodpeckerci/woodpecker-server:{{ woodpecker_server_version }}
-    restart: true
     restart_policy: 'always'
     volumes:
       - /opt/woodpecker:/var/lib/woodpecker/
@@ -28,7 +28,6 @@
       WOODPECKER_GITHUB_SECRET: '{{ woodpecker_server_github_secret | string }}'
       WOODPECKER_AGENT_SECRET: '{{ woodpecker_server_agent_secret | string }}'
       WOODPECKER_GITHUB_MERGE_REF: 'false'
-
   tags:
     - woodpecker
     - woodpecker-server

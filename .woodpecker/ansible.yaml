@@ -1,6 +1,6 @@
 when:
   - event: pull_request
-  - event: push
+  - event: [push, deployment]
     branch:
       - ${CI_REPO_DEFAULT_BRANCH}
 
@@ -30,6 +30,8 @@ steps:
         from_secret: ansible_ssh_private_key
     when:
       - event: pull_request
+      - event: push
+        branch: ${CI_REPO_DEFAULT_BRANCH}
 
   - name: ansible (apply)
     image: woodpeckerci/plugin-ansible:0.2.2
@@ -49,5 +51,5 @@ steps:
       private_key:
         from_secret: ansible_ssh_private_key
     when:
-      - event: manual
+      - event: deployment
         branch: ${CI_REPO_DEFAULT_BRANCH}

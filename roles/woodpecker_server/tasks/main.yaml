@@ -6,35 +6,29 @@
   tags:
     - woodpecker
 
-- name: Install Woodpecker server
-  community.docker.docker_compose:
-    project_name: woodpecker_server
-    pull: true
-    definition:
-      version: '3'
-      services:
-        woodpecker-server:
-          image: woodpeckerci/woodpecker-server:{{ woodpecker_server_version }}
-          restart: always
-          volumes:
-            - /opt/woodpecker:/var/lib/woodpecker/
-          networks:
-            - web
-            - default
-          environment:
-            - WOODPECKER_OPEN=true
-            - WOODPECKER_HOST={{ woodpecker_server_host }}
-            - WOODPECKER_ORGS={{ woodpecker_server_orgs }}
-            - WOODPECKER_ADMIN={{ woodpecker_server_admins }}
-            - WOODPECKER_GITHUB=true
-            - WOODPECKER_GITHUB_CLIENT={{ woodpecker_server_github_client }}
-            - WOODPECKER_GITHUB_SECRET={{ woodpecker_server_github_secret }}
-            - WOODPECKER_AGENT_SECRET={{ woodpecker_server_agent_secret }}
-            - WOODPECKER_GITHUB_MERGE_REF=false
-      networks:
-        web:
-          external:
-            name: web
+- name: Woodpecker server container
+  community.docker.docker_container:
+    name: woodpecker_server
+    hostname: woodpecker-server
+    pull: 'always'
+    image: woodpeckerci/woodpecker-server:{{ woodpecker_server_version }}
+    restart: true
+    restart_policy: 'always'
+    volumes:
+      - /opt/woodpecker:/var/lib/woodpecker/
+    networks:
+      - name: web
+    env:
+      WOODPECKER_OPEN: 'true'
+      WOODPECKER_HOST: '{{ woodpecker_server_host | string }}'
+      WOODPECKER_ORGS: '{{ woodpecker_server_orgs | string }}'
+      WOODPECKER_ADMIN: '{{ woodpecker_server_admins | string }}'
+      WOODPECKER_GITHUB: 'true'
+      WOODPECKER_GITHUB_CLIENT: '{{ woodpecker_server_github_client | string }}'
+      WOODPECKER_GITHUB_SECRET: '{{ woodpecker_server_github_secret | string }}'
+      WOODPECKER_AGENT_SECRET: '{{ woodpecker_server_agent_secret | string }}'
+      WOODPECKER_GITHUB_MERGE_REF: 'false'
+
   tags:
     - woodpecker
     - woodpecker-server

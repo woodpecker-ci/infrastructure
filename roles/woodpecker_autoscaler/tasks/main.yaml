@@ -1,33 +1,27 @@
-- name: Install Woodpecker autoscaler
-  community.docker.docker_compose:
-    project_name: woodpecker_autoscaler
-    pull: true
-    definition:
-      version: '3'
-      services:
-        woodpecker-autoscaler:
-          image: woodpeckerci/autoscaler:{{ woodpecker_autoscaler_version }}
-          restart: always
-          environment:
-            - WOODPECKER_SERVER={{ woodpecker_autoscaler_server_url }}
-            - WOODPECKER_TOKEN={{ woodpecker_autoscaler_server_token }}
-            - WOODPECKER_MIN_AGENTS={{ woodpecker_autoscaler_min_agents }}
-            - WOODPECKER_MAX_AGENTS={{ woodpecker_autoscaler_max_agents }}
-            - WOODPECKER_WORKFLOWS_PER_AGENT={{ woodpecker_autoscaler_workflows_per_agent }}
-            - WOODPECKER_GRPC_ADDR={{ woodpecker_autoscaler_grpc_addr }}
-            - WOODPECKER_GRPC_SECURE={{ woodpecker_autoscaler_grpc_secure }}
-            - WOODPECKER_PROVIDER={{ woodpecker_autoscaler_provider }}
-            - WOODPECKER_HETZNERCLOUD_API_TOKEN={{ woodpecker_autoscaler_hetzner_api_token }}
-            - WOODPECKER_HETZNERCLOUD_SERVER_TYPE={{ woodpecker_autoscaler_hetzner_server_type }}
-            - WOODPECKER_HETZNERCLOUD_SSH_KEYS={{ woodpecker_autoscaler_hetzner_ssh_keys }}
-            - WOODPECKER_RECONCILIATION_INTERVAL=5s
-          networks:
-            - web
-            - default
-      networks:
-        web:
-          external:
-            name: web
+- name: Woodpecker autoscaler container
+  community.docker.docker_container:
+    name: woodpecker_autoscaler
+    hostname: woodpecker-autoscaler
+    pull: 'always'
+    image: woodpeckerci/autoscaler:{{ woodpecker_autoscaler_version }}
+    restart: true
+    restart_policy: 'always'
+    networks:
+      - name: web
+    env:
+      WOODPECKER_SERVER: '{{ woodpecker_autoscaler_server_url | string }}'
+      WOODPECKER_TOKEN: '{{ woodpecker_autoscaler_server_token | string }}'
+      WOODPECKER_MIN_AGENTS: '{{ woodpecker_autoscaler_min_agents | string }}'
+      WOODPECKER_MAX_AGENTS: '{{ woodpecker_autoscaler_max_agents | string }}'
+      WOODPECKER_WORKFLOWS_PER_AGENT: '{{ woodpecker_autoscaler_workflows_per_agent | string }}'
+      WOODPECKER_GRPC_ADDR: '{{ woodpecker_autoscaler_grpc_addr | string }}'
+      WOODPECKER_GRPC_SECURE: '{{ woodpecker_autoscaler_grpc_secure | string }}'
+      WOODPECKER_PROVIDER: '{{ woodpecker_autoscaler_provider | string }}'
+      WOODPECKER_HETZNERCLOUD_API_TOKEN: '{{ woodpecker_autoscaler_hetzner_api_token | string }}'
+      WOODPECKER_HETZNERCLOUD_SERVER_TYPE: '{{ woodpecker_autoscaler_hetzner_server_type | string }}'
+      WOODPECKER_HETZNERCLOUD_SSH_KEYS: '{{ woodpecker_autoscaler_hetzner_ssh_keys | string }}'
+      WOODPECKER_RECONCILIATION_INTERVAL: 5s
+
   tags:
     - woodpecker
     - woodpecker-autoscaler

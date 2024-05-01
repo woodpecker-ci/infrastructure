@@ -5,14 +5,15 @@
     mode: '0o700'
   tags:
     - woodpecker
+    - woodpecker-agent
 
-- name: Woodpecker agent container
+- name: Install Woodpecker agent container
   community.docker.docker_container:
     name: woodpecker_agent
     hostname: woodpecker_agent
     pull: 'always'
     image: woodpeckerci/woodpecker-agent:{{ woodpecker_agent_version }}
-    restart: true
+    restart: "{{ 'true' if output.changed else 'false' }}"
     restart_policy: 'always'
     networks:
       - name: web
@@ -23,7 +24,6 @@
       WOODPECKER_SERVER: '{{ woodpecker_agent_server | string }}'
       WOODPECKER_AGENT_SECRET: '{{ woodpecker_agent_agent_secret | string }}'
       WOODPECKER_MAX_WORKFLOWS: '{{ woodpecker_agent_max_workflows | string }}'
-
   tags:
     - woodpecker
     - woodpecker-agent

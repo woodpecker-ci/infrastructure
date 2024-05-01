@@ -1,10 +1,10 @@
-- name: Woodpecker autoscaler container
+- name: Install Woodpecker autoscaler container
   community.docker.docker_container:
     name: woodpecker_autoscaler
     hostname: woodpecker-autoscaler
     pull: 'always'
     image: woodpeckerci/autoscaler:{{ woodpecker_autoscaler_version }}
-    restart: true
+    restart: "{{ 'true' if output.changed else 'false' }}"
     restart_policy: 'always'
     networks:
       - name: web
@@ -21,7 +21,6 @@
       WOODPECKER_HETZNERCLOUD_SERVER_TYPE: '{{ woodpecker_autoscaler_hetzner_server_type | string }}'
       WOODPECKER_HETZNERCLOUD_SSH_KEYS: '{{ woodpecker_autoscaler_hetzner_ssh_keys | string }}'
       WOODPECKER_RECONCILIATION_INTERVAL: 5s
-
   tags:
     - woodpecker
     - woodpecker-autoscaler

@@ -1,66 +1,83 @@
-- name: Install Weblate
-  community.docker.docker_compose:
-    project_name: weblate
-    pull: true
-    definition:
-      version: '3'
-      services:
-        weblate:
-          image: weblate/weblate:{{ weblate_version }}
-          tmpfs:
-            - /app/cache
-          volumes:
-            - weblate-data:/app/data
-          environment:
-            WEBLATE_EMAIL_HOST: '{{ weblate_email_host }}'
-            WEBLATE_EMAIL_PORT: '{{ weblate_email_port }}'
-            WEBLATE_EMAIL_USE_TLS: '{{ weblate_email_use_tls }}'
-            WEBLATE_EMAIL_USE_SSL: '{{ weblate_email_use_ssl }}'
-            WEBLATE_EMAIL_HOST_USER: '{{ weblate_email_username }}'
-            WEBLATE_EMAIL_HOST_PASSWORD: '{{ weblate_email_password }}'
-            WEBLATE_SERVER_EMAIL: '{{ weblate_email_username }}'
-            WEBLATE_DEFAULT_FROM_EMAIL: '{{ weblate_email_username }}'
-            WEBLATE_SITE_DOMAIN: '{{ weblate_domain }}'
-            WEBLATE_ADMIN_EMAIL: '{{ weblate_admin_email }}'
-            WEBLATE_SITE_TITLE: '{{ weblate_site_title }}'
-            POSTGRES_USER: weblate
-            POSTGRES_PASSWORD: '{{ weblate_postgres_password }}'
-            POSTGRES_DATABASE: weblate
-            POSTGRES_HOST: database
-            POSTGRES_PORT: 5432
-            REDIS_HOST: cache
-            REDIS_PORT: 6379
-          restart: always
-          depends_on:
-            - database
-            - cache
-          networks:
-            - web
-            - default
-        database:
-          image: postgres:16-alpine
-          environment:
-            POSTGRES_USER: weblate
-            POSTGRES_PASSWORD: '{{ weblate_postgres_password }}'
-            POSTGRES_DATABASE: weblate
-            POSTGRES_HOST: database
-            POSTGRES_PORT: 5432
-          volumes:
-            - postgres-data:/var/lib/postgresql/data
-          restart: always
-        cache:
-          image: redis:7-alpine
-          restart: always
-          command: [redis-server, --save, '60', '1']
-          volumes:
-            - redis-data:/data
-      networks:
-        web:
-          external:
-            name: web
-      volumes:
-        weblate-data: {}
-        postgres-data: {}
-        redis-data: {}
+- name: Create volumes for containers
+  community.docker.docker_volume:
+    name: '{{ item }}'
+  loop:
+    - weblate_postgres-data
+    - weblate_redis-data
+    - weblate_weblate-data
+  tags:
+    - weblate
+
+- name: Create Weblate network
+  community.docker.docker_network:
+    name: weblate
+  tags:
+    - weblate
+
+- name: Create Weblate cache container
+  community.docker.docker_container:
+    name: weblate_cache
+    hostname: weblate-cache
+    image: redis:{{ weblate_redis_version | string }}
+    restart_policy: 'always'
+    command: [redis-server, --save, '60', '1']
+    volumes:
+      - weblate_redis-data:/data
+    networks:
+      - name: weblate
+  tags:
+    - weblate
+
+- name: Create Weblate database container
+  community.docker.docker_container:
+    name: weblate_database
+    hostname: weblate-database
+    image: postgres:{{ weblate_postgres_version | string }}
+    volumes:
+      - weblate_postgres-data:/var/lib/postgresql/data
+    restart_policy: 'always'
+    networks:
+      - name: weblate
+    env:
+      POSTGRES_USER: weblate
+      POSTGRES_PASSWORD: '{{ weblate_postgres_password | string }}'
+      POSTGRES_DATABASE: 'weblate'
+      POSTGRES_HOST: 'database'
+      POSTGRES_PORT: '5432'
+  tags:
+    - weblate
+
+- name: Create Weblate container
+  community.docker.docker_container:
+    name: weblate
+    hostname: weblate
+    image: weblate/weblate:{{ weblate_version }}
+    restart_policy: 'always'
+    volumes:
+      - weblate_weblate-data:/app/data
+    tmpfs:
+      - /app/cache
+    networks:
+      - name: weblate
+      - name: web
+    env:
+      WEBLATE_EMAIL_HOST: '{{ weblate_email_host | string }}'
+      WEBLATE_EMAIL_PORT: '{{ weblate_email_port | string }}'
+      WEBLATE_EMAIL_USE_TLS: '{{ weblate_email_use_tls | string }}'
+      WEBLATE_EMAIL_USE_SSL: '{{ weblate_email_use_ssl | string }}'
+      WEBLATE_EMAIL_HOST_USER: '{{ weblate_email_username | string }}'
+      WEBLATE_EMAIL_HOST_PASSWORD: '{{ weblate_email_password | string }}'
+      WEBLATE_SERVER_EMAIL: '{{ weblate_email_username | string }}'
+      WEBLATE_DEFAULT_FROM_EMAIL: '{{ weblate_email_username | string }}'
+      WEBLATE_SITE_DOMAIN: '{{ weblate_domain | string }}'
+      WEBLATE_ADMIN_EMAIL: '{{ weblate_admin_email | string }}'
+      WEBLATE_SITE_TITLE: '{{ weblate_site_title | string }}'
+      POSTGRES_USER: 'weblate'
+      POSTGRES_PASSWORD: '{{ weblate_postgres_password | string }}'
+      POSTGRES_DATABASE: 'weblate'
+      POSTGRES_HOST: 'weblate-database'
+      POSTGRES_PORT: '5432'
+      REDIS_HOST: 'weblate-cache'
+      REDIS_PORT: '6379'
   tags:
     - weblate

@@ -1,10 +1,9 @@
-- name: Install Woodpecker autoscaler container
+- name: Create Woodpecker autoscaler container
   community.docker.docker_container:
     name: woodpecker_autoscaler
     hostname: woodpecker-autoscaler
     pull: 'always'
     image: woodpeckerci/autoscaler:{{ woodpecker_autoscaler_version }}
-    restart: "{{ 'true' if output.changed else 'false' }}"
     restart_policy: 'always'
     networks:
       - name: web

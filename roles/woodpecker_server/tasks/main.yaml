@@ -7,13 +7,12 @@
     - woodpecker
     - woodpecker-server
 
-- name: Install Woodpecker server container
+- name: Create Woodpecker server container
   community.docker.docker_container:
     name: woodpecker_server
     hostname: woodpecker-server
     pull: 'always'
     image: woodpeckerci/woodpecker-server:{{ woodpecker_server_version }}
-    restart: "{{ 'true' if output.changed else 'false' }}"
     restart_policy: 'always'
     volumes:
       - /opt/woodpecker:/var/lib/woodpecker/

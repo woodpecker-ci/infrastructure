@@ -33,13 +33,11 @@
   tags:
     - caddy
 
-- name: Install Caddy container
+- name: Create Caddy container
   community.docker.docker_container:
     name: caddy
     hostname: caddy
-    pull: 'always'
     image: caddy:{{ caddy_version }}
-    restart: "{{ 'true' if output.changed else 'false' }}"
     restart_policy: 'always'
     ports:
       - 80:80

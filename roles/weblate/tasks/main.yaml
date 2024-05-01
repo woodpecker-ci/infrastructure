@@ -19,7 +19,6 @@
     name: weblate_cache
     hostname: weblate-cache
     image: redis:{{ weblate_redis_version | string }}
-    # restart: "{{ 'true' if output.changed else 'false' }}"
     restart_policy: 'always'
     command: [redis-server, --save, '60', '1']
     volumes:
@@ -36,7 +35,6 @@
     image: postgres:{{ weblate_postgres_version | string }}
     volumes:
       - weblate_postgres-data:/var/lib/postgresql/data
-    # restart: "{{ 'true' if output.changed else 'false' }}"
     restart_policy: 'always'
     networks:
       - name: weblate
@@ -54,7 +52,6 @@
     name: weblate
     hostname: weblate
     image: weblate/weblate:{{ weblate_version }}
-    # restart: "{{ 'true' if output.changed else 'false' }}"
     restart_policy: 'always'
     volumes:
       - weblate_weblate-data:/app/data

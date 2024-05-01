@@ -7,13 +7,12 @@
     - woodpecker
     - woodpecker-agent
 
-- name: Install Woodpecker agent container
+- name: Create Woodpecker agent container
   community.docker.docker_container:
     name: woodpecker_agent
     hostname: woodpecker_agent
     pull: 'always'
     image: woodpeckerci/woodpecker-agent:{{ woodpecker_agent_version }}
-    restart: "{{ 'true' if output.changed else 'false' }}"
     restart_policy: 'always'
     networks:
       - name: web

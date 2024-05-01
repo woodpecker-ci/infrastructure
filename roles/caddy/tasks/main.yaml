@@ -21,32 +21,34 @@
   tags:
     - caddy
 
-- name: Install Caddy
-  community.docker.docker_compose:
-    project_name: caddy
-    pull: true
-    restarted: "{{ 'true' if output.changed else 'false' }}"
-    definition:
-      version: '3.7'
-      services:
-        caddy:
-          image: caddy:{{ caddy_version }}
-          restart: always
-          ports:
-            - 80:80
-            - 443:443
-          volumes:
-            - /opt/caddy/Caddyfile:/etc/caddy/Caddyfile
-            - caddy_data:/data
-            - caddy_config:/config
-          networks:
-            - web
-      volumes:
-        caddy_data:
-        caddy_config:
-      networks:
-        web:
-          external:
-            name: web
+- name: Create Caddy data volume
+  community.docker.docker_volume:
+    name: caddy_data
+  tags:
+    - caddy
+
+- name: Create Caddy config volume
+  community.docker.docker_volume:
+    name: caddy_config
+  tags:
+    - caddy
+
+- name: Install Caddy container
+  community.docker.docker_container:
+    name: caddy
+    hostname: caddy
+    pull: 'always'
+    image: caddy:{{ caddy_version }}
+    restart: "{{ 'true' if output.changed else 'false' }}"
+    restart_policy: 'always'
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /opt/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - name: web
   tags:
     - caddy

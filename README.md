@@ -4,7 +4,7 @@
 
 Is done through Woodpecker-CI itself using the [woodpecker ansible plugin](https://codeberg.org/woodpecker-plugins/ansible).
 
-On the `main` branch the "deployment" approach is used, which means that run on the branch don't "apply" changes but one must manually click the "deploy" button of these runs to initiate the deployment.
+On the `main` branch the "deployment" approach is used. This means that every run on the main branch will automatically check the changes and you can apply them by clicking the "deploy" button in the Woodpecker-CI UI.
 
 ## Local apply
 
@@ -24,6 +24,6 @@ For reproducibility, a Dockerfile is provided to run the ansible playbook locall
 > You can execute specific parts of the deployment by using a filter.
 > For example to only update `woodpecker` you could use: `./ansible.sh ansible-playbook playbooks/run.yaml --tags woodpecker`
 
-## Local SSH connection
+## SSH
 
-- Use `./ssh.sh`. This will decrypt the local SSH key and connect to the server. (Only works if you're allowed to decrypt the key.)
+- Use `./ssh.sh`. This will decrypt the local SSH key and connect to the server. (Only works if you have the vault password stored in `vault-pass.secret`)

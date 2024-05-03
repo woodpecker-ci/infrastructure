@@ -16,7 +16,7 @@ steps:
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
-      playbook: site.yaml
+      playbook: playbooks/run.yaml
       diff: true
       inventory: inventory.yaml
       syntax_check: false
@@ -38,7 +38,7 @@ steps:
     environment:
       ANSIBLE_ROLES_PATH: ./roles
     settings:
-      playbook: site.yaml
+      playbook: playbooks/run.yaml
       diff: true
       inventory: inventory.yaml
       syntax_check: false

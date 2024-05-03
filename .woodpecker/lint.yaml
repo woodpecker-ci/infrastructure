@@ -7,7 +7,7 @@ steps:
     image: bash
     commands:
       - sed -i '/vault_password_file/d' ansible.cfg
-      - sed -i  's/vault\.yaml/vault\.example\.yaml/g' site.yaml
+      - sed -i  's/vault\.yaml/vault\.example\.yaml/g' playbooks/run.yaml
 
   ansible-lint:
     image: pipelinecomponents/ansible-lint:0.67.0

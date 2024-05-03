@@ -1,7 +1,0 @@
-# use v1 till https://github.com/ansible-collections/community.docker/issues/216 got fixed
-- name: Install docker-compose
-  ansible.builtin.apt:
-    name:
-      - docker-compose
-  tags:
-    - docker_compose

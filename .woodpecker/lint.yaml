@@ -17,5 +17,5 @@ steps:
       - ansible-lint
 
   editor-config:
-    image: mstruebing/editorconfig-checker:2.7.2
+    image: mstruebing/editorconfig-checker:v3.0.1
     depends_on: []

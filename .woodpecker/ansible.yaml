@@ -12,6 +12,7 @@ steps:
       - ansible-galaxy install -r requirements.yaml
 
   - name: ansible (check)
+    secrets: [woodpecker_autoscaler_hetzner_api_token]
     image: woodpeckerci/plugin-ansible:0.2.2
     environment:
       ANSIBLE_ROLES_PATH: ./roles

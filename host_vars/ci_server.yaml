@@ -30,6 +30,7 @@ woodpecker_autoscaler_provider: hetznercloud
 woodpecker_autoscaler_hetzner_api_token: "{{ lookup('ansible.builtin.env', 'WOODPECKER_AUTOSCALER_HETZNER_API_TOKEN') }}"
 woodpecker_autoscaler_hetzner_server_type: cax31 # 16 GB RAM, 4 vCPUs, arm64
 woodpecker_autoscaler_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
+woodpecker_autoscaler_hetzner_location: hel1
 
 ### Weblate
 # renovate: datasource=docker depName=weblate/weblate

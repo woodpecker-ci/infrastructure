@@ -4,6 +4,6 @@ RUN_ANSIBLE="docker run --rm -ti -e ANSIBLE_PRIVATE_KEY_FILE=keys/ci_woodpecker-
 
 # docker build -t ansible .
 P=$@
-CMD="${P:=ansible-playbook site.yaml}"
+CMD="${P:=ansible-playbook playbooks/run.yaml}"
 
 $RUN_ANSIBLE $CMD

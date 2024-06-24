@@ -1,0 +1,72 @@
+- name: Setup dns for website
+  community.dns.hetzner_dns_record_sets:
+    state: present
+    zone_name: woodpecker-ci.org
+    record_sets:
+      - type: A
+        value:
+          - 185.199.110.153
+      - type: AAAA
+        value:
+          - 2606:50c0:8002::153
+      - type: CNAME
+        prefix: www
+        value:
+          - woodpecker-ci.github.io.
+  tags:
+    - dns
+
+- name: Setup dns for mail
+  community.dns.hetzner_dns_record_set:
+    state: present
+    zone_name: woodpecker-ci.org
+    record_sets:
+      - type: MX
+        value:
+          - smtpin.rzone.de.
+      - type: A
+        prefix: autoconfig
+        value:
+          - 2a01:238:20a:202:5800::1141
+      - type: A
+        prefix: autoconfig
+        value:
+          - 81.169.145.141
+      - type: SRV
+        prefix: _autodiscover._tcp.autoconfig
+        value:
+          - 0 0 443 autoconfigure.strato.de.
+  tags:
+    - dns
+
+- name: Setup dns for ci server
+  community.dns.hetzner_dns_record_sets:
+    state: present
+    zone_name: woodpecker-ci.org
+    record_sets:
+      - type: A
+        prefix: server01
+        value:
+          - 168.119.99.122
+      - type: AAAA
+        prefix: server01
+        value:
+          - 2a01:4f8:1c17:ef38::1
+      - type: CNAME
+        prefix: ci
+        value:
+          - server01.woodpecker-ci.org.
+      - type: CNAME
+        prefix: grpc-ci
+        value:
+          - server01.woodpecker-ci.org.
+      - type: CNAME
+        prefix: translate
+        value:
+          - server01.woodpecker-ci.org.
+      - type: CNAME
+        prefix: go
+        value:
+          - server01.woodpecker-ci.org.
+  tags:
+    - dns

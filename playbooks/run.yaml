@@ -15,3 +15,12 @@
     # - role: woodpecker_agent # not in use as the autoscaler role provisions agents automatically
     - role: woodpecker_autoscaler
     - role: weblate
+
+- name: local tasks
+  hosts: localhost
+  gather_facts: false
+  module_defaults:
+    group/community.dns.hetzner
+      hetzner_token: '{{ token }}'
+  roles:
+    - role: hetzner_dns

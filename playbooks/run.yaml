@@ -19,8 +19,6 @@
 - name: local tasks
   hosts: localhost
   gather_facts: false
-  module_defaults:
-    group/community.dns.hetzner
-      hetzner_token: '{{ token }}'
   roles:
     - role: hetzner_dns
+      hetzner_dns_token: '{{ vault_hetzner_dns_token }}'

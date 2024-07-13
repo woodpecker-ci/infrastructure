@@ -22,6 +22,7 @@
       WOODPECKER_HETZNERCLOUD_LOCATION: '{{ woodpecker_autoscaler_hetzner_location | string }}'
       WOODPECKER_RECONCILIATION_INTERVAL: 5s
       WOODPECKER_AGENT_IMAGE: woodpeckerci/woodpecker-agent:{{ woodpecker_autoscaler_autoscaler_agent_version }}
+      WOODPECKER_AGENT_IDLE_TIMEOUT: 50m
   tags:
     - woodpecker
     - woodpecker-autoscaler

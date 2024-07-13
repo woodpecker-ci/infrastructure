@@ -6,7 +6,7 @@ when:
 
 steps:
   - name: 'Install galaxy requirements'
-    image: alpine:3.19
+    image: alpine:3.20
     commands:
       - apk add -q --no-cache ansible git
       - ansible-galaxy install -r requirements.yaml

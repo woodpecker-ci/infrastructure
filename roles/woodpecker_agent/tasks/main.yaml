@@ -11,7 +11,7 @@
   community.docker.docker_container:
     name: woodpecker_agent
     hostname: woodpecker_agent
-    pull: 'always'
+    pull: true
     image: woodpeckerci/woodpecker-agent:{{ woodpecker_agent_version }}
     restart_policy: 'always'
     networks:

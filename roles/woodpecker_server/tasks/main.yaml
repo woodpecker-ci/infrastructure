@@ -11,7 +11,7 @@
   community.docker.docker_container:
     name: woodpecker_server
     hostname: woodpecker-server
-    pull: 'always'
+    pull: true
     image: woodpeckerci/woodpecker-server:{{ woodpecker_server_version }}
     restart_policy: 'always'
     volumes:

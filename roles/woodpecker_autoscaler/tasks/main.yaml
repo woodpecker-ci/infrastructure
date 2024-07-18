@@ -2,7 +2,7 @@
   community.docker.docker_container:
     name: woodpecker_autoscaler
     hostname: woodpecker-autoscaler
-    pull: 'always'
+    pull: true
     image: woodpeckerci/autoscaler:{{ woodpecker_autoscaler_version }}
     restart_policy: 'always'
     networks:

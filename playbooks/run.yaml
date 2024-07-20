@@ -16,7 +16,7 @@
     - role: woodpecker_autoscaler
     - role: weblate
 
-- name: local tasks
+- name: Local tasks
   hosts: localhost
   gather_facts: false
   roles:

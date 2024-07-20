@@ -82,5 +82,13 @@
         ttl: *ttl
         value:
           - server01.woodpecker-ci.org.
+
+      # github pages
+      - type: TXT
+        prefix: _github-pages-challenge-woodpecker-ci
+        ttl: *ttl
+        value:
+          - "a355dda5f92c2458a423b2f72f998d"
+
   tags:
     - dns

@@ -13,8 +13,6 @@ steps:
 
   - name: ansible (check)
     image: woodpeckerci/plugin-ansible:0.2.2
-    environment:
-      ANSIBLE_ROLES_PATH: ./roles
     settings:
       playbook: playbooks/run.yaml
       diff: true
@@ -35,8 +33,6 @@ steps:
 
   - name: ansible (apply)
     image: woodpeckerci/plugin-ansible:0.2.2
-    environment:
-      ANSIBLE_ROLES_PATH: ./roles
     settings:
       playbook: playbooks/run.yaml
       diff: true

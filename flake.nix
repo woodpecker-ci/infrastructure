@@ -17,7 +17,9 @@
             # generic
             ansible
             ansible-lint
+            openssh
           ];
+          EDITOR = "${pkgs.nano}/bin/nano";
         };
       }
     );

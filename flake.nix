@@ -20,6 +20,8 @@
             openssh
           ];
           EDITOR = "${pkgs.nano}/bin/nano";
+          ANSIBLE_PRIVATE_KEY_FILE = "keys/ci_woodpecker-ci_org.id_ed25519";
+          ANSIBLE_VAULT_PASSWORD_FILE = "vault-pass.secret";
         };
       }
     );

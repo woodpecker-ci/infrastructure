@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 if [ ! -f "keys/ci_woodpecker-ci_org.id_ed25519" ]; then
   echo "Decrypting SSH keys ..."

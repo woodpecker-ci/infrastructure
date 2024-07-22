@@ -28,6 +28,7 @@
       WOODPECKER_GITHUB_SECRET: '{{ woodpecker_server_github_secret | string }}'
       WOODPECKER_AGENT_SECRET: '{{ woodpecker_server_agent_secret | string }}'
       WOODPECKER_GITHUB_MERGE_REF: 'false'
+      WOODPECKER_DISABLE_VERSION_CHECK: 'true'
   tags:
     - woodpecker
     - woodpecker-server

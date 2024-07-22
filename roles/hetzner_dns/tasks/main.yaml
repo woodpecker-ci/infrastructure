@@ -1,0 +1,94 @@
+- name: Setup dns
+  community.dns.hetzner_dns_record_sets:
+    hetzner_token: '{{ hetzner_dns_token }}'
+    zone_name: woodpecker-ci.org
+    prune: true # remove all records not defined in record_sets
+    record_sets:
+      - prefix: ''
+        type: NS
+        ignore: true
+
+      - prefix: ''
+        type: SOA
+        ignore: true
+
+      # website
+      - type: A
+        prefix: ''
+        ttl: &ttl 300
+        value:
+          - 185.199.110.153
+      - type: AAAA
+        prefix: ''
+        ttl: *ttl
+        value:
+          - 2606:50c0:8002::153
+      - type: CNAME
+        prefix: www
+        ttl: *ttl
+        value:
+          - woodpecker-ci.github.io.
+
+      # email
+      - type: MX
+        prefix: ''
+        ttl: *ttl
+        value:
+          - 10 smtpin.rzone.de.
+      - type: A
+        prefix: autoconfig
+        ttl: *ttl
+        value:
+          - 81.169.145.141
+      - type: AAAA
+        prefix: autoconfig
+        ttl: *ttl
+        value:
+          - 2a01:238:20a:202:5800::1141
+      - type: SRV
+        prefix: _autodiscover._tcp.autoconfig
+        ttl: *ttl
+        value:
+          - 0 0 443 autoconfigure.strato.de.
+
+      # ci-server
+      - type: A
+        prefix: server01
+        ttl: *ttl
+        value:
+          - 168.119.99.122
+      - type: AAAA
+        prefix: server01
+        ttl: *ttl
+        value:
+          - 2a01:4f8:1c17:ef38::1
+      - type: CNAME
+        prefix: ci
+        ttl: *ttl
+        value:
+          - server01.woodpecker-ci.org.
+      - type: CNAME
+        prefix: grpc-ci
+        ttl: *ttl
+        value:
+          - server01.woodpecker-ci.org.
+      - type: CNAME
+        prefix: translate
+        ttl: *ttl
+        value:
+          - server01.woodpecker-ci.org.
+      - type: CNAME
+        prefix: go
+        ttl: *ttl
+        value:
+          - server01.woodpecker-ci.org.
+
+      # github pages
+      - type: TXT
+        prefix: _github-pages-challenge-woodpecker-ci
+        ttl: *ttl
+        value:
+          - "a355dda5f92c2458a423b2f72f998d"
+
+  tags:
+    - dns

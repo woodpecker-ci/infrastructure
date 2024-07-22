@@ -6,16 +6,13 @@ when:
 
 steps:
   - name: 'Install galaxy requirements'
-    image: alpine:3.19
+    image: alpine:3.20
     commands:
       - apk add -q --no-cache ansible git
       - ansible-galaxy install -r requirements.yaml
 
   - name: ansible (check)
-    secrets: [woodpecker_autoscaler_hetzner_api_token]
-    image: woodpeckerci/plugin-ansible:0.2.2
-    environment:
-      ANSIBLE_ROLES_PATH: ./roles
+    image: woodpeckerci/plugin-ansible:0.3.0
     settings:
       playbook: playbooks/run.yaml
       diff: true
@@ -35,9 +32,7 @@ steps:
         branch: ${CI_REPO_DEFAULT_BRANCH}
 
   - name: ansible (apply)
-    image: woodpeckerci/plugin-ansible:0.2.2
-    environment:
-      ANSIBLE_ROLES_PATH: ./roles
+    image: woodpeckerci/plugin-ansible:0.3.0
     settings:
       playbook: playbooks/run.yaml
       diff: true

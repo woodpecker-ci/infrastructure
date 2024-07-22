@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 RUN_ANSIBLE="docker run --rm -ti -e ANSIBLE_PRIVATE_KEY_FILE=keys/ci_woodpecker-ci_org.id_ed25519 -e ANSIBLE_VAULT_PASSWORD_FILE=vault-pass.secret -v $(pwd):/ansible ansible"
 

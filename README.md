@@ -8,7 +8,7 @@ On the `main` branch the "deployment" approach is used. This means that every ru
 
 ## Local apply via docker
 
-**Preparation**:
+### Preparation
 
 For reproducibility, a Dockerfile is provided to run the ansible playbook locally.
 
@@ -16,17 +16,13 @@ For reproducibility, a Dockerfile is provided to run the ansible playbook locall
 2. Run `docker build -t ansible .`
 3. Install dependencies: `./ansible.sh ansible-galaxy install -r requirements.yaml`
 
-**Provisioning**:
+### Provisioning
 
 1. Run `./ansible.sh`
 
 > [!NOTE]
 > You can execute specific parts of the deployment by using a filter.
 > For example to only update `woodpecker` you could use: `./ansible.sh ansible-playbook playbooks/run.yaml --tags woodpecker`
-
-## SSH
-
-- Use `./ssh.sh`. This will decrypt the local SSH key and connect to the server. (Only works if you have the vault password stored in `vault-pass.secret`)
 
 ## Local apply via nix
 
@@ -36,13 +32,17 @@ enter the environment:
 nix develop -c $SHELL
 ```
 
-**Provisioning**:
+### Provisioning
 
 run the playbook as usual:
 
 ```sh
 ansible-playbook playbooks/run.yaml --tags woodpecker
 ```
+
+## SSH
+
+- Use `./ssh.sh`. This will decrypt the local SSH key and connect to the server.
 
 > [!NOTE]
 > Only works if you have the vault password stored in `vault-pass.secret`

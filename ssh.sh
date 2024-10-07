@@ -6,4 +6,10 @@ if [ ! -f "keys/ci_woodpecker-ci_org.id_ed25519" ]; then
   # TODO: chown key to current user
 fi
 
-ssh -i ./keys/ci_woodpecker-ci_org.id_ed25519 root@ci.woodpecker-ci.org
+echo "open firewall for ssh"
+./ansible.sh ansible-playbook playbooks/run.yaml --skip-tags always --tags ssh-open
+
+ssh -4 -i ./keys/ci_woodpecker-ci_org.id_ed25519 root@ci.woodpecker-ci.org
+
+echo "close firewall for ssh"
+./ansible.sh ansible-playbook playbooks/run.yaml --skip-tags always --tags ssh-close

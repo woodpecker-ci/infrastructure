@@ -12,7 +12,7 @@ steps:
       - ansible-galaxy install -r requirements.yaml
 
   - name: ansible (check)
-    image: woodpeckerci/plugin-ansible:0.3.0
+    image: woodpeckerci/plugin-ansible:0.4.0
     settings:
       playbook: playbooks/run.yaml
       diff: true
@@ -32,7 +32,7 @@ steps:
         branch: ${CI_REPO_DEFAULT_BRANCH}
 
   - name: ansible (apply)
-    image: woodpeckerci/plugin-ansible:0.3.0
+    image: woodpeckerci/plugin-ansible:0.4.0
     settings:
       playbook: playbooks/run.yaml
       diff: true

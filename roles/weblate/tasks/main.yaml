@@ -18,7 +18,8 @@
   community.docker.docker_container:
     name: weblate_cache
     hostname: weblate-cache
-    image: redis:{{ weblate_redis_version | string }}
+    # renovate: datasource=docker depName=library/redis
+    image: redis:7-alpine
     restart_policy: 'always'
     command: [redis-server, --save, '60', '1']
     volumes:
@@ -32,7 +33,8 @@
   community.docker.docker_container:
     name: weblate_database
     hostname: weblate-database
-    image: postgres:{{ weblate_postgres_version | string }}
+    # renovate: datasource=docker depName=library/postgres
+    image: postgres:16-alpine
     volumes:
       - weblate_postgres-data:/var/lib/postgresql/data
     restart_policy: 'always'
@@ -56,7 +58,9 @@
     volumes:
       - weblate_weblate-data:/app/data
     tmpfs:
-      - /app/cache
+      - /run
+      - /tmp
+    read_only: true
     networks:
       - name: weblate
       - name: web

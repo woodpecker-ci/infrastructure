@@ -10,7 +10,7 @@ steps:
       - sed -i  's/vault\.yaml/vault\.example\.yaml/g' playbooks/run.yaml
 
   ansible-lint:
-    image: pipelinecomponents/ansible-lint:0.71.0
+    image: pipelinecomponents/ansible-lint:0.75.0
     depends_on: no-vault
     commands:
       - ansible-galaxy install -r requirements.yaml

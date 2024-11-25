@@ -24,10 +24,6 @@ For reproducibility, a Dockerfile is provided to run the ansible playbook locall
 > You can execute specific parts of the deployment by using a filter.
 > For example to only update `woodpecker` you could use: `./ansible.sh ansible-playbook playbooks/run.yaml --tags woodpecker`
 
-### SSH
-
-- Use `./ssh.sh`. This will decrypt the local SSH key and connect to the server. (Only works if you have the vault password stored in `vault-pass.secret`)
-
 ## Local apply via nix
 
 enter the environment:
@@ -43,6 +39,10 @@ run the playbook as usual:
 ```sh
 ansible-playbook playbooks/run.yaml --tags woodpecker
 ```
+
+## SSH
+
+- Use `./ssh.sh`. This will decrypt the local SSH key and connect to the server.
 
 > [!NOTE]
 > Only works if you have the vault password stored in `vault-pass.secret`

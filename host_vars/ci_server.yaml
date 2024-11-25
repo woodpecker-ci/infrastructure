@@ -28,7 +28,6 @@ woodpecker_autoscaler_grpc_addr: grpc-ci.woodpecker-ci.org:443
 woodpecker_autoscaler_grpc_secure: true
 woodpecker_autoscaler_provider: hetznercloud
 woodpecker_autoscaler_hetzner_api_token: '{{ vault_hcloud_token }}'
-# woodpecker_autoscaler_hetzner_server_type: cx42
 woodpecker_autoscaler_hetzner_server_type: cax31 # 16 GB RAM, 4 vCPUs, arm64
 woodpecker_autoscaler_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
 woodpecker_autoscaler_hetzner_location: hel1
@@ -36,18 +35,14 @@ woodpecker_autoscaler_autoscaler_agent_version: *woodpecker_version
 
 ### Weblate
 # renovate: datasource=docker depName=weblate/weblate
-weblate_version: 4.18.2.2
+weblate_version: 5.8.4.0
 weblate_email_host: '{{ vault_weblate_email_host }}'
 weblate_email_use_ssl: 0
 weblate_email_use_tls: 1
 weblate_email_port: 587
 weblate_email_username: '{{ vault_weblate_email_username }}'
 weblate_email_password: '{{ vault_weblate_email_password }}'
-# renovate: datasource=docker depName=library/postgres
-weblate_postgres_version: 16-alpine
 weblate_postgres_password: '{{ vault_weblate_postgres_password }}'
 weblate_domain: 'translate.woodpecker-ci.org'
 weblate_admin_email: '{{ vault_weblate_admin_email }}'
 weblate_site_title: Woodpecker translate
-# renovate: datasource=docker depName=library/redis
-weblate_redis_version: 7-alpine

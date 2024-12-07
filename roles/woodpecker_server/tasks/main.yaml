@@ -28,7 +28,19 @@
       WOODPECKER_GITHUB_SECRET: '{{ woodpecker_server_github_secret | string }}'
       WOODPECKER_AGENT_SECRET: '{{ woodpecker_server_agent_secret | string }}'
       WOODPECKER_GITHUB_MERGE_REF: 'false'
-      WOODPECKER_PLUGINS_PRIVILEGED: 'docker.io/woodpeckerci/plugin-docker-buildx:5.0.0,docker.io/woodpeckerci/plugin-docker-buildx:latest'
+      WOODPECKER_PLUGINS_PRIVILEGED: >-
+        docker.io/woodpeckerci/plugin-docker-buildx:latest,
+        docker.io/woodpeckerci/plugin-docker-buildx:5.0.0,
+        docker.io/woodpeckerci/plugin-docker-buildx:5.1.0,
+        docker.io/woodpeckerci/plugin-docker-buildx:5.0,
+        docker.io/woodpeckerci/plugin-docker-buildx:5.1,
+        docker.io/woodpeckerci/plugin-docker-buildx:5,
+        codeberg.org/woodpecker-plugins/docker-buildx:latest,
+        codeberg.org/woodpecker-plugins/docker-buildx:5.0.0,
+        codeberg.org/woodpecker-plugins/docker-buildx:5.1.0,
+        codeberg.org/woodpecker-plugins/docker-buildx:5.0,
+        codeberg.org/woodpecker-plugins/docker-buildx:5.1,
+        codeberg.org/woodpecker-plugins/docker-buildx:5
   tags:
     - woodpecker
     - woodpecker-server

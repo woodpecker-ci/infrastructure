@@ -88,7 +88,14 @@
         prefix: _github-pages-challenge-woodpecker-ci
         ttl: *ttl
         value:
-          - "a355dda5f92c2458a423b2f72f998d"
+          - 'a355dda5f92c2458a423b2f72f998d'
+
+      # bluesky
+      - type: TXT
+        prefix: _atproto
+        ttl: *ttl
+        value:
+          - 'did=did:plc:fmsa5dxhhsursfhg2o6sil5k'
 
   tags:
     - dns

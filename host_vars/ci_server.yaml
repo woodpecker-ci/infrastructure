@@ -3,7 +3,7 @@
 caddy_version: 2.4.6-alpine
 
 ### Server
-woodpecker_server_version: &woodpecker_version next
+woodpecker_server_version: &woodpecker_version next-afa6dee30b
 woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: 6543,anbraten
@@ -32,7 +32,7 @@ woodpecker_autoscaler_hetzner_api_token: '{{ vault_hcloud_token }}'
 woodpecker_autoscaler_hetzner_server_type: cpx41 # cpx31
 woodpecker_autoscaler_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
 woodpecker_autoscaler_hetzner_location: hel1
-woodpecker_autoscaler_autoscaler_agent_version: next-afa6dee30b
+woodpecker_autoscaler_autoscaler_agent_version: *woodpecker_version
 
 ### Weblate
 # renovate: datasource=docker depName=weblate/weblate

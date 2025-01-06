@@ -32,6 +32,8 @@ enter the environment:
 nix develop -c $SHELL
 ```
 
+<!-- markdownlint-disable MD024 -->
+
 ### Provisioning
 
 run the playbook as usual:

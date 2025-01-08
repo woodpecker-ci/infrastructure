@@ -2,3 +2,4 @@ vault-pass.secret
 ansible_collections/
 
 .vscode/
+node_modules/

@@ -32,6 +32,8 @@ enter the environment:
 nix develop -c $SHELL
 ```
 
+<!-- markdownlint-disable MD024 -->
+
 ### Provisioning
 
 run the playbook as usual:
@@ -39,6 +41,8 @@ run the playbook as usual:
 ```sh
 ansible-playbook playbooks/run.yaml --tags woodpecker
 ```
+
+<!-- markdownlint-enable MD024 -->
 
 ## SSH
 

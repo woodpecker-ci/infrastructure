@@ -42,7 +42,7 @@ run the playbook as usual:
 ansible-playbook playbooks/run.yaml --tags woodpecker
 ```
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-enable MD024 -->
 
 ## SSH
 

@@ -42,6 +42,8 @@ run the playbook as usual:
 ansible-playbook playbooks/run.yaml --tags woodpecker
 ```
 
+<!-- markdownlint-enable -->
+
 ## SSH
 
 - Use `./ssh.sh`. This will decrypt the local SSH key and connect to the server.

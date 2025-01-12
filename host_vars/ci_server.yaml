@@ -36,7 +36,7 @@ woodpecker_autoscaler_autoscaler_agent_version: *woodpecker_version
 
 ### Weblate
 # renovate: datasource=docker depName=weblate/weblate
-weblate_version: 5.8.4.0
+weblate_version: 5.9.2.1
 weblate_email_host: '{{ vault_weblate_email_host }}'
 weblate_email_use_ssl: 0
 weblate_email_use_tls: 1

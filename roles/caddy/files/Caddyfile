@@ -31,6 +31,13 @@ go.woodpecker-ci.org {
     redir https://pkg.go.dev/go.woodpecker-ci.org/woodpecker/v2
   }
 
+  route /woodpecker/v3 {
+    @goget query go-get=1
+    respond @goget `<meta name="go-import" content="go.woodpecker-ci.org/woodpecker/v3 git https://github.com/woodpecker-ci/woodpecker">`
+
+    redir https://pkg.go.dev/go.woodpecker-ci.org/woodpecker/v3
+  }
+
   route /autoscaler {
     @goget query go-get=1
     respond @goget `<meta name="go-import" content="go.woodpecker-ci.org/autoscaler git https://github.com/woodpecker-ci/autoscaler">`

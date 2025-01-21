@@ -39,6 +39,7 @@
     hostname: caddy
     image: caddy:{{ caddy_version }}
     restart_policy: 'always'
+    restart: true # To reload the Caddyfile in case the container wasn't updated
     ports:
       - 80:80
       - 443:443

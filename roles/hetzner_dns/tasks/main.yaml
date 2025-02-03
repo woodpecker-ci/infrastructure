@@ -34,22 +34,8 @@
         prefix: ''
         ttl: *ttl
         value:
-          - 10 smtpin.rzone.de.
-      - type: A
-        prefix: autoconfig
-        ttl: *ttl
-        value:
-          - 81.169.145.141
-      - type: AAAA
-        prefix: autoconfig
-        ttl: *ttl
-        value:
-          - 2a01:238:20a:202:5800::1141
-      - type: SRV
-        prefix: _autodiscover._tcp.autoconfig
-        ttl: *ttl
-        value:
-          - 0 0 443 autoconfigure.strato.de.
+          - 1 fwd1.porkbun.com.
+          - 1 fwd2.porkbun.com.
 
       # ci-server
       - type: A

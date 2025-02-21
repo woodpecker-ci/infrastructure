@@ -3,7 +3,7 @@
 caddy_version: 2.4.6-alpine
 
 ### Server
-woodpecker_server_version: &woodpecker_version next-b78427e8b5
+woodpecker_server_version: &woodpecker_version next-5ea4f0cfae
 woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: anbraten,qwerty287

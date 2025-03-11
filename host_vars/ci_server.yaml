@@ -1,9 +1,9 @@
 ### Caddy
 # renovate: datasource=docker depName=library/caddy
-caddy_version: 2.4.6-alpine
+caddy_version: 2.9.1-alpine
 
 ### Server
-woodpecker_server_version: &woodpecker_version next-5ea4f0cfae
+woodpecker_server_version: &woodpecker_version next-1232ceb794
 woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: anbraten,qwerty287
@@ -34,9 +34,13 @@ woodpecker_autoscaler_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
 woodpecker_autoscaler_hetzner_location: hel1
 woodpecker_autoscaler_autoscaler_agent_version: *woodpecker_version
 
+### Vaultwarden
+# renovate: datasource=docker depName=vaultwarden/server
+vaultwarden_version: 1.33.2-alpine
+
 ### Weblate
 # renovate: datasource=docker depName=weblate/weblate
-weblate_version: 5.9.2.1
+weblate_version: 5.10.2.0
 weblate_email_host: '{{ vault_weblate_email_host }}'
 weblate_email_use_ssl: 0
 weblate_email_use_tls: 1

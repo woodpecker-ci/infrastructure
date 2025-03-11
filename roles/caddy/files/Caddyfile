@@ -49,3 +49,7 @@ go.woodpecker-ci.org {
 translate.woodpecker-ci.org {
   reverse_proxy weblate:8080
 }
+
+vault.woodpecker-ci.org {
+  reverse_proxy vaultwarden:80
+}

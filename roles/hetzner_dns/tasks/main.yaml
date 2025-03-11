@@ -68,6 +68,11 @@
         ttl: *ttl
         value:
           - server01.woodpecker-ci.org.
+      - type: CNAME
+        prefix: vault
+        ttl: *ttl
+        value:
+          - server01.woodpecker-ci.org.
 
       # github pages
       - type: TXT

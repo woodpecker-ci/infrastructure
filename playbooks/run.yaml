@@ -14,6 +14,7 @@
     - role: woodpecker_server
     # - role: woodpecker_agent # not in use as the autoscaler role provisions agents automatically
     - role: woodpecker_autoscaler
+    - role: vaultwarden
     - role: weblate
 
 - name: Local tasks

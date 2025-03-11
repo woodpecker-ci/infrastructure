@@ -1,0 +1,25 @@
+- name: Create Vaultwarden data volume
+  community.docker.docker_volume:
+    name: vaultwarden_data
+  tags:
+    - vaultwarden
+
+- name: Create Vaultwarden container
+  community.docker.docker_container:
+    name: vaultwarden
+    hostname: vaultwarden
+    image: vaultwarden/server:{{ vaultwarden_version }}
+    restart_policy: 'always'
+    restart: true
+    env:
+      DOMAIN: 'https://vault.woodpecker-ci.org'
+      SENDS_ALLOWED: 'false'
+      SIGNUPS_ALLOWED: 'false'
+      EMERGENCY_ACCESS_ALLOWED: 'false'
+      ORG_CREATION_USERS: 'none'
+    volumes:
+      - vaultwarden_data:/data
+    networks:
+      - name: web
+  tags:
+    - vaultwarden

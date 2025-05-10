@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.21
 
 # hadolint ignore=DL3018
 RUN apk add --update --no-cache ansible ansible-lint openssh nano py3-ruamel.yaml \

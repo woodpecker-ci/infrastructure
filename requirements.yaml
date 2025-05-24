@@ -7,6 +7,6 @@ collections:
   - name: hetzner.hcloud
     version: 4.3.0
   - name: community.crypto
-    version: 2.26.1
+    version: 2.26.2
   - name: community.dns
     version: 3.2.3

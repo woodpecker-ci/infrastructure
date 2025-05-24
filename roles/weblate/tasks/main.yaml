@@ -19,7 +19,7 @@
     name: weblate_cache
     hostname: weblate-cache
     # renovate: datasource=docker depName=library/redis
-    image: redis:7-alpine
+    image: redis:8-alpine
     restart_policy: 'always'
     command: [redis-server, --save, '60', '1']
     volumes:

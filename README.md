@@ -13,8 +13,7 @@ On the `main` branch the "deployment" approach is used. This means that every ru
 For reproducibility, a Dockerfile is provided to run the ansible playbook locally.
 
 1. Save the ansible vault password under `vault-pass.secret`
-2. Run `docker build -t ansible .`
-3. Install dependencies: `./ansible.sh ansible-galaxy install -r requirements.yaml`
+2. Install dependencies: `./ansible.sh ansible-galaxy install -r requirements.yaml`
 
 ### Provisioning
 

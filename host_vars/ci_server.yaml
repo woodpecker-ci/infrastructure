@@ -36,7 +36,7 @@ woodpecker_autoscaler_autoscaler_agent_version: *woodpecker_version
 
 ### Vaultwarden
 # renovate: datasource=docker depName=vaultwarden/server
-vaultwarden_version: 1.34.1-alpine
+vaultwarden_version: 1.34.3-alpine
 
 ### Weblate
 # renovate: datasource=docker depName=weblate/weblate

@@ -3,19 +3,21 @@ when:
     branch: ${CI_REPO_DEFAULT_BRANCH}
 
 steps:
-  no-vault:
-    image: bash
+  - name: no-vault
+    image: docker.io/bash
     commands:
       - sed -i '/vault_password_file/d' ansible.cfg
       - sed -i  's/vault\.yaml/vault\.example\.yaml/g' playbooks/run.yaml
 
-  ansible-lint:
-    image: pipelinecomponents/ansible-lint:0.79.0
+  - name: ansible-lint
+    image: ghcr.io/ansible/community-ansible-dev-tools:v25.5.2
     depends_on: no-vault
+    environment:
+      ANSIBLE_CONFIG: ansible.cfg
     commands:
       - ansible-galaxy install -r requirements.yaml
       - ansible-lint
 
-  editor-config:
-    image: mstruebing/editorconfig-checker:v3.3.0
+  - name: editor-config
+    image: docker.io/mstruebing/editorconfig-checker:v3.3.0
     depends_on: []

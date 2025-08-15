@@ -5,14 +5,16 @@ when:
       - ${CI_REPO_DEFAULT_BRANCH}
 
 steps:
-  - name: 'Install galaxy requirements'
-    image: alpine:3.20
+  - name: galaxy-install
+    image: docker.io/alpine:3.20
+    environment:
+      ANSIBLE_CONFIG: ansible.cfg
     commands:
       - apk add -q --no-cache ansible git
       - ansible-galaxy install -r requirements.yaml
 
-  - name: ansible (check)
-    image: woodpeckerci/plugin-ansible:1.0.2
+  - name: ansible-check
+    image: docker.io/woodpeckerci/plugin-ansible:1.0.6
     settings:
       playbook: playbooks/run.yaml
       diff: true
@@ -31,8 +33,8 @@ steps:
       - event: push
         branch: ${CI_REPO_DEFAULT_BRANCH}
 
-  - name: ansible (apply)
-    image: woodpeckerci/plugin-ansible:1.0.2
+  - name: ansible-apply
+    image: docker.io/woodpeckerci/plugin-ansible:1.0.6
     settings:
       playbook: playbooks/run.yaml
       diff: true

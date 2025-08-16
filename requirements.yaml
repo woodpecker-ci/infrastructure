@@ -9,4 +9,4 @@ collections:
   - name: community.crypto
     version: 2.26.2
   - name: community.dns
-    version: 3.2.4
+    version: 3.3.0

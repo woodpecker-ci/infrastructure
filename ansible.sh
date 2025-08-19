@@ -11,7 +11,7 @@ else
   echo "✅ Image '$IMAGE_NAME' already exists. Skipping build."
 fi
 
-P=("$@")
+P="$@"
 CMD="${P:=ansible-playbook playbooks/run.yaml}"
 
 # shellcheck disable=SC2086

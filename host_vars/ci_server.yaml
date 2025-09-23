@@ -3,7 +3,7 @@
 caddy_version: 2.9.1-alpine
 
 ### Server
-woodpecker_server_version: &woodpecker_version next-2349ee1eef
+woodpecker_server_version: &woodpecker_version next-7707e843f2
 woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: anbraten,qwerty287
@@ -37,6 +37,11 @@ woodpecker_autoscaler_autoscaler_agent_version: *woodpecker_version
 ### Vaultwarden
 # renovate: datasource=docker depName=vaultwarden/server
 vaultwarden_version: 1.34.3-alpine
+vaultwarden_smtp_host: '{{ vault_vaultwarden_smtp_host }}'
+vaultwarden_smtp_port: 587
+vaultwarden_smtp_security: starttls
+vaultwarden_smtp_username: '{{ vault_vaultwarden_smtp_username }}'
+vaultwarden_smtp_password: '{{ vault_vaultwarden_smtp_password }}'
 
 ### Weblate
 # renovate: datasource=docker depName=weblate/weblate

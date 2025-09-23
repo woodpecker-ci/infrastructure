@@ -17,6 +17,12 @@
       SIGNUPS_ALLOWED: 'false'
       EMERGENCY_ACCESS_ALLOWED: 'false'
       ORG_CREATION_USERS: 'none'
+      SMTP_HOST: '{{ vaultwarden_smtp_host | string }}'
+      SMTP_PORT: '{{ vaultwarden_smtp_port | string }}'
+      SMTP_SECURITY: '{{ vaultwarden_smtp_security | string }}'
+      SMTP_FROM: '{{ vaultwarden_smtp_username | string }}'
+      SMTP_USERNAME: '{{ vaultwarden_smtp_username | string }}'
+      SMTP_PASSWORD: '{{ vaultwarden_smtp_password | string }}'
     volumes:
       - vaultwarden_data:/data
     networks:

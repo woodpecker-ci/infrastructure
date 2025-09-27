@@ -34,7 +34,7 @@
     name: weblate_database
     hostname: weblate-database
     # renovate: datasource=docker depName=library/postgres
-    image: postgres:16-alpine
+    image: postgres:18-alpine
     volumes:
       - weblate_postgres-data:/var/lib/postgresql/data
     restart_policy: 'always'

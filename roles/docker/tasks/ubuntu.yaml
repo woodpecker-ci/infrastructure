@@ -4,19 +4,19 @@
       - apt-transport-https
       - ca-certificates
       - gnupg2
+      - curl
   tags:
     - docker
 
 - name: Add apt key for Docker repository
-  ansible.builtin.apt_key:
-    id: 0EBFCD88
-    url: https://download.docker.com/linux/ubuntu/gpg
+  ansible.builtin.command:
+    cmd: curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
   tags:
     - docker
 
 - name: Add Docker repository (amd64)
   ansible.builtin.apt_repository:
-    repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+    repo: 'deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
     state: present
   when: ansible_architecture == "x86_64"
   tags:
@@ -24,7 +24,7 @@
 
 - name: Add Docker repository (armhf)
   ansible.builtin.apt_repository:
-    repo: 'deb [arch=armhf] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+    repo: 'deb [arch=armhf signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
     state: present
   when: ansible_architecture == "armv7l"
   tags:
@@ -32,7 +32,7 @@
 
 - name: Add Docker repository (arm64)
   ansible.builtin.apt_repository:
-    repo: 'deb [arch=arm64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+    repo: 'deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
     state: present
   when: ansible_architecture == "aarch64"
   tags:

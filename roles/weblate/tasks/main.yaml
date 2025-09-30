@@ -18,10 +18,10 @@
   community.docker.docker_container:
     name: weblate_cache
     hostname: weblate-cache
-    # renovate: datasource=docker depName=library/redis
-    image: redis:7-alpine
+    # renovate: datasource=docker depName=docker.io/valkey/valkey
+    image: docker.io/valkey/valkey:8-alpine
     restart_policy: 'always'
-    command: [redis-server, --save, '60', '1']
+    command: [valkey-server, --save, '60', '1']
     volumes:
       - weblate_redis-data:/data
     networks:

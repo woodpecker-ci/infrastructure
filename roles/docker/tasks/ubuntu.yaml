@@ -9,8 +9,9 @@
     - docker
 
 - name: Add apt key for Docker repository
-  ansible.builtin.command:
-    cmd: curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  ansible.builtin.apt_key:
+    id: 0EBFCD88
+    url: https://download.docker.com/linux/ubuntu/gpg
   tags:
     - docker
 

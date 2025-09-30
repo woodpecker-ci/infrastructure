@@ -5,5 +5,5 @@
   roles:
     - role: ssh_key
       vars:
-        base_dir: .
-        server_name: ci_woodpecker-ci_org
+        ssh_key_base_dir: .
+        ssh_key_server_name: ci_woodpecker-ci_org

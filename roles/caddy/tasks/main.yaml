@@ -17,7 +17,7 @@
     src: Caddyfile
     dest: /opt/caddy/Caddyfile
     mode: '0o644'
-  register: output
+  register: caddy_output
   tags:
     - caddy
 

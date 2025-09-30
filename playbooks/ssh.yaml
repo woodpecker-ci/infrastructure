@@ -1,0 +1,9 @@
+---
+- name: Local tasks
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: ssh_key
+      vars:
+        ssh_key_base_dir: .
+        ssh_key_server_name: ci_woodpecker-ci_org

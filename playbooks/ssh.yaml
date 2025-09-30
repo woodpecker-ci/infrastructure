@@ -1,0 +1,29 @@
+- name: Setup main server at hetzner
+  hosts: ci_server
+  pre_tasks:
+    - name: Collect facts
+      ansible.builtin.setup:
+        gather_subset:
+          - 'system'
+          - 'local'
+          - 'distribution'
+  roles:
+    - role: common
+    - role: docker
+    - role: caddy
+    - role: woodpecker_server
+    # - role: woodpecker_agent # not in use as the autoscaler role provisions agents automatically
+    - role: woodpecker_autoscaler
+    - role: vaultwarden
+    - role: weblate
+
+- name: Local tasks
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: hetzner_dns
+      hetzner_dns_token: '{{ vault_hetzner_dns_token }}'
+    - role: ssh_key
+      vars:
+        base_dir: .
+        server_name: ci_woodpecker-ci_org

@@ -1,6 +1,6 @@
 - name: Decrypt existing SSH key
   vars:
-    key_path: "{{ './keys/%s.id_ed25519' | format(server_name | replace('.', '_')) }}"
+    key_path: "{{ base_dir }}{{ '/keys/%s.id_ed25519' | format(server_name | replace('.', '_')) }}"
   ansible.builtin.command:
     creates: '{{ key_path }}'
     cmd: ansible-vault decrypt {{ key_path }}.enc --output {{ key_path }}
@@ -10,7 +10,7 @@
 
 - name: Generate SSH key for {{ server_name }}
   vars:
-    key_path: "{{ './keys/%s.id_ed25519' | format(server_name | replace('.', '_')) }}"
+    key_path: "{{ base_dir }}{{ '/keys/%s.id_ed25519' | format(server_name | replace('.', '_')) }}"
   community.crypto.openssh_keypair:
     path: '{{ key_path }}'
     type: ed25519
@@ -22,7 +22,7 @@
 
 - name: Encrypt created SSH key
   vars:
-    key_path: "{{ './keys/%s.id_ed25519' | format(server_name | replace('.', '_')) }}"
+    key_path: "{{ base_dir }}{{ '/keys/%s.id_ed25519' | format(server_name | replace('.', '_')) }}"
   ansible.builtin.command:
     creates: '{{ key_path }}.enc'
     cmd: ansible-vault encrypt {{ key_path }} --output {{ key_path }}.enc

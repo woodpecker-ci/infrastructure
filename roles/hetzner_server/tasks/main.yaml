@@ -23,7 +23,7 @@
     ssh_keys:
       - '{{ server_name }}-ssh'
   delegate_to: localhost
-  register: server
+  register: hetzner_server_server
   tags:
     - hetzner
     - hetzner-server

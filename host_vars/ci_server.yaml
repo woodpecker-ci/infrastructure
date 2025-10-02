@@ -1,9 +1,10 @@
 ### Caddy
-# renovate: datasource=docker depName=library/caddy
+# renovate: datasource=docker depName=library/caddy versioning=docker
 caddy_version: 2.10.2-alpine
 
 ### Server
-woodpecker_server_version: &woodpecker_version next-dee88a14f8
+# renovate: datasource=docker depName=woodpeckerci/woodpecker-server versioning=docker
+woodpecker_server_version: next@sha256:5588c89b57674839c7e5b56c4a1ac79a4b8d133c0232bf7ef180986ae5927e16
 woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: anbraten,qwerty287
@@ -12,13 +13,15 @@ woodpecker_server_github_client: '{{ vault_woodpecker_github_client }}'
 woodpecker_server_github_secret: '{{ vault_woodpecker_github_secret }}'
 
 ### Agent
-woodpecker_agent_version: *woodpecker_version
+# renovate: datasource=docker depName=woodpeckerci/woodpecker-agent versioning=docker
+woodpecker_agent_version: next@sha256:5396f07367a273fc371b6844aa6068a5b002a6a992447b0ca40f6e374a338894
 woodpecker_agent_server: woodpecker-server:9000
 woodpecker_agent_agent_secret: '{{ vault_woodpecker_agent1_secret }}'
 woodpecker_agent_max_workflows: 2
 
 ### Autoscaler
-woodpecker_autoscaler_version: next
+# renovate: datasource=docker depName=woodpeckerci/autoscaler versioning=docker
+woodpecker_autoscaler_version: next@sha256:12d02b0b9554a85c3648b71d1448242df9db92c04c2905b6cfdf4d84983b2f17
 woodpecker_autoscaler_server_url: http://woodpecker-server:8000
 woodpecker_autoscaler_server_token: '{{ vault_woodpecker_api_token }}'
 woodpecker_autoscaler_min_agents: 0
@@ -32,10 +35,10 @@ woodpecker_autoscaler_hetzner_api_token: '{{ vault_hcloud_token }}'
 woodpecker_autoscaler_hetzner_server_type: cpx41 # cpx31
 woodpecker_autoscaler_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
 woodpecker_autoscaler_hetzner_location: hel1
-woodpecker_autoscaler_autoscaler_agent_version: *woodpecker_version
+woodpecker_autoscaler_autoscaler_agent_version: '{{ woodpecker_agent_version }}'
 
 ### Vaultwarden
-# renovate: datasource=docker depName=vaultwarden/server
+# renovate: datasource=docker depName=vaultwarden/server versioning=docker
 vaultwarden_version: 1.34.3-alpine
 vaultwarden_smtp_host: '{{ vault_vaultwarden_smtp_host }}'
 vaultwarden_smtp_port: 587
@@ -44,7 +47,7 @@ vaultwarden_smtp_username: '{{ vault_vaultwarden_smtp_username }}'
 vaultwarden_smtp_password: '{{ vault_vaultwarden_smtp_password }}'
 
 ### Weblate
-# renovate: datasource=docker depName=weblate/weblate
+# renovate: datasource=docker depName=weblate/weblate versioning=docker
 weblate_version: 5.13.3.3
 weblate_email_host: '{{ vault_weblate_email_host }}'
 weblate_email_use_ssl: 0

@@ -12,7 +12,7 @@
     name: woodpecker_agent
     hostname: woodpecker_agent
     pull: 'always'
-    image: woodpeckerci/woodpecker-agent:{{ woodpecker_agent_version }}
+    image: docker.io/woodpeckerci/woodpecker-agent:{{ woodpecker_agent_version }}
     restart_policy: 'always'
     networks:
       - name: web

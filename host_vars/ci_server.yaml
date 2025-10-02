@@ -4,7 +4,7 @@ caddy_version: 2.10.2-alpine
 
 ### Server
 # renovate: datasource=docker depName=woodpeckerci/woodpecker-server versioning=docker
-woodpecker_server_version: next@sha256:4fa29a12dcc9ca379e6b21d6aa2455dce7bf68ba61ace62df8daf58b8cebb2fc
+woodpecker_server_version: next@sha256:5588c89b57674839c7e5b56c4a1ac79a4b8d133c0232bf7ef180986ae5927e16
 woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: anbraten,qwerty287
@@ -13,7 +13,8 @@ woodpecker_server_github_client: '{{ vault_woodpecker_github_client }}'
 woodpecker_server_github_secret: '{{ vault_woodpecker_github_secret }}'
 
 ### Agent
-woodpecker_agent_version: '{{ woodpecker_server_version }}'
+# renovate: datasource=docker depName=woodpeckerci/woodpecker-agent versioning=docker
+woodpecker_agent_version: next@sha256:5396f07367a273fc371b6844aa6068a5b002a6a992447b0ca40f6e374a338894
 woodpecker_agent_server: woodpecker-server:9000
 woodpecker_agent_agent_secret: '{{ vault_woodpecker_agent1_secret }}'
 woodpecker_agent_max_workflows: 2
@@ -34,7 +35,7 @@ woodpecker_autoscaler_hetzner_api_token: '{{ vault_hcloud_token }}'
 woodpecker_autoscaler_hetzner_server_type: cpx41 # cpx31
 woodpecker_autoscaler_hetzner_ssh_keys: ci.woodpecker-ci.org-ssh
 woodpecker_autoscaler_hetzner_location: hel1
-woodpecker_autoscaler_autoscaler_agent_version: '{{ woodpecker_server_version }}'
+woodpecker_autoscaler_autoscaler_agent_version: '{{ woodpecker_agent_version }}'
 
 ### Vaultwarden
 # renovate: datasource=docker depName=vaultwarden/server versioning=docker

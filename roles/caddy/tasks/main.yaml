@@ -17,7 +17,7 @@
     src: Caddyfile
     dest: /opt/caddy/Caddyfile
     mode: '0o644'
-  register: caddy_output
+  register: caddy_copy_conf
   tags:
     - caddy
 
@@ -37,9 +37,9 @@
   community.docker.docker_container:
     name: caddy
     hostname: caddy
-    image: caddy:{{ caddy_version }}
+    image: docker.io/caddy:{{ caddy_version }}
     restart_policy: 'always'
-    restart: true # To reload the Caddyfile in case the container wasn't updated
+    restart: '{{ caddy_copy_conf.changed }}'
     ports:
       - 80:80
       - 443:443

@@ -3,7 +3,7 @@
     name: woodpecker_autoscaler
     hostname: woodpecker-autoscaler
     pull: 'always'
-    image: woodpeckerci/autoscaler:{{ woodpecker_autoscaler_version }}
+    image: docker.io/woodpeckerci/autoscaler:{{ woodpecker_autoscaler_version }}
     restart_policy: 'always'
     networks:
       - name: web
@@ -21,7 +21,7 @@
       WOODPECKER_HETZNERCLOUD_SSH_KEYS: '{{ woodpecker_autoscaler_hetzner_ssh_keys | string }}'
       WOODPECKER_HETZNERCLOUD_LOCATION: '{{ woodpecker_autoscaler_hetzner_location | string }}'
       WOODPECKER_RECONCILIATION_INTERVAL: 5s
-      WOODPECKER_AGENT_IMAGE: woodpeckerci/woodpecker-agent:{{ woodpecker_autoscaler_autoscaler_agent_version }}
+      WOODPECKER_AGENT_IMAGE: docker.io/woodpeckerci/woodpecker-agent:{{ woodpecker_autoscaler_autoscaler_agent_version }}
       WOODPECKER_AGENT_IDLE_TIMEOUT: 50m
   tags:
     - woodpecker

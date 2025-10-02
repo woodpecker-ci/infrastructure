@@ -8,9 +8,8 @@
   community.docker.docker_container:
     name: vaultwarden
     hostname: vaultwarden
-    image: vaultwarden/server:{{ vaultwarden_version }}
+    image: docker.io/vaultwarden/server:{{ vaultwarden_version }}
     restart_policy: 'always'
-    restart: true
     env:
       DOMAIN: 'https://vault.woodpecker-ci.org'
       SENDS_ALLOWED: 'false'

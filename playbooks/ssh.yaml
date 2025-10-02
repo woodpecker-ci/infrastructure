@@ -1,4 +1,3 @@
----
 - name: Local tasks
   hosts: localhost
   gather_facts: false

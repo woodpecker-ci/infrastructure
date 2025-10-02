@@ -1,4 +1,3 @@
----
 - name: Setup main server at hetzner
   hosts: ci_server
   pre_tasks:

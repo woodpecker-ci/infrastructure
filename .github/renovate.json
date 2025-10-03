@@ -3,7 +3,7 @@
   "extends": ["github>woodpecker-ci/renovate-config"],
   "packageRules": [
     {
-      "groupName": "woodecker server",
+      "groupName": "woodecker",
       "extends": ["schedule:weekly"],
       "matchPackageNames": ["/woodpeckerci/woodpecker-server/", "/woodpeckerci/woodpecker-agent/"]
     }

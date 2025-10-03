@@ -1,4 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>woodpecker-ci/renovate-config"]
+  "extends": ["github>woodpecker-ci/renovate-config"],
+  "packageRules": [
+    {
+      "groupName": "woodecker server",
+      "extends": ["schedule:weekly"],
+      "matchPackageNames": ["/woodpeckerci/woodpecker-server/", "/woodpeckerci/woodpecker-agent/"]
+    }
+  ]
 }

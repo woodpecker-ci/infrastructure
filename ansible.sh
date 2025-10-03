@@ -11,8 +11,11 @@ else
   echo "✅ Image '$IMAGE_NAME' already exists. Skipping build."
 fi
 
-P="$@"
-CMD="${P:=ansible-playbook playbooks/run.yaml}"
+# Use default command if no arguments provided, otherwise use provided arguments
+if [ $# -eq 0 ]; then
+  CMD=(ansible-playbook playbooks/run.yaml)
+else
+  CMD=("$@")
+fi
 
-# shellcheck disable=SC2086
-$RUN_ANSIBLE $CMD
+$RUN_ANSIBLE "${CMD[@]}"

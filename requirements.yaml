@@ -2,7 +2,7 @@
 
 collections:
   - name: community.docker
-    version: 4.7.0
+    version: 4.8.0
   - name: hetzner.hcloud
     version: 5.3.1
   - name: community.crypto

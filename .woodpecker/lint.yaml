@@ -19,5 +19,5 @@ steps:
       - ansible-lint
 
   - name: editor-config
-    image: docker.io/mstruebing/editorconfig-checker:v3.4.0
+    image: docker.io/mstruebing/editorconfig-checker:v3.4.1
     depends_on: []

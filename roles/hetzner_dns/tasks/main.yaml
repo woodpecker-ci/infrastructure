@@ -113,7 +113,7 @@
 
 - name: Compute unmanaged records
   ansible.builtin.set_fact:
-    __hetzner_dns_unmanaged: "{{ (__hetzner_dns_exist.hcloud_zone_rrset_info | json_query('[*].id') | list) | difference(__hetzner_dns_add.results | json_query('[*].hcloud_zone_rrset.id') | list) }}"
+    __hetzner_dns_unmanaged: "{{ (__hetzner_dns_exist.hcloud_zone_rrset_info | community.general.json_query('[*].id') | list) | difference(__hetzner_dns_add.results | community.general.json_query('[*].hcloud_zone_rrset.id') | list) }}"
   tags:
     - dns
 

@@ -12,7 +12,7 @@
     zone: woodpecker-ci.org
     name: '{{ item.name }}'
     type: '{{ item.type }}'
-    ttl: '{{ item.ttl | default(omit) }}'
+    ttl: '{{ item.ttl | default(hetzner_dns_ttl) }}'
     records: '{{ item.records | default(omit) }}'
   register: __hetzner_dns_add
   tags:
@@ -37,19 +37,16 @@
     # website
     - type: A
       name: '@'
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: 185.199.110.153
           comment: ''
     - type: AAAA
       name: '@'
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: 2606:50c0:8002::153
           comment: ''
     - type: CNAME
       name: www
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: woodpecker-ci.github.io.
           comment: ''
@@ -57,7 +54,6 @@
     # email
     - type: MX
       name: '@'
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: 1 fwd1.porkbun.com.
           comment: ''
@@ -67,43 +63,36 @@
     # ci-server
     - type: A
       name: server01
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: 168.119.99.122
           comment: ''
     - type: AAAA
       name: server01
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: 2a01:4f8:1c17:ef38::1
           comment: ''
     - type: CNAME
       name: ci
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: server01.woodpecker-ci.org.
           comment: ''
     - type: CNAME
       name: grpc-ci
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: server01.woodpecker-ci.org.
           comment: ''
     - type: CNAME
       name: translate
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: server01.woodpecker-ci.org.
           comment: ''
     - type: CNAME
       name: go
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: server01.woodpecker-ci.org.
           comment: ''
     - type: CNAME
       name: vault
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: server01.woodpecker-ci.org.
           comment: ''
@@ -111,7 +100,6 @@
     # github pages
     - type: TXT
       name: _github-pages-challenge-woodpecker-ci
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: '"a355dda5f92c2458a423b2f72f998d"'
           comment: ''
@@ -119,7 +107,6 @@
     # bluesky
     - type: TXT
       name: _atproto
-      ttl: '{{ hetzner_dns_ttl }}'
       records:
         - value: '"did=did:plc:fmsa5dxhhsursfhg2o6sil5k"'
           comment: ''

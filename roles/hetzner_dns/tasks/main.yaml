@@ -12,7 +12,7 @@
     zone: woodpecker-ci.org
     name: '{{ item.name }}'
     type: '{{ item.type }}'
-    # ttl: '{{ item.ttl | default(omit) }}'
+    ttl: '{{ item.ttl | default(omit) }}'
     records: '{{ item.records | default(omit) }}'
   register: __hetzner_dns_add
   tags:

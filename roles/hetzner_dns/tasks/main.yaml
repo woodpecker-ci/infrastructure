@@ -1,92 +1,140 @@
-- name: Setup dns
-  community.dns.hetzner_dns_record_sets:
-    hetzner_token: '{{ hetzner_dns_token }}'
-    zone_name: woodpecker-ci.org
-    prune: true # remove all records not defined in record_sets
-    record_sets:
-      - prefix: ''
-        type: NS
-        ignore: true
-
-      - prefix: ''
-        type: SOA
-        ignore: true
-
-      # website
-      - type: A
-        prefix: ''
-        ttl: &ttl 300
-        value:
-          - 185.199.110.153
-      - type: AAAA
-        prefix: ''
-        ttl: *ttl
-        value:
-          - 2606:50c0:8002::153
-      - type: CNAME
-        prefix: www
-        ttl: *ttl
-        value:
-          - woodpecker-ci.github.io.
-
-      # email
-      - type: MX
-        prefix: ''
-        ttl: *ttl
-        value:
-          - 1 fwd1.porkbun.com.
-          - 1 fwd2.porkbun.com.
-
-      # ci-server
-      - type: A
-        prefix: server01
-        ttl: *ttl
-        value:
-          - 168.119.99.122
-      - type: AAAA
-        prefix: server01
-        ttl: *ttl
-        value:
-          - 2a01:4f8:1c17:ef38::1
-      - type: CNAME
-        prefix: ci
-        ttl: *ttl
-        value:
-          - server01.woodpecker-ci.org.
-      - type: CNAME
-        prefix: grpc-ci
-        ttl: *ttl
-        value:
-          - server01.woodpecker-ci.org.
-      - type: CNAME
-        prefix: translate
-        ttl: *ttl
-        value:
-          - server01.woodpecker-ci.org.
-      - type: CNAME
-        prefix: go
-        ttl: *ttl
-        value:
-          - server01.woodpecker-ci.org.
-      - type: CNAME
-        prefix: vault
-        ttl: *ttl
-        value:
-          - server01.woodpecker-ci.org.
-
-      # github pages
-      - type: TXT
-        prefix: _github-pages-challenge-woodpecker-ci
-        ttl: *ttl
-        value:
-          - 'a355dda5f92c2458a423b2f72f998d'
-
-      # bluesky
-      - type: TXT
-        prefix: _atproto
-        ttl: *ttl
-        value:
-          - 'did=did:plc:fmsa5dxhhsursfhg2o6sil5k'
-
+- name: Gather Zone RRSet infos
+  hetzner.hcloud.zone_rrset_info:
+    api_token: '{{ vault_hcloud_token }}'
+    zone: woodpecker-ci.org
+  register: __hetzner_dns_exist
   tags:
     - dns
+
+- name: Create records
+  hetzner.hcloud.zone_rrset:
+    api_token: '{{ vault_hcloud_token }}'
+    zone: woodpecker-ci.org
+    name: '{{ item.name }}'
+    type: '{{ item.type }}'
+    # ttl: '{{ item.ttl | default(omit) }}'
+    records: '{{ item.records | default(omit) }}'
+  register: __hetzner_dns_add
+  tags:
+    - dns
+  loop:
+    - type: NS
+      name: '@'
+      records:
+        - value: 'helium.ns.hetzner.de.'
+          comment: ''
+        - value: 'hydrogen.ns.hetzner.com.'
+          comment: ''
+        - value: 'oxygen.ns.hetzner.com.'
+          comment: ''
+
+    - type: SOA
+      name: '@'
+      records:
+        - value: 'hydrogen.ns.hetzner.com. dns.hetzner.com. 2025101000 86400 10800 3600000 3600'
+          comment: ''
+
+    # website
+    - type: A
+      name: '@'
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: 185.199.110.153
+          comment: ''
+    - type: AAAA
+      name: '@'
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: 2606:50c0:8002::153
+          comment: ''
+    - type: CNAME
+      name: www
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: woodpecker-ci.github.io.
+          comment: ''
+
+    # email
+    - type: MX
+      name: '@'
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: 1 fwd1.porkbun.com.
+          comment: ''
+        - value: 1 fwd2.porkbun.com.
+          comment: ''
+
+    # ci-server
+    - type: A
+      name: server01
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: 168.119.99.122
+          comment: ''
+    - type: AAAA
+      name: server01
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: 2a01:4f8:1c17:ef38::1
+          comment: ''
+    - type: CNAME
+      name: ci
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: server01.woodpecker-ci.org.
+          comment: ''
+    - type: CNAME
+      name: grpc-ci
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: server01.woodpecker-ci.org.
+          comment: ''
+    - type: CNAME
+      name: translate
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: server01.woodpecker-ci.org.
+          comment: ''
+    - type: CNAME
+      name: go
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: server01.woodpecker-ci.org.
+          comment: ''
+    - type: CNAME
+      name: vault
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: server01.woodpecker-ci.org.
+          comment: ''
+
+    # github pages
+    - type: TXT
+      name: _github-pages-challenge-woodpecker-ci
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: '"a355dda5f92c2458a423b2f72f998d"'
+          comment: ''
+
+    # bluesky
+    - type: TXT
+      name: _atproto
+      ttl: '{{ hetzner_dns_ttl }}'
+      records:
+        - value: '"did=did:plc:fmsa5dxhhsursfhg2o6sil5k"'
+          comment: ''
+
+- name: Compute unmanaged records
+  ansible.builtin.set_fact:
+    __hetzner_dns_unmanaged: "{{ (__hetzner_dns_exist.hcloud_zone_rrset_info | json_query('[*].id') | list) | difference(__hetzner_dns_add.results | json_query('[*].hcloud_zone_rrset.id') | list) }}"
+  tags:
+    - dns
+
+- name: Delete unmanaged records
+  hetzner.hcloud.zone_rrset_info:
+    api_token: '{{ vault_hcloud_token }}'
+    zone: woodpecker-ci.org
+    id: '{{ item }}'
+  tags:
+    - dns
+  loop: '{{ __hetzner_dns_unmanaged }}'

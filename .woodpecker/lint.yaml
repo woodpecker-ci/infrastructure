@@ -15,6 +15,7 @@ steps:
     environment:
       ANSIBLE_CONFIG: ansible.cfg
     commands:
+      - dnf install -yq python3-jmespath
       - ansible-galaxy install -r requirements.yaml
       - ansible-lint
 

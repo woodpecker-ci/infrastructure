@@ -19,7 +19,7 @@
     name: weblate_cache
     hostname: weblate-cache
     # renovate: datasource=docker depName=docker.io/valkey/valkey
-    image: docker.io/valkey/valkey:8-alpine
+    image: docker.io/valkey/valkey:9-alpine
     restart_policy: 'always'
     command: [valkey-server, --save, '60', '1']
     volumes:

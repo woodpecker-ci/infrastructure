@@ -10,7 +10,7 @@ steps:
       - sed -i  's/vault\.yaml/vault\.example\.yaml/g' playbooks/run.yaml
 
   - name: ansible-lint
-    image: ghcr.io/ansible/community-ansible-dev-tools:v25.8.3
+    image: ghcr.io/ansible/community-ansible-dev-tools:v25.9.0
     depends_on: no-vault
     environment:
       ANSIBLE_CONFIG: ansible.cfg

@@ -2,7 +2,7 @@
 
 collections:
   - name: community.general
-    version: 12.0.0
+    version: 12.0.1
   - name: community.docker
     version: 5.0.1
   - name: hetzner.hcloud

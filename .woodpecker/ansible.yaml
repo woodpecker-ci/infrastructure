@@ -6,7 +6,7 @@ when:
 
 steps:
   - name: galaxy-install
-    image: docker.io/alpine:3.22
+    image: docker.io/alpine:3.23
     environment:
       ANSIBLE_CONFIG: ansible.cfg
     commands:

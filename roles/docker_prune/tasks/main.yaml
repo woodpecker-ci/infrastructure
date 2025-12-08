@@ -1,0 +1,18 @@
+- name: Docker prune everything
+  community.docker.docker_prune:
+    containers: true
+    images: true
+    networks: true
+    volumes: true
+    builder_cache: true
+  tags:
+    - docker_prune
+
+- name: Ensure a job that prunes the system of unused Docker data
+  ansible.builtin.cron:
+    name: 'docker system prune'
+    minute: '5'
+    hour: '4'
+    job: 'docker system prune -fa'
+  tags:
+    - docker_prune

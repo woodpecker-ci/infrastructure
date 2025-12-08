@@ -13,6 +13,6 @@
     name: 'docker system prune'
     minute: '5'
     hour: '4'
-    job: 'docker system prune -fa'
+    job: 'docker system prune -fa --filter "until=24h"'
   tags:
     - docker_prune

@@ -1,6 +1,6 @@
 - name: Include tasks on Ubuntu
   ansible.builtin.include_tasks: ubuntu.yaml
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts['distribution'] == "Ubuntu"
   tags:
     - docker
 

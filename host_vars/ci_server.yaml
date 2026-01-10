@@ -38,7 +38,7 @@ woodpecker_autoscaler_autoscaler_agent_version: '{{ woodpecker_agent_version }}'
 
 ### Vaultwarden
 # renovate: datasource=docker depName=vaultwarden/server versioning=docker
-vaultwarden_version: 1.35.1-alpine
+vaultwarden_version: 1.35.2-alpine
 vaultwarden_smtp_host: '{{ vault_vaultwarden_smtp_host }}'
 vaultwarden_smtp_port: 587
 vaultwarden_smtp_security: starttls

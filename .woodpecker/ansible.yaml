@@ -14,7 +14,7 @@ steps:
       - ansible-galaxy install -r requirements.yaml
 
   - name: ansible-check
-    image: docker.io/woodpeckerci/plugin-ansible:1.0.7
+    image: docker.io/woodpeckerci/plugin-ansible:1.0.8
     settings:
       playbook: playbooks/run.yaml
       diff: true
@@ -34,7 +34,7 @@ steps:
         branch: ${CI_REPO_DEFAULT_BRANCH}
 
   - name: ansible-apply
-    image: docker.io/woodpeckerci/plugin-ansible:1.0.7
+    image: docker.io/woodpeckerci/plugin-ansible:1.0.8
     settings:
       playbook: playbooks/run.yaml
       diff: true

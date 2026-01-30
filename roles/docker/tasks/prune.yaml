@@ -41,6 +41,12 @@
     - docker
     - docker_prune
 
+- name: Flush handlers to reload systemd
+  ansible.builtin.meta: flush_handlers
+  tags:
+    - docker
+    - docker_prune
+
 - name: Enable and start Docker prune timer
   ansible.builtin.systemd_service:
     name: docker-prune.timer

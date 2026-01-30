@@ -10,7 +10,6 @@
   roles:
     - role: common
     - role: docker
-    - role: docker_prune
     - role: caddy
     - role: woodpecker_server
     # - role: woodpecker_agent # not in use as the autoscaler role provisions agents automatically

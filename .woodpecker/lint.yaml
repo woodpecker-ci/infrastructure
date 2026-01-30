@@ -19,6 +19,6 @@ steps:
       - ansible-galaxy install -r requirements.yaml
       - ansible-lint
 
-  - name: editor-config
-    image: docker.io/mstruebing/editorconfig-checker:v3.6.0
+  - name: lint-editorconfig
+    image: docker.io/woodpeckerci/plugin-editorconfig-checker:0.3.3
     depends_on: []

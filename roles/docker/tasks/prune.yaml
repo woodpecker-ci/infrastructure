@@ -52,6 +52,7 @@
     name: docker-prune.timer
     enabled: true
     state: started
+  check_mode: false
   tags:
     - docker
     - docker_prune

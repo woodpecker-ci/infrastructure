@@ -52,7 +52,7 @@
     name: docker-prune.timer
     enabled: true
     state: started
-  check_mode: false
+  when: not ansible_check_mode
   tags:
     - docker
     - docker_prune

@@ -46,7 +46,6 @@
     name: docker-prune.timer
     enabled: true
     state: started
-    daemon_reload: true
   tags:
     - docker
     - docker_prune

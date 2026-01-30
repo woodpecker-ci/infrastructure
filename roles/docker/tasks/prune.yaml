@@ -1,5 +1,3 @@
-
-# Docker pruning with systemd timer
 - name: Create systemd service for Docker prune
   ansible.builtin.copy:
     content: |

@@ -1,0 +1,68 @@
+- name: Create systemd service for Docker prune
+  ansible.builtin.copy:
+    content: |
+      [Unit]
+      Description=Docker system prune
+      After=docker.service
+      Requires=docker.service
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/bin/docker system prune -fa --volumes
+    dest: /etc/systemd/system/docker-prune.service
+    mode: '0644'
+    owner: root
+    group: root
+  notify: Reload systemd
+  tags:
+    - docker
+    - docker_prune
+
+- name: Create systemd timer for Docker prune
+  ansible.builtin.copy:
+    content: |
+      [Unit]
+      Description=Daily Docker system prune
+      Requires=docker-prune.service
+
+      [Timer]
+      OnCalendar=daily
+      RandomizedDelaySec=2h
+      Persistent=true
+
+      [Install]
+      WantedBy=timers.target
+    dest: /etc/systemd/system/docker-prune.timer
+    mode: '0644'
+    owner: root
+    group: root
+  notify: Reload systemd
+  tags:
+    - docker
+    - docker_prune
+
+- name: Flush handlers to reload systemd
+  ansible.builtin.meta: flush_handlers
+  tags:
+    - docker
+    - docker_prune
+
+- name: Enable and start Docker prune timer
+  ansible.builtin.systemd_service:
+    name: docker-prune.timer
+    enabled: true
+    state: started
+  when: not ansible_check_mode
+  tags:
+    - docker
+    - docker_prune
+
+- name: Docker prune everything now
+  community.docker.docker_prune:
+    containers: true
+    images: true
+    networks: true
+    volumes: true
+    builder_cache: true
+  tags:
+    - docker_prune

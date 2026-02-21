@@ -3,6 +3,7 @@
     path: /etc/ssh/sshd_config
     regexp: '^#PasswordAuthentication yes'
     line: 'PasswordAuthentication no'
+  notify: Restart SSH
   when: ansible_facts['distribution'] in ["Debian", "Ubuntu"]
   tags:
     - common

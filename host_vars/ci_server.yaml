@@ -47,7 +47,7 @@ vaultwarden_smtp_password: '{{ vault_vaultwarden_smtp_password }}'
 
 ### Weblate
 # renovate: datasource=docker depName=weblate/weblate versioning=docker
-weblate_version: 5.15.2.5
+weblate_version: 5.16.0.0
 weblate_email_host: '{{ vault_weblate_email_host }}'
 weblate_email_use_ssl: 0
 weblate_email_use_tls: 1

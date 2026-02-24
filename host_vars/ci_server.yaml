@@ -1,6 +1,6 @@
 ### Caddy
 # renovate: datasource=docker depName=library/caddy versioning=docker
-caddy_version: 2.10.2-alpine
+caddy_version: 2.11.1-alpine
 
 ### Server
 # renovate: datasource=docker depName=woodpeckerci/woodpecker-server versioning=docker

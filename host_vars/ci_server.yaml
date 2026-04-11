@@ -21,7 +21,7 @@ woodpecker_agent_max_workflows: 2
 
 ### Autoscaler
 # renovate: datasource=docker depName=woodpeckerci/autoscaler versioning=docker
-woodpecker_autoscaler_version: next@sha256:6fb2ef11ffbdfad148671f2c374787958087872bdeded6aff84352593cdc8e50
+woodpecker_autoscaler_version: next@sha256:abc04f3b2025196bad4ff950b3683619f632cab706d44a6bbf3bf4c832e95145
 woodpecker_autoscaler_server_url: http://woodpecker-server:8000
 woodpecker_autoscaler_server_token: '{{ vault_woodpecker_api_token }}'
 woodpecker_autoscaler_min_agents: 0

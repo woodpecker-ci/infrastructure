@@ -17,7 +17,7 @@
     src: Caddyfile
     dest: /opt/caddy/Caddyfile
     mode: '0o644'
-  register: caddy_copy_conf
+  notify: Restart Caddy
   tags:
     - caddy
 
@@ -39,7 +39,6 @@
     hostname: caddy
     image: docker.io/caddy:{{ caddy_version }}
     restart_policy: 'always'
-    restart: '{{ caddy_copy_conf.changed }}'
     ports:
       - 80:80
       - 443:443

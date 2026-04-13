@@ -1,0 +1,4 @@
+- name: Restart Caddy
+  community.docker.docker_container:
+    name: caddy
+    restart: true

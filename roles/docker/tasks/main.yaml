@@ -11,3 +11,8 @@
     state: started
   tags:
     - docker
+
+- name: Setup Docker Prune
+  ansible.builtin.include_tasks: prune.yaml
+  tags:
+    - docker

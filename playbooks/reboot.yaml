@@ -1,0 +1,6 @@
+- name: Reboot server
+  hosts: ci_server
+  tasks:
+    - name: Reboot
+      ansible.builtin.reboot:
+        reboot_timeout: 300

@@ -4,7 +4,7 @@ caddy_version: 2.11.2-alpine
 
 ### Server
 # renovate: datasource=docker depName=woodpeckerci/woodpecker-server versioning=docker
-woodpecker_server_version: next@sha256:dbeb0ff6c02a4cfc990cca6919a9bb8d53f3d0bc662892b88dc63505423790b6
+woodpecker_server_version: next@sha256:4be591d7d96d1d7bcca4ca21b1167831fbc1db9f4d91cc9b92efb301ac6cba99
 woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: anbraten,qwerty287
@@ -14,14 +14,14 @@ woodpecker_server_github_secret: '{{ vault_woodpecker_github_secret }}'
 
 ### Agent
 # renovate: datasource=docker depName=woodpeckerci/woodpecker-agent versioning=docker
-woodpecker_agent_version: next@sha256:eb1be2b623de0fcf5d14d34b06ceb8300c1b58e9550560688ef3047dddf4fd35
+woodpecker_agent_version: next@sha256:3dde4b17b500d58f0fff2aeb7e35cadcda5e42a99f936bf8b01757bc29fbeaf0
 woodpecker_agent_server: woodpecker-server:9000
 woodpecker_agent_agent_secret: '{{ vault_woodpecker_agent1_secret }}'
 woodpecker_agent_max_workflows: 2
 
 ### Autoscaler
 # renovate: datasource=docker depName=woodpeckerci/autoscaler versioning=docker
-woodpecker_autoscaler_version: next@sha256:abc04f3b2025196bad4ff950b3683619f632cab706d44a6bbf3bf4c832e95145
+woodpecker_autoscaler_version: next@sha256:5004dfbb14ed4ffe00b08361e8782824a38096fa8064938dbc62de72ee804f0f
 woodpecker_autoscaler_server_url: http://woodpecker-server:8000
 woodpecker_autoscaler_server_token: '{{ vault_woodpecker_api_token }}'
 woodpecker_autoscaler_min_agents: 0
@@ -38,7 +38,7 @@ woodpecker_autoscaler_autoscaler_agent_version: '{{ woodpecker_agent_version }}'
 
 ### Vaultwarden
 # renovate: datasource=docker depName=vaultwarden/server versioning=docker
-vaultwarden_version: 1.35.7-alpine
+vaultwarden_version: 1.36.0-alpine
 vaultwarden_smtp_host: '{{ vault_vaultwarden_smtp_host }}'
 vaultwarden_smtp_port: 587
 vaultwarden_smtp_security: starttls
@@ -47,7 +47,7 @@ vaultwarden_smtp_password: '{{ vault_vaultwarden_smtp_password }}'
 
 ### Weblate
 # renovate: datasource=docker depName=weblate/weblate versioning=docker
-weblate_version: 5.17.0.0
+weblate_version: 5.17.1.0
 weblate_email_host: '{{ vault_weblate_email_host }}'
 weblate_email_use_ssl: 0
 weblate_email_use_tls: 1

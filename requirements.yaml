@@ -2,11 +2,11 @@
 
 collections:
   - name: community.general
-    version: 12.5.0
+    version: 12.6.0
   - name: community.docker
     version: 5.2.0
   - name: hetzner.hcloud
-    version: 6.8.0
+    version: 6.9.0
   - name: community.crypto
     version: 3.2.0
   - name: community.dns

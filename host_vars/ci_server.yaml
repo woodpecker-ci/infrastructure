@@ -4,7 +4,7 @@ caddy_version: 2.11.3-alpine
 
 ### Server
 # renovate: datasource=docker depName=woodpeckerci/woodpecker-server versioning=docker
-woodpecker_server_version: next@sha256:1231966f482695e1ea5cb34f21a04b60e5884b5ce00e4b9af116b64292909e61
+woodpecker_server_version: next@sha256:00442f6c0ea1bba735c0a713bbb7b2465e461cf335ff3a9fd862152ea882c799
 woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: anbraten,qwerty287
@@ -14,7 +14,7 @@ woodpecker_server_github_secret: '{{ vault_woodpecker_github_secret }}'
 
 ### Agent
 # renovate: datasource=docker depName=woodpeckerci/woodpecker-agent versioning=docker
-woodpecker_agent_version: next@sha256:fe06bca5235d29f43877523fd2df11289d9eeb999f95a660534a999cc142dc4b
+woodpecker_agent_version: next@sha256:818bb9d5c70170e90e6c15dde78bc64dae2eb822544d1db2077c07370fe7aca4
 woodpecker_agent_server: woodpecker-server:9000
 woodpecker_agent_agent_secret: '{{ vault_woodpecker_agent1_secret }}'
 woodpecker_agent_max_workflows: 2

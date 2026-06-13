@@ -4,7 +4,7 @@ when:
 
 steps:
   - name: ansible-reboot
-    image: docker.io/woodpeckerci/plugin-ansible:1.0.8
+    image: docker.io/woodpeckerci/plugin-ansible:1.0.9
     settings:
       playbook: playbooks/reboot.yaml
       inventory: inventory.yaml

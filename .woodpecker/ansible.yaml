@@ -6,12 +6,12 @@ when:
 
 steps:
   - name: galaxy-install
-    image: docker.io/alpine:3.23
+    image: docker.io/alpine:3.24
     environment:
       ANSIBLE_CONFIG: ansible.cfg
     commands:
       - apk add -q --no-cache ansible git
-      - ansible-galaxy install -r requirements.yaml
+      - ansible-galaxy install -f -r requirements.yaml
 
   - name: ansible-check
     image: docker.io/woodpeckerci/plugin-ansible:1.0.9

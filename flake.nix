@@ -14,10 +14,10 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            # generic
             ansible
             ansible-lint
             openssh
+            python3Packages.dateutils
           ];
           EDITOR = "${pkgs.nano}/bin/nano";
           ANSIBLE_PRIVATE_KEY_FILE = "keys/ci_woodpecker-ci_org.id_ed25519";

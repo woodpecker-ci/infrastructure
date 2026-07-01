@@ -39,6 +39,7 @@
     hostname: caddy
     image: docker.io/caddy:{{ caddy_version }}
     restart_policy: 'always'
+    memory: '96m'
     ports:
       - 80:80
       - 443:443

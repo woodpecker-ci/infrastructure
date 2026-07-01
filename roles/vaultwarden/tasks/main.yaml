@@ -10,6 +10,7 @@
     hostname: vaultwarden
     image: docker.io/vaultwarden/server:{{ vaultwarden_version }}
     restart_policy: 'always'
+    memory: '96m'
     env:
       DOMAIN: 'https://vault.woodpecker-ci.org'
       SENDS_ALLOWED: 'false'

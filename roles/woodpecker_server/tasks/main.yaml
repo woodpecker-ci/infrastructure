@@ -14,6 +14,7 @@
     pull: 'always'
     image: docker.io/woodpeckerci/woodpecker-server:{{ woodpecker_server_version }}
     restart_policy: 'always'
+    memory: '192m'
     volumes:
       - /opt/woodpecker:/var/lib/woodpecker/
     networks:

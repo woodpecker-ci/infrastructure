@@ -21,6 +21,7 @@
     # renovate: datasource=docker depName=docker.io/valkey/valkey
     image: docker.io/valkey/valkey:9-alpine
     restart_policy: 'always'
+    memory: '96m'
     command: [valkey-server, --save, '60', '1']
     volumes:
       - weblate_redis-data:/data
@@ -38,6 +39,7 @@
     volumes:
       - weblate_postgres-data:/var/lib/postgresql/data
     restart_policy: 'always'
+    memory: '384m'
     networks:
       - name: weblate
     env:
@@ -55,6 +57,7 @@
     hostname: weblate
     image: docker.io/weblate/weblate:{{ weblate_version }}
     restart_policy: 'always'
+    memory: '2500m'
     volumes:
       - weblate_weblate-data:/app/data
     tmpfs:

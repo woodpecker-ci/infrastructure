@@ -5,6 +5,7 @@
     pull: 'always'
     image: docker.io/woodpeckerci/autoscaler:{{ woodpecker_autoscaler_version }}
     restart_policy: 'always'
+    memory: '96m'
     networks:
       - name: web
     env:

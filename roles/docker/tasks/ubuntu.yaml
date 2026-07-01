@@ -7,34 +7,17 @@
   tags:
     - docker
 
-- name: Add apt key for Docker repository
-  ansible.builtin.apt_key:
-    id: 0EBFCD88
-    url: https://download.docker.com/linux/ubuntu/gpg
-  tags:
-    - docker
-
-- name: Add Docker repository (amd64)
-  ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
+- name: Add Docker repository
+  ansible.builtin.deb822_repository:
+    name: docker
+    types: [deb]
+    uris: https://download.docker.com/linux/ubuntu
+    suites: "{{ ansible_facts['distribution_release'] }}"
+    components: [stable]
+    architectures: "{{ docker_apt_arch[ansible_facts['architecture']] }}"
+    signed_by: https://download.docker.com/linux/ubuntu/gpg
     state: present
-  when: ansible_facts['architecture'] == "x86_64"
-  tags:
-    - docker
-
-- name: Add Docker repository (armhf)
-  ansible.builtin.apt_repository:
-    repo: "deb [arch=armhf signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
-    state: present
-  when: ansible_facts['architecture'] == "armv7l"
-  tags:
-    - docker
-
-- name: Add Docker repository (arm64)
-  ansible.builtin.apt_repository:
-    repo: "deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
-    state: present
-  when: ansible_facts['architecture'] == "aarch64"
+    enabled: true
   tags:
     - docker
 

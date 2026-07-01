@@ -1,0 +1,5 @@
+# Map host architecture (ansible_facts.architecture) to Docker apt arch.
+docker_apt_arch:
+  x86_64: amd64
+  armv7l: armhf
+  aarch64: arm64

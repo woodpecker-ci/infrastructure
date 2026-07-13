@@ -24,6 +24,7 @@
       WOODPECKER_HOST: '{{ woodpecker_server_host | string }}'
       WOODPECKER_ORGS: '{{ woodpecker_server_orgs | string }}'
       WOODPECKER_ADMIN: '{{ woodpecker_server_admins | string }}'
+      WOODPECKER_GRPC_SECRET: '{{ woodpecker_server_grpc_secret | string }}'
       WOODPECKER_GITHUB: 'true'
       WOODPECKER_GITHUB_CLIENT: '{{ woodpecker_server_github_client | string }}'
       WOODPECKER_GITHUB_SECRET: '{{ woodpecker_server_github_secret | string }}'

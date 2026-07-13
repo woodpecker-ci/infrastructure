@@ -11,6 +11,7 @@ woodpecker_server_admins: anbraten,qwerty287
 woodpecker_server_agent_secret: '{{ vault_woodpecker_agent_secret }}'
 woodpecker_server_github_client: '{{ vault_woodpecker_github_client }}'
 woodpecker_server_github_secret: '{{ vault_woodpecker_github_secret }}'
+woodpecker_server_grpc_secret: '{{ vault_woodpecker_grpc_secret }}'
 
 ### Agent
 # renovate: datasource=docker depName=woodpeckerci/woodpecker-agent versioning=docker

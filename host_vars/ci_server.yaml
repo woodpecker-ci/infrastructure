@@ -4,7 +4,7 @@ caddy_version: 2.11.4-alpine
 
 ### Server
 # renovate: datasource=docker depName=woodpeckerci/woodpecker-server versioning=docker
-woodpecker_server_version: next@sha256:a40844c81b694dd5fdeefd54e77610841a83d8cdd40a6414959fa12dca6e53bd
+woodpecker_server_version: next@sha256:9a7fbf4e5db501b44b710b8f3947d1a4b451372b44e2f88b474a1ee9001e5c41
 woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: anbraten,qwerty287
@@ -15,7 +15,7 @@ woodpecker_server_grpc_secret: '{{ vault_woodpecker_grpc_secret }}'
 
 ### Agent
 # renovate: datasource=docker depName=woodpeckerci/woodpecker-agent versioning=docker
-woodpecker_agent_version: next@sha256:cd6ff2cde5e9a3113bfc724f147ec5b963da5f5b4ce0c443b0516eb32a14b072
+woodpecker_agent_version: next@sha256:6230dbafd4f4015b18d68227beb1b177d7cae55f6fb307d9a5ba13e6965708ce
 woodpecker_agent_server: woodpecker-server:9000
 woodpecker_agent_agent_secret: '{{ vault_woodpecker_agent1_secret }}'
 woodpecker_agent_max_workflows: 2
@@ -39,7 +39,7 @@ woodpecker_autoscaler_autoscaler_agent_version: '{{ woodpecker_agent_version }}'
 
 ### Vaultwarden
 # renovate: datasource=docker depName=vaultwarden/server versioning=docker
-vaultwarden_version: 1.37.1-alpine
+vaultwarden_version: 1.37.2-alpine
 vaultwarden_smtp_host: '{{ vault_vaultwarden_smtp_host }}'
 vaultwarden_smtp_port: 587
 vaultwarden_smtp_security: starttls

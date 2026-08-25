@@ -13,7 +13,7 @@ repos:
     rev: v0.49.1
     hooks:
       - id: markdownlint
-        language_version: 24.15.0
+        language_version: 24.19.0
   - repo: https://github.com/hadolint/hadolint
     rev: v2.15.1
     hooks:

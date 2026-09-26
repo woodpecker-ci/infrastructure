@@ -20,5 +20,5 @@ steps:
       - ansible-lint
 
   - name: lint-editorconfig
-    image: docker.io/woodpeckerci/plugin-editorconfig-checker:0.3.3
+    image: docker.io/woodpeckerci/plugin-editorconfig-checker:0.3.4
     depends_on: []

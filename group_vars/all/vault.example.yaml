@@ -10,3 +10,6 @@ vault_weblate_postgres_password: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 vault_weblate_admin_email: mail@example.com
 vault_woodpecker_api_token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 vault_woodpecker_grpc_secret: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+vault_vaultwarden_smtp_host: mail.example.com
+vault_vaultwarden_smtp_username: mail@example.com
+vault_vaultwarden_smtp_password: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

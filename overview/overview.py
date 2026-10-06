@@ -86,4 +86,4 @@ with Diagram(
     api >> Edge(style="dashed", **CI) >> agent
     agent >> Edge(label="gRPC via Caddy", **CI) >> server
     agent >> Edge(label="pull, push", **CI) >> registries
-    weblate >> Edge(label="translation PRs") >> github
+    weblate >> Edge(label="translations") >> github

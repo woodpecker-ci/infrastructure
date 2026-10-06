@@ -28,12 +28,6 @@
         - value: 'oxygen.ns.hetzner.com.'
           comment: ''
 
-    - type: SOA
-      name: '@'
-      records:
-        - value: 'hydrogen.ns.hetzner.com. dns.hetzner.com. 2025101000 86400 10800 3600000 3600'
-          comment: ''
-
     # website
     - type: A
       name: '@'
@@ -111,9 +105,16 @@
         - value: '"did=did:plc:fmsa5dxhhsursfhg2o6sil5k"'
           comment: ''
 
+# The SOA record is owned by Hetzner (it bumps the serial on every change), so it is neither managed nor deleted here.
 - name: Compute unmanaged records
   ansible.builtin.set_fact:
-    __hetzner_dns_unmanaged: "{{ (__hetzner_dns_exist.hcloud_zone_rrset_info | community.general.json_query('[*].id') | list) | difference(__hetzner_dns_add.results | community.general.json_query('[*].hcloud_zone_rrset.id') | list) }}"
+    __hetzner_dns_unmanaged: >-
+      {{
+        __hetzner_dns_exist.hcloud_zone_rrset_info
+        | rejectattr('type', 'eq', 'SOA')
+        | rejectattr('id', 'in', __hetzner_dns_add.results | map(attribute='hcloud_zone_rrset.id') | list)
+        | list
+      }}
   tags:
     - dns
 
@@ -121,7 +122,10 @@
   hetzner.hcloud.zone_rrset_info:
     api_token: '{{ vault_hcloud_token }}'
     zone: woodpecker-ci.org
-    id: '{{ item }}'
+    name: '{{ item.name }}'
+    type: '{{ item.type }}'
   tags:
     - dns
   loop: '{{ __hetzner_dns_unmanaged }}'
+  loop_control:
+    label: '{{ item.id }}'

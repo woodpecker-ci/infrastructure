@@ -119,11 +119,12 @@
     - dns
 
 - name: Delete unmanaged records
-  hetzner.hcloud.zone_rrset_info:
+  hetzner.hcloud.zone_rrset:
     api_token: '{{ vault_hcloud_token }}'
     zone: woodpecker-ci.org
     name: '{{ item.name }}'
     type: '{{ item.type }}'
+    state: absent
   tags:
     - dns
   loop: '{{ __hetzner_dns_unmanaged }}'

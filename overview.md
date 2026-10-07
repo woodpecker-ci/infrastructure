@@ -8,7 +8,7 @@ Everything the Woodpecker CI project runs and has to maintain. The Ansible code 
 
 ![Overview of the Woodpecker CI infrastructure](overview/overview.png)
 
-Generated from [`overview/overview.py`](overview/overview.py). Do not edit the image, change the script and run `python3 overview/overview.py` (needs Graphviz and `pip install diagrams`).
+Generated from [`overview/overview.py`](overview/overview.py). Do not edit the image, change the script and run `python3 overview/overview.py` (needs Graphviz, `rsvg-convert` and `pip install diagrams`). The icons are not in this repo, the script downloads them from the official sources pinned in it.
 
 In short:
 

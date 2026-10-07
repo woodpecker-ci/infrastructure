@@ -4,3 +4,6 @@ ansible_collections/
 .ansible/
 .vscode/
 node_modules/
+
+# downloaded by overview/overview.py
+overview/icons/

@@ -1,5 +1,11 @@
 # Woodpecker-CI Infrastructure
 
+Ansible code for the servers and DNS of the Woodpecker-CI project.
+
+## Overview
+
+What runs where, how a pipeline gets its agent and how changes are deployed is explained with diagrams in [overview.md](overview.md).
+
 ## Remote apply
 
 Is done through Woodpecker-CI itself using the [woodpecker ansible plugin](https://codeberg.org/woodpecker-plugins/ansible).

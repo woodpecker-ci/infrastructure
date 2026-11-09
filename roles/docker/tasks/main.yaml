@@ -4,6 +4,35 @@
   tags:
     - docker
 
+- name: Create Docker configuration directory
+  ansible.builtin.file:
+    path: /etc/docker
+    state: directory
+    owner: root
+    group: root
+    mode: '0o755'
+  tags:
+    - docker
+
+- name: Configure Docker logging
+  ansible.builtin.copy:
+    content: |
+      {
+        "log-driver": "journald"
+      }
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: '0o644'
+  notify: Restart Docker
+  tags:
+    - docker
+
+- name: Apply Docker configuration before managing containers
+  ansible.builtin.meta: flush_handlers
+  tags:
+    - docker
+
 - name: Start Docker
   ansible.builtin.service:
     name: docker

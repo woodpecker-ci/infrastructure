@@ -8,6 +8,30 @@
   tags:
     - common
 
+- name: Create journald configuration directory
+  ansible.builtin.file:
+    path: /etc/systemd/journald.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0o755'
+  tags:
+    - common
+
+- name: Configure journal retention limits
+  ansible.builtin.copy:
+    content: |
+      [Journal]
+      SystemMaxUse=1G
+      RuntimeMaxUse=128M
+    dest: /etc/systemd/journald.conf.d/60-retention.conf
+    owner: root
+    group: root
+    mode: '0o644'
+  notify: Restart journald
+  tags:
+    - common
+
 - name: Update packages with apt
   ansible.builtin.apt:
     upgrade: dist

@@ -1,0 +1,8 @@
+[sshd]
+enabled = true
+backend = systemd
+banaction = iptables-multiport
+port = ssh
+maxretry = 5
+findtime = 10m
+bantime = 1h

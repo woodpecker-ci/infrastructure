@@ -1,0 +1,23 @@
+- name: Install fail2ban
+  ansible.builtin.apt:
+    name:
+      - fail2ban
+      - iptables
+      - python3-systemd
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Configure SSH jail
+  ansible.builtin.copy:
+    src: sshd.local
+    dest: /etc/fail2ban/jail.d/sshd.local
+    owner: root
+    group: root
+    mode: '0o644'
+  notify: Restart fail2ban
+
+- name: Start fail2ban
+  ansible.builtin.systemd_service:
+    name: fail2ban
+    enabled: true
+    state: started

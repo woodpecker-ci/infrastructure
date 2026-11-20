@@ -101,7 +101,8 @@ flowchart TB
   wl -->|mail| smtp
 ```
 
-Also on the host: a daily `docker system prune` timer and a `reboot` cron pipeline.
+Also on the host: fail2ban, a daily `docker system prune` timer and a `reboot` cron pipeline.
+The SSH jail reads the systemd journal and bans an IP for one hour after five failed logins within ten minutes.
 
 ## How a pipeline runs
 

@@ -20,7 +20,6 @@
     networks:
       - name: web
     env:
-      WOODPECKER_DEBUG_PRETTY: 'false'
       WOODPECKER_OPEN: 'true'
       WOODPECKER_HOST: '{{ woodpecker_server_host | string }}'
       WOODPECKER_ORGS: '{{ woodpecker_server_orgs | string }}'

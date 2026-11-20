@@ -16,11 +16,6 @@
     mode: '0o644'
   notify: Restart fail2ban
 
-- name: Inspect reverse proxy network
-  community.docker.docker_network_info:
-    name: web
-  register: fail2ban_web_network
-
 - name: Install Woodpecker agent filter
   ansible.builtin.copy:
     src: woodpecker-agent.conf
@@ -31,8 +26,8 @@
   notify: Restart fail2ban
 
 - name: Configure Woodpecker agent jail
-  ansible.builtin.template:
-    src: woodpecker-agent.local.j2
+  ansible.builtin.copy:
+    src: woodpecker-agent.local
     dest: /etc/fail2ban/jail.d/woodpecker-agent.local
     owner: root
     group: root

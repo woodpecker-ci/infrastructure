@@ -20,8 +20,6 @@
     - role: vaultwarden
     - role: weblate
     - role: fail2ban
-      tags:
-        - fail2ban
 
 - name: Local tasks
   hosts: localhost

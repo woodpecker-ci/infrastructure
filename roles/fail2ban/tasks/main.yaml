@@ -2,7 +2,7 @@
   ansible.builtin.apt:
     name:
       - fail2ban
-      - iptables
+      - nftables
       - python3-systemd
     update_cache: true
     cache_valid_time: 3600

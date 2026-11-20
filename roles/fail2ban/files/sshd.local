@@ -1,7 +1,7 @@
 [sshd]
 enabled = true
 backend = systemd
-banaction = iptables-multiport
+banaction = nftables[type=multiport]
 port = ssh
 maxretry = 5
 findtime = 10m

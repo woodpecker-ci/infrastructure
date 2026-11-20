@@ -1,6 +1,7 @@
 - name: Create common docker network for reverse proxying
   community.docker.docker_network:
     name: web
+    enable_ipv6: true
   tags:
     - caddy
 

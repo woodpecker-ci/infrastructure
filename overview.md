@@ -103,6 +103,11 @@ flowchart TB
 
 Also on the host: fail2ban, a daily `docker system prune` timer and a `reboot` cron pipeline.
 The SSH jail reads the systemd journal and bans an IP for one hour after five failed logins within ten minutes.
+The Woodpecker agent jail reads the server container's journal and bans an IP on HTTPS for one hour after ten failed logins within ten minutes.
+It uses the last address in Caddy's `X-Forwarded-For` header and blocks traffic in `DOCKER-USER`.
+The `web` bridge uses IPv4 and IPv6 so Caddy receives the original client address for both.
+The first apply on an IPv4-only bridge recreates the network and reconnects its containers, briefly interrupting their connections.
+The agent jail needs a Woodpecker server image containing [woodpecker#7601](https://github.com/woodpecker-ci/woodpecker/pull/7601).
 
 ## How a pipeline runs
 

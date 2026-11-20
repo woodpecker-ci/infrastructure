@@ -1,0 +1,14 @@
+[woodpecker-agent]
+enabled = true
+filter = woodpecker-agent
+backend = systemd
+journalmatch = CONTAINER_NAME=woodpecker_server
+# Caddy supplies X-Forwarded-For; port 9000 is not published.
+ignoreip = {{ (['127.0.0.1/8', '::1'] + (fail2ban_web_network.network.IPAM.Config | default([]) | map(attribute='Subnet') | list)) | join(' ') }}
+banaction = iptables-multiport
+# Published HTTPS traffic bypasses INPUT and is DNATed to Caddy's port 443.
+chain = DOCKER-USER
+port = 443
+maxretry = 10
+findtime = 10m
+bantime = 1h

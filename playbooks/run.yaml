@@ -19,6 +19,7 @@
     - role: woodpecker_autoscaler
     - role: vaultwarden
     - role: weblate
+    - role: fail2ban
 
 - name: Local tasks
   hosts: localhost

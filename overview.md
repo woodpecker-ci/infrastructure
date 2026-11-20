@@ -63,7 +63,7 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-  subgraph web[docker network: web, IPv4 and IPv6]
+  subgraph web[docker network: web]
     caddy[caddy]
     wp[woodpecker_server]
     as[woodpecker_autoscaler]

@@ -1,0 +1,15 @@
+[woodpecker-agent]
+enabled = true
+filter = woodpecker-agent
+backend = systemd
+journalmatch = CONTAINER_NAME=woodpecker_server
+# Caddy supplies X-Forwarded-For; port 9000 is not published.
+# Private ranges cover the Docker networks, e.g. the gateway address of IPv6 clients.
+ignoreip = 127.0.0.1/8 ::1 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
+banaction = iptables-multiport
+# Published HTTPS traffic bypasses INPUT and is DNATed to Caddy's port 443.
+chain = DOCKER-USER
+port = 443
+maxretry = 10
+findtime = 10m
+bantime = 1h

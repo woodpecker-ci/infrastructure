@@ -1,6 +1,8 @@
-- name: Create Vaultwarden data volume
-  community.docker.docker_volume:
-    name: vaultwarden_data
+- name: Create Vaultwarden directory
+  ansible.builtin.file:
+    path: /opt/vaultwarden
+    state: directory
+    mode: '0o700'
   tags:
     - vaultwarden
 
@@ -24,7 +26,7 @@
       SMTP_USERNAME: '{{ vaultwarden_smtp_username | string }}'
       SMTP_PASSWORD: '{{ vaultwarden_smtp_password | string }}'
     volumes:
-      - vaultwarden_data:/data
+      - /opt/vaultwarden:/data
     networks:
       - name: web
   tags:

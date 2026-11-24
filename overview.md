@@ -79,8 +79,8 @@ flowchart TB
   subgraph state[State on disk]
     d1[/"/opt/woodpecker (SQLite)"/]
     d2[/vaultwarden_data/]
-    d3[/weblate_weblate-data/]
-    d4[/weblate_postgres-data/]
+    d3[/"/opt/weblate/data"/]
+    d4[/"/opt/weblate/postgres"/]
     d5[/weblate_redis-data/]
     d6[/"caddy_data (certificates)"/]
   end

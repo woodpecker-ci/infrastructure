@@ -2,9 +2,37 @@
   community.docker.docker_volume:
     name: '{{ item }}'
   loop:
-    - weblate_postgres-data
     - weblate_redis-data
-    - weblate_weblate-data
+  tags:
+    - weblate
+
+- name: Create Weblate directory
+  ansible.builtin.file:
+    path: /opt/weblate
+    state: directory
+    mode: '0o700'
+  tags:
+    - weblate
+
+# owned by the postgres user (uid 70) of the alpine image, PGDATA is <major>/docker inside
+- name: Create Weblate database directory
+  ansible.builtin.file:
+    path: /opt/weblate/postgres
+    state: directory
+    owner: '70'
+    group: '70'
+    mode: '0o700'
+  tags:
+    - weblate
+
+# owned by the weblate user (uid 1000) of the image, it cannot chown itself
+- name: Create Weblate data directory
+  ansible.builtin.file:
+    path: /opt/weblate/data
+    state: directory
+    owner: '1000'
+    group: '1000'
+    mode: '0o700'
   tags:
     - weblate
 
@@ -37,7 +65,7 @@
     # renovate: datasource=docker depName=library/postgres
     image: docker.io/postgres:19-alpine
     volumes:
-      - weblate_postgres-data:/var/lib/postgresql/data
+      - /opt/weblate/postgres:/var/lib/postgresql
     restart_policy: 'always'
     memory: '384m'
     networks:
@@ -59,7 +87,7 @@
     restart_policy: 'always'
     memory: '2500m'
     volumes:
-      - weblate_weblate-data:/app/data
+      - /opt/weblate/data:/app/data
     tmpfs:
       - /run
       - /tmp

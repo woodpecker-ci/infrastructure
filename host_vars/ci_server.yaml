@@ -4,7 +4,7 @@ caddy_version: 2.11.9-alpine
 
 ### Server
 # renovate: datasource=docker depName=woodpeckerci/woodpecker-server versioning=docker
-woodpecker_server_version: next@sha256:eefb76b40b4daeb7a2b8b0a7dfd37ca961a31bb725507eaf80b21e56fef9629c
+woodpecker_server_version: next@sha256:60bf2e6138d003f8ea7459fb4728f2f270a9bc17541c3c521ecb8a576a21571c
 woodpecker_server_host: 'https://ci.woodpecker-ci.org'
 woodpecker_server_orgs: woodpecker-ci
 woodpecker_server_admins: anbraten,qwerty287
